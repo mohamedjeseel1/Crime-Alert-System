@@ -41,7 +41,7 @@ export class AdViewNewrulesComponent implements OnInit {
     this.getAllRules();
   }
 
-  // Pop-Up
+  // Pop-Up open
   view(id: any) {
     const rule = this.rules.filter((dataObj: any) => dataObj.id == id);
     if (rule.length == 0) return;
