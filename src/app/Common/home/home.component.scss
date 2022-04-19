@@ -1,0 +1,154 @@
+// .root-container {
+//     display: flex;
+//     width: 95%;
+//     background-image: linear-gradient(to right, rgb(210, 235, 255), #f0f0f0);
+//   }
+
+.card-container{
+  width: 80%;
+  margin-left: 10%;
+}
+.card-body{
+  background-image: linear-gradient(to right, rgb(228, 240, 250), #f0f0f0);
+  height: 20rem;
+
+}
+
+.loginbtn{
+  background: #181880;
+  width: 100px;
+  color: white;
+
+}
+
+  .about {
+    width: 100%;
+    background-color: white;
+    padding: 30px;
+    text-align: justify;
+    font-size: 18px;
+    margin-top: 50px;
+  }
+  
+  .about h1 {
+    font-size: 28px;
+  }
+  
+  .img-about {
+    width: 80%;
+    height: 100%;
+  }
+  
+  .question {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0% auto;
+    justify-content: space-around;
+    text-align: center;
+    height: auto;
+
+  }
+  
+  .box {
+    width: 49%;
+    margin-top: 50px;
+    padding: 10px;
+    border-radius: 10px;
+    background-image: linear-gradient(to right, rgb(228, 240, 250), #f0f0f0);
+
+  }
+  
+  .box h1 {
+    font-size: 28px;
+  }
+  
+  .box1 {
+    background-image: linear-gradient(
+      to right,
+      rgb(0, 139, 253),
+      rgb(0, 84, 194)
+    );
+    color: white;
+  }
+  
+  .box p {
+    font-size: 16px;
+    text-align: justify;
+    padding: 0px;
+  }
+  
+  .box img {
+    width: 60%;
+    height: 50%;
+  }
+
+  .contact{
+    width: 100%;
+    background-color: white;
+    padding: 30px;
+    text-align: justify;
+    font-size: 20px;
+    margin-top: 50px;
+  }
+  @media only screen and (max-width: 768px) {
+    .root-container {
+      display: block;
+      width: 100%;
+    }
+    .left-section {
+      width: 100%;
+    }
+    .right-section {
+      width: 100%;
+    }
+    .content button {
+      margin-right: 30px;
+      margin-left: 0px;
+    }
+    .content {
+      margin-top: 0%;
+    }
+    .content p {
+      padding: 10px;
+    }
+  
+    .img {
+      width: 50%;
+      height: 50%;
+    }
+    .content button {
+      margin-bottom: 30px;
+    }
+  
+    .img-about {
+      width: 50%;
+      height: 100%;
+    }
+  
+    .box {
+      width: 80%;
+    }
+    .box img {
+      width: 50%;
+      height: 50%;
+    }
+    .box p {
+      padding: 10px;
+    }
+  }
+  
+  @media only screen and (max-width: 545px) {
+    .content p {
+      font-size: 18px;
+    }
+  
+    .box {
+      width: 100%;
+    }
+    .box img {
+      width: 40%;
+      height: 40%;
+    }
+  }
+  

@@ -1,0 +1,140 @@
+<h1 mat-dialog-title>Edit Wanted Criminal</h1>
+<div mat-dialog-content>
+
+  <div class="row">
+    <form [formGroup]="wantedCriminal">
+
+      <!-- crime id -->
+      <mat-form-field appearance="outline">
+        <mat-label>Crime ID</mat-label>
+        <input matInput formControlName="crimeid">
+        <mat-error *ngIf="wantedCriminal.get('crimeid')?.hasError('required')">
+          Crime ID required
+        </mat-error>
+        <mat-error *ngIf="wantedCriminal.get('crimeid')?.hasError('minlength')">
+          must be at least 5 digits
+        </mat-error>
+      </mat-form-field>
+
+      <!-- auto admin id -->
+      <mat-form-field appearance="outline" style="margin-left: 4%;">
+        <mat-label>Admin ID</mat-label>
+        <input matInput tyep="text" formControlName="adminid">
+      </mat-form-field>
+
+      <!-- category -->
+      <mat-form-field appearance="outline">
+        <mat-label>Crime category</mat-label>
+        <mat-select formControlName="category" #categ>
+          <mat-option value="Theft">Theft</mat-option>
+          <mat-option value="Murder Attempt">Murder Attempt</mat-option>
+          <mat-option value="Criminal Attempt,Conspiracy,and Aiding and Abetting.">Criminal Attempt,Conspiracy,and
+            Aiding and Abetting.</mat-option>
+          <!--helping to crime -->
+          <mat-option value="Drugs">Drugs</mat-option>
+          <mat-option value="Sexual attack">Sexual attack</mat-option>
+          <mat-option value="Violent">Violent</mat-option>
+          <mat-option value="other">Other</mat-option>
+        </mat-select>
+        <mat-error *ngIf="wantedCriminal.get('category')?.hasError('required')">
+          Crime category required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Full name -->
+      <mat-form-field appearance="outline" style="margin-left: 4%;">
+        <mat-label>Full name</mat-label>
+        <input matInput formControlName="fullname">
+        <mat-error *ngIf="wantedCriminal.get('fullname')?.hasError('required')">
+          Full name required
+        </mat-error>
+        <mat-error *ngIf="wantedCriminal.get('fullname')?.hasError('maxlength')">
+          maximum 20 character
+        </mat-error>
+      </mat-form-field>
+
+      <!-- date -->
+      <mat-form-field appearance="outline" >
+        <mat-label>Current date</mat-label>
+        <input matInput type="date" #date formControlName="date">
+        <mat-error *ngIf="wantedCriminal.get('date')?.hasError('required')">
+          Date required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- DOB -->
+      <mat-form-field appearance="outline" style="margin-left: 4%;">
+        <mat-label>DOB</mat-label>
+        <input matInput type="date" #date formControlName="dob">
+        <mat-error *ngIf="wantedCriminal.get('dob')?.hasError('required')">
+          DOB required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- NIC -->
+      <mat-form-field appearance="outline" >
+        <mat-label>NIC</mat-label>
+        <input matInput type="number" formControlName="nic">
+        <mat-hint align="end">optional</mat-hint>
+      </mat-form-field>
+
+      <!-- Gender -->
+      <mat-radio-group aria-label="Select an option" labelPosition="before" formControlName="gender"
+        style="margin-left: ;">
+        <mat-label>Gender</mat-label>
+        <mat-radio-button value="male" color="primary">Male</mat-radio-button>
+        <mat-radio-button value="female" color="primary">Female</mat-radio-button>
+        <mat-error *ngIf="wantedCriminal.get('gender')?.hasError('required')">
+          Gender required
+        </mat-error>
+      </mat-radio-group>
+
+      <!-- Image -->
+      <div class="image mb-4">
+        <label for="image">Image</label>
+        <input type="file" class="form-control" formControlName="image">
+        <mat-error *ngIf="wantedCriminal.get('image')?.hasError('required')">
+          Image required
+        </mat-error>
+      </div>
+
+      <!-- permanent address -->
+      <mat-form-field appearance="outline">
+        <mat-label>Permanent address</mat-label>
+        <textarea matInput #p_add maxlength="100" type="text" formControlName="pAddress"></textarea>
+        <mat-error *ngIf="wantedCriminal.get('pAddress')?.hasError('required')">
+          Permanent Address required
+        </mat-error>
+        <mat-hint align="end">{{p_add.value.length}}/100</mat-hint>
+        <mat-error *ngIf="wantedCriminal.get('pAddress')?.hasError('minlength')">
+          must be at least 10 character
+        </mat-error>
+      </mat-form-field>
+
+      <!-- current address -->
+      <mat-form-field appearance="outline" style="margin-left: 4%;">
+        <mat-label>Current addres</mat-label>
+        <textarea matInput #desc maxlength="100" type="text" formControlName="cAddress"></textarea>
+        <mat-error *ngIf="wantedCriminal.get('cAddress')?.hasError('required')">
+          Current Address required
+        </mat-error>
+        <mat-hint align="end">{{desc.value.length}}/100</mat-hint>
+        <mat-error *ngIf="wantedCriminal.get('cAddress')?.hasError('minlength')">
+          must be at least 10 character
+        </mat-error>
+      </mat-form-field>
+
+
+    </form>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <div class="buttons row">
+    <div class="col-sm-6 ">
+      <button mat-raised-button color="warn" #cancel mat-dialog-close>Cancel</button>
+    </div>
+    <div class="col-sm-6 ">
+      <button mat-raised-button color="primary" class="submit" (click)="updateCriminal()">Update</button>
+    </div>
+  </div>
+</div>

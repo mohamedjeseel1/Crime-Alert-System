@@ -1,0 +1,45 @@
+<!-- buttons -->
+<button mat-stroked-button color="primary">Closed</button>
+<button mat-stroked-button color="primary" matTooltip="Ongoing process">On Process</button>
+<button mat-stroked-button color="primary">All</button>
+
+<!-- filter -->
+<mat-form-field class="search">
+  <mat-label>Filter</mat-label>
+  <input matInput placeholder="Ex. Mia" #input>
+</mat-form-field>
+<!-- table -->
+<table class="table table-hover ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <!-- <th scope="col">Report ID</th> -->
+      <th scope="col">Complaint ID</th>
+      <th scope="col">Category</th>
+      <th scope="col">Subject</th>
+      <th scope="col">Document</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let reportData of complaintData; let i=index">
+    <tr>
+      <th scope="row">{{i+1}}</th>
+      <td>{{reportData.id}}</td>   
+      <td>{{reportData.crimeType}}</td>
+      <td>{{reportData.subject}}</td>
+      <!-- <td><a href="//{{apiBaseUrl}}{{reportData.document}}" target="_blank">Download</a></td> -->
+      <td>
+        <a matTooltip="view">
+          <mat-icon color="primary">visibility</mat-icon>
+        </a>
+        <a href="#" matTooltip="delete">
+          <mat-icon color="warn">delete</mat-icon>
+        </a>
+        <a matTooltip="print">
+          <mat-icon (click)="generateReport(reportData.id)">print</mat-icon>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Paginator -->
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>

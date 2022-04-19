@@ -1,0 +1,134 @@
+<mat-sidenav-container>
+  <!-- navbar -->
+  <mat-sidenav #sidenav mode="side" opened>
+    <img src="assets\logo.png" alt="LOGO" style="height: 100px; width: 100px; margin-left: 50px;">
+    <mat-list class="navbar">
+      <mat-nav-list><a href="#">
+          <mat-icon>dashboard</mat-icon>Dashboard
+        </a> </mat-nav-list>
+      <mat-nav-list><a href="#">
+          <mat-icon>note_add</mat-icon>Create Records
+        </a></mat-nav-list>
+      <mat-nav-list><a href="#">
+          <mat-icon>preview</mat-icon>View Records
+        </a></mat-nav-list>
+      <mat-nav-list><a href="#">
+          <mat-icon>text_snippet</mat-icon>Complaints
+        </a></mat-nav-list>
+      <mat-nav-list><a href="#">
+          <mat-icon>domain_verification</mat-icon>User Verify
+        </a></mat-nav-list>
+    </mat-list>
+
+  </mat-sidenav>
+
+  <!-- content -->
+  <mat-sidenav-content>
+    <button mat-icon-button (click)="sidenav.toggle()" color="primary">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <!-- Header -->
+    <mat-toolbar color="primary" class="toptoolbar">
+      <span>Welcome User123</span>
+      <!-- logout -->
+      <div class="logout">
+        <button mat-icon-button>
+          <mat-icon #logout>logout</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+    <!-- component content -->
+    <!-- tab for complaint components -->
+    <mat-tab-group animationDuration="0ms">
+      <!-- request complaint -->
+      <mat-tab label="Request">
+        <!-- card -->
+        <mat-card>
+          <!-- card title -->
+          <mat-card-title>Request Complaint</mat-card-title>
+          <!-- card content    -->
+          <mat-card-content>
+            <form [formGroup]="loginForm">
+              <div class="row">
+                <div class="col-6">
+
+                  <!-- user id -->
+                  <mat-form-field appearance="outline">
+                    <mat-label>User ID</mat-label>
+                    <input matInput formControlName="userid">
+                  </mat-form-field>
+                  <br>
+                  <!-- <mat-form-field appearance="outline">
+                  <mat-label>Complaint ID</mat-label>
+                  <input matInput >
+                </mat-form-field> -->
+                  <br>
+                  <mat-form-field appearance="outline">
+                    <mat-label>Crime Type</mat-label>
+                    <mat-select formControlName="type">
+                      <mat-option value="Theft">Theft</mat-option>
+                      <mat-option value="Murder Attempt">Murder Attempt</mat-option>
+                      <mat-option value="Criminal Attempt">Criminal Attempt, Conspiracy, and Aiding and Abetting.
+                      </mat-option>
+                      <!--helping to crime -->
+                      <mat-option value="Drugs">Drugs</mat-option>
+                      <mat-option value="Sexual attack">Sexual attack</mat-option>
+                      <mat-option value="Violent">Violent</mat-option>
+                      <mat-option value="other">Other</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <br>
+                  <mat-form-field appearance="outline" class="mt-4">
+                    <mat-label>Subject</mat-label>
+                    <input matInput formControlName="subject">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="outline" class=" mt-4">
+                    <mat-label>Description</mat-label>
+                    <input matInput disabled>
+                    <div class="">
+                      <input type="file" (change)="upload($event)" class="custom-file-input" id="image"
+                        formControlName="descFile" />
+                      <label class="custom-file-label" for="image">
+                        {{selectedFile?.name || "Upload file (Required)..."
+                                              }}</label>
+                      <div class="invalid-feedback">
+                        Example invalid custom file feedback
+                      </div>
+                    </div>
+                  </mat-form-field>
+
+                </div>
+                <div class="col-6 ">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Location</mat-label>
+                    <input matInput formControlName="location">
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="warn" class="cancel mt-4">Cancel</button>
+            <button mat-raised-button color="primary" class="submit mt-4" (click)="submit()">Submit</button>
+          </mat-card-actions>
+
+        </mat-card>
+      </mat-tab>
+      <!-- view complaint -->
+      <mat-tab label="View">View
+        <mat-card>
+          <mat-card-title>Complaints</mat-card-title>
+          <mat-card-content>
+            hi everyone
+          </mat-card-content>
+          <mat-card-actions>
+
+
+          </mat-card-actions>
+        </mat-card>
+      </mat-tab>
+    </mat-tab-group>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,66 @@
+<!-- buttons -->
+<div class="example-button-row">
+  <button mat-stroked-button color="warn">Closed</button>
+  <button mat-stroked-button color="accent">Ongoing</button>
+  <button mat-stroked-button color="primary">New</button>
+  <button mat-stroked-button>All</button>
+</div>
+
+<!-- filter -->
+<mat-form-field class="search">
+  <mat-label>Filter</mat-label>
+  <input matInput placeholder="Ex. Mia" #input>
+</mat-form-field>
+<!-- table -->
+<table class="table table-hover ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Admin ID</th>
+      <th scope="col">Date</th>
+      <th scope="col">Area Code</th>
+      <th scope="col">category</th>
+      <th scope="col">Title</th>
+      <!-- <th scope="col">Description</th> -->
+      <th scope="col">Location</th>
+      <th scope="col">start_date_time</th>
+      <th scope="col">end_date_time</th>
+
+    </tr>
+  </thead>
+  <tbody *ngFor="let area of areas; let i=index">
+    <tr>
+      <th scope="row">{{i+1}}</th>
+      <td>{{area.id}}</td>
+      <td>{{area.adminid}}</td>
+      <td>{{area.date}}</td>
+      <td>{{area.areaCode}}</td>
+      <td>{{area.category}}</td>
+      <td>{{area.title}}</td>
+      <!-- <td>{{area.description}}</td> -->
+      <td>{{area.location}}</td>
+      <td>{{area.start_date_time}}</td>
+      <td>{{area.end_date_time}}</td>
+
+      <td>
+        <a matTooltip="View">
+          <mat-icon color="primary" (click)="openDialog(area.id)">visibility</mat-icon>
+        </a>
+        <a matTooltip="Edit" *ngIf="logged_user_role=='admin'">
+          <mat-icon class="material-icons-outlined" (click)="edit(area.id)">
+            edit
+          </mat-icon>
+        </a>
+        <a matTooltip="Delete">
+          <mat-icon color="warn" (click)="deleteArea(area.id)">delete</mat-icon>
+        </a>
+        <a matTooltip="Print" *ngIf="(logged_user_role=='public'||logged_user_role=='police')">
+          <mat-icon>print</mat-icon>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Paginator -->
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of crimes"></mat-paginator>

@@ -1,0 +1,89 @@
+<!-- background svg img -->
+<app-background></app-background>
+<!-- <div class="homeBtn">
+  <a href="src/common/home.html" matTooltip="Back to Home"><mat-icon class="material-icons-outlined " >
+    home
+    </mat-icon></a>
+</div> -->
+  
+<!-- container -->
+<div class="root-container">
+  <div class="content-container">
+    <!-- left section -->
+    <div class="section left-section">
+      <img class="img-fluid " src="..\assets\login.png" alt="photo" width="300px" height="400px">
+      <h1 class="display-2  pb-0 text-center ">Let's unite against crime!</h1>
+    </div>
+
+    <!-- right section -->
+    <div class="section right-section">
+      <!-- Login form -->
+      <form [formGroup]="loginform">
+        <div class="header-section">
+          <h1>Sign In</h1>
+        </div>
+
+        <div class="form-content-container">
+
+          <!-- alert part -->
+          <mat-card class="mat-elevation-z0 outline" *ngIf="errorMessage">
+            <div class="mat-card-warning">
+              <mat-icon>error_outline</mat-icon>
+              <mat-label>{{ errorMessage }}</mat-label>
+            </div>
+          </mat-card>
+
+          <!-- user name -->
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Username</mat-label>
+              <input matInput label="username" formControlName="username" required />
+              <!-- <input matInput label="username" [(ngModel)]="signInData.userId" required #name="ngModel" /> -->
+              <mat-icon matPrefix>person_outline</mat-icon>
+
+              <mat-error *ngIf="loginform.get('username')?.hasError('required')">
+                username required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- password -->
+          <div>
+            <mat-form-field appearance="outline">
+              <mat-label>Password</mat-label>
+              <mat-icon matPrefix>vpn_key</mat-icon>
+              <input matInput [type]="isPasswordVisible ? 'password' : 'text'" label="password"
+                formControlName="password" required />
+              <!-- <input matInput [type]="isPasswordVisible ? 'password' : 'text'" label="password"
+                [(ngModel)]="signInData.password" required #name="ngModel" /> -->
+
+              <mat-icon matSuffix class="isVisible-Point" (click)="isPasswordVisible = !isPasswordVisible">{{
+                  isPasswordVisible ? "visibility_off" : "visibility"
+                }}</mat-icon>
+
+              <mat-error *ngIf="loginform.get('password')?.hasError('required')">
+                password required
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+
+          <!-- button -->
+          <button mat-flat-button (click)="login()">
+            Login
+          </button>
+          <div class="link-section mt-4 d-flex justify-content-between">
+            <a href="" [routerLink]="['/forgot-password']">
+              <p>Forgot password ?</p>
+            </a>
+            <a href="" routerLink="../register" routerLinkActive="active">
+              <p>Create new account !</p>
+            </a>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>

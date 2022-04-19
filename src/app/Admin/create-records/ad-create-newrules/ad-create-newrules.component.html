@@ -1,0 +1,124 @@
+<mat-card>
+  <!-- card title -->
+  <mat-card-title>New rules </mat-card-title>
+  <!-- card content    -->
+  <mat-card-content>
+    <div class="row">
+      <div class="col-6">
+        <form [formGroup]="formNewrule">
+
+          <!-- date -->
+          <mat-form-field appearance="outline" style="width: 48%; ">
+            <mat-label>Current date</mat-label>
+            <input matInput type="date"  formControlName="date" #date>
+            <mat-error *ngIf="formNewrule.get('date')?.hasError('required')">
+              Date required
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Crime category -->
+          <mat-form-field appearance="outline" style="width: 48%; margin-left: 4%;">
+            <mat-label>Crime category</mat-label>
+            <mat-select formControlName="category" #categ>
+              <mat-option value="Theft">Theft</mat-option>
+              <mat-option value="Murder Attempt">Murder Attempt</mat-option>
+              <mat-option value="Criminal Attempt">Criminal Attempt, Conspiracy, and Aiding and Abetting.</mat-option>
+              <mat-option value="Drugs">Drugs</mat-option>
+              <mat-option value="Sexual attack">Sexual attack</mat-option>
+              <mat-option value="Violent">Violent</mat-option>
+              <mat-option value="other">Other</mat-option>
+            </mat-select>
+            <mat-error *ngIf="formNewrule.get('category')?.hasError('required')">
+              Crime category required
+            </mat-error>
+          </mat-form-field>
+
+          <!-- title -->
+          <mat-form-field appearance="outline">
+            <mat-label>Title</mat-label>
+            <input matInput type="text" maxlength="50" formControlName="title"  #title >
+            <mat-hint align="end">{{title.value.length}}/50</mat-hint>
+            <mat-error *ngIf="formNewrule.get('title')?.hasError('required')">
+              Title required
+            </mat-error>
+            <mat-error *ngIf="formNewrule.get('title')?.hasError('minlength')">
+              must be at least 6 character long
+            </mat-error>
+          </mat-form-field>
+
+          <!-- rule document(optional) -->
+          <div class="RuleDoc mb-4">
+            <label for="RuleDoc"> Rule Document</label>
+            <mat-hint>(optional)</mat-hint>
+            <input type="file" (change)="onFileSelected($event)" class="form-control" formControlName="RuleDoc">
+          </div>
+
+
+
+
+
+          <!-- Description -->
+          <mat-form-field appearance="outline" style="width: 50%;">
+            <mat-label>Description</mat-label>
+            <textarea matInput  maxlength="250" type="text" formControlName="description" #desc></textarea>
+            <mat-error *ngIf="formNewrule.get('description')?.hasError('required')">
+              Description required
+            </mat-error>
+            <mat-hint align="end">{{desc.value.length}}/250</mat-hint>
+            <mat-error *ngIf="formNewrule.get('description')?.hasError('minlength')">
+              must be at least 20 character
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Action -->
+          <mat-form-field appearance="outline" style="width: 45%; margin-left: 5%;">
+            <mat-label>Action against misuse</mat-label>
+            <textarea matInput  maxlength="250" type="text" formControlName="action" #action></textarea>
+            <mat-hint align="end">{{action.value.length}}/250</mat-hint>
+            <mat-error *ngIf="formNewrule.get('action')?.hasError('required')">
+              action required
+            </mat-error>
+            <mat-error *ngIf="formNewrule.get('action')?.hasError('minlength')">
+              must be at least 10 character
+            </mat-error>
+          </mat-form-field>
+        </form>
+      </div>
+     <!-- card -->
+     <div class="col-6">
+
+      <mat-card class="card">
+        <mat-card-title class="header">
+          <img src=".\assets\create-logo.png" alt="logo"
+            style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
+          <p class="h5">{{categ.value}}</p>
+        </mat-card-title>
+        <p style="text-align: right;">{{date.value}}</p>
+
+        <hr>
+        
+        <h4> <u>{{title.value}}</u> </h4>
+        
+        <mat-card-content>
+          {{desc.value}}<br>
+          <u>Action against misuse</u><br>
+          <p>{{action.value}}</p>  
+        </mat-card-content>
+        <mat-card-actions></mat-card-actions>
+      </mat-card>
+    </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="buttons row">
+      <div class="col-sm-6 ">
+        <button mat-raised-button color="warn" #cancel>Cancel</button>
+      </div>
+      <div class="col-sm-6 ">
+        <button mat-raised-button color="primary" class="submit" (click)="createRule()">Add</button>
+      </div>
+    </div>
+
+  </mat-card-actions>
+
+</mat-card>

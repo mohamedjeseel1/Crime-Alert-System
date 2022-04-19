@@ -1,0 +1,35 @@
+.mat-sidenav-container{
+    height: 100%;
+}
+.mat-sidenav{
+    width: 250px;
+    padding: 10px;
+    color: white;
+    background-color: rgb(13, 49, 49);
+}
+.mat-sidenav img{
+    padding: 5px;
+    margin-top: 30px;
+}
+.navbar{
+    padding: 10px;
+    margin-left: 8%;
+    margin-top: 40px;   
+}
+.mat-nav-list{
+    padding: 0;   
+    display: flex;
+    
+}
+.mat-list-item {   
+    font-size: 18px;   
+    color: white;
+}
+
+.logout{
+    margin-left: auto;
+
+}
+.active{
+    color: rgb(240, 240, 27);
+}

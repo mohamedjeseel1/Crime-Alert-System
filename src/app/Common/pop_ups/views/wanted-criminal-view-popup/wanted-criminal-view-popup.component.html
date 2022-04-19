@@ -1,0 +1,63 @@
+<div  class="header">      
+  <img src=".\assets\create-logo.png" alt="logo"
+    style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
+  <p class="h6">{{criminals.date}}</p>
+  <p class="ad_id"><i>Admin : {{criminals.adminid}}</i></p>
+  
+</div>
+<hr>
+  <div mat-dialog-content>
+    <div class="row">
+      <p class="h6 col-11"></p>
+      <p class="box col-1" style="text-align: right;">{{criminals.image}}</p>
+
+      <!-- Criminal details -->
+      <table class="table table-hover">
+        <tr>
+          <th>Name: </th>
+          <th>Crime ID</th>
+          <th>Crime Type</th>
+
+          <th>DOB </th>
+          <th>NIC</th>
+          <th>Gender</th>
+          <th>P_Address </th>
+          <th>C_Address</th>
+        </tr>
+        <tr>
+          <td>{{criminals.fullname}}</td>
+          <td>{{criminals.crimeid}}</td>
+          <td>{{criminals.category}}</td>
+
+          <td>{{criminals.dob}}</td>
+          <td>{{criminals.nic}}</td>
+          <td>{{criminals.gender}}</td> 
+          <td>{{criminals.pAddress}}</td>
+          <td>{{criminals.cAddress}}</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>
+
+<!-- 
+<div class="header bg-light">
+  <img src=".\assets\logo.png" alt="logo" style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
+  <p class="h5">Crime ID - </p>
+</div>
+<hr>
+<p class="date"><i></i></p>
+<h3 mat-dialog-title><u></u></h3>
+<div mat-dialog-content>
+  <p>
+
+  </p>
+  <h3><u>Law</u></h3>
+  <p></p>
+</div>
+<div mat-dialog-actions class="close ">
+  <button mat-stroked-button color="warn" mat-dialog-close>Close</button>
+</div> -->

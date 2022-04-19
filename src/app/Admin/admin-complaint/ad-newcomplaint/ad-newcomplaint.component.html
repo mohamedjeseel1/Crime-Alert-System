@@ -1,0 +1,52 @@
+<!-- buttons -->
+<button mat-stroked-button color="primary" (click)="getByStatus('Rejected')">Rejected</button>
+<button mat-stroked-button color="primary" (click)="getByStatus('Accepted')">Accepted</button>
+<button mat-stroked-button color="primary" (click)="getByStatus('Panding')">Panding</button>
+<button mat-stroked-button color="primary" (click)="getAll()">All</button>
+
+<!-- filter -->
+<mat-form-field class="search">
+  <mat-label>Filter</mat-label>
+  <input matInput placeholder="Ex. Mia" #input>
+</mat-form-field>
+<!-- table -->
+<table class="table table-hover ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">User ID</th>
+      <th scope="col">Crime category</th>
+      <th scope="col">subject</th>
+      <!-- <th scope="col">Description</th> -->
+      <th scope="col">Document</th>
+      <th scope="col">Location</th>
+      <th scope="col">Status</th>
+
+    </tr>
+  </thead>
+  <tbody *ngFor="let complaints of complaintData; let i=index">
+    <tr>
+      <th scope="row">{{i+1}}</th>
+      <td>{{complaints.id}}</td>
+      <td>{{complaints.userId}}</td>
+      <td>{{complaints.crimeType}}</td>
+      <td>{{complaints.subject}}</td>
+      <!-- <td>{{complaints.description}}</td> -->
+      <td>{{complaints.document}}</td>
+      <td>{{complaints.location}}</td>
+      <td>{{complaints.status}}</td>
+      <td>
+        <a matTooltip="view">
+          <mat-icon color="primary" (click)="openDialog(complaints.id)">visibility</mat-icon>
+        </a>
+        <a matTooltip="delete">
+          <mat-icon color="warn" (click)="deleteComplaint(complaints.id)">delete</mat-icon>
+        </a>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Paginator -->
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of crimes"></mat-paginator>

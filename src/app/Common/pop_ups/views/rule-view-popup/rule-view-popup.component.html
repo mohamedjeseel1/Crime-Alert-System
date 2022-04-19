@@ -1,0 +1,43 @@
+<div  class="header">      
+  <img src=".\assets\create-logo.png" alt="logo"
+    style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
+  <p class="h6">{{rules.date}}</p>
+  <!-- <p class="ad_id"><i>Admin : {{rules.adminid}}</i></p> -->
+  
+</div>
+<hr>
+  <div mat-dialog-content>
+    <div class="row">
+      <p class="h6 col-11"></p>
+      <p class="box col-1" style="text-align: right;">{{rules.image}}</p>
+
+      <!-- Criminal details -->
+      <table class="table table-hover">
+        <tr>
+          <th>ID </th>
+          <th>Category</th>
+          <th>Title </th>
+          </tr>
+          <tr>
+            <td>{{rules.id}}</td>
+            <td>{{rules.category}}</td>
+            <td>{{rules.title}}</td>
+          </tr>
+      </table>
+      <table class="table table-hover">
+        <tr>
+          <th>Description</th>
+          <th>Action against mis-use</th>
+        </tr>
+        <tr>
+          <td>{{rules.description}}</td>
+          <td>{{rules.action}}</td> 
+        </tr>
+      </table>
+    </div>
+  </div>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close class="close">Close</button>
+</div>
+

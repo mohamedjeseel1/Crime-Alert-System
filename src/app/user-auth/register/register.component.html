@@ -1,0 +1,195 @@
+<!-- There are 02 steppers available. 1) horizontel(-) 2). vertical(|) -->
+<!-- linear stepper - for complete the steps by sequiential order -->
+
+<div class="container h-100 bg-light">
+  <div class="row">
+    <div class="col-sm-6">
+      <img src="..\assets\register.png" class="img-fluid" alt="Sample image">
+    </div>
+
+    <div class="col-sm-6">
+
+      <div class="card">
+        <span class="h3 text-center">Sign Up</span>
+        <div class="card-body">
+          <mat-horizontal-stepper labelPosition="bottom">
+
+            <!-- Step = 1 -->
+            <mat-step label="User Details">
+              <h2>User Details</h2>
+              <form [formGroup]="userdetails">
+                <!-- User name -->
+                <mat-form-field appearance="outline">
+                  <mat-label>User name</mat-label>
+                  <input matInput formControlName="username">
+                  <mat-error *ngIf="userdetails.get('username')?.hasError('required')">
+                    user name required
+                  </mat-error>
+                  <mat-error
+                    *ngIf="userdetails.get('username')?.hasError('minlength') || userdetails.get('username')?.hasError('maxlength')">
+                    must be between 5-20 characters long
+                  </mat-error>
+                  <mat-error *ngIf="userdetails.get('username')?.hasError('exists')">
+                    Username already exists
+                  </mat-error>
+                </mat-form-field>
+
+                <!-- User type -->
+                <mat-form-field appearance="outline">
+                  <mat-label>User type</mat-label>
+                  <mat-select formControlName="role">
+                    <mat-option value="admin">Admin</mat-option>
+                    <mat-option value="police">Police</mat-option>
+                    <mat-option value="public">General Public</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="userdetails.get('role')?.hasError('required')">
+                    User type required
+                  </mat-error>
+                </mat-form-field>
+
+                <!-- Password -->
+                <mat-form-field appearance="outline">
+                  <mat-label>Password</mat-label>
+                  <input matInput type="password" formControlName="password" maxlength="8" #pwd>
+                  <mat-error *ngIf="userdetails.get('password')?.hasError('required')">password required</mat-error>
+                  <mat-error *ngIf="userdetails.get('password')?.hasError('minlength')">must be 8 digits</mat-error>
+                  <mat-hint align="end"> {{pwd.value.length}}/8 </mat-hint>
+                </mat-form-field>
+
+                <!-- Confirm Password -->
+                <mat-form-field appearance="outline">
+                  <mat-label>Confirm Password</mat-label>
+                  <input matInput type="password" formControlName="cpassword">
+                  <mat-error *ngIf="userdetails.get('cpassword')?.hasError('required')">Confim password required
+                  </mat-error>
+                  <mat-error *ngIf="userdetails.get('cpassword')?.hasError('notmatch')"> not matched
+                  </mat-error>
+                  <!-- <mat-error *ngIf="userform.cpassword.errors?.notmatch">
+                    not matched
+                  </mat-error> -->
+                </mat-form-field>
+                <!-- buttons -->
+                <div>
+                  <button mat-raised-button color="primary" style=" width: 140px; margin-top: 20px;"
+                    routerLink="">Cancel</button>
+                  <button mat-raised-button color="primary" matStepperNext
+                    style="float: right; width: 140px; margin-top: 20px;" [disabled]="!userdetails.valid">Next</button>
+                </div>
+              </form>
+            </mat-step>
+
+            <!-- Step = 2 -->
+            <mat-step label="Personal Details">
+              <form [formGroup]="personaldetails">
+                <h2>Personal Details</h2>
+                <!-- Full name -->
+                <mat-form-field appearance="outline">
+                  <mat-label>Full name</mat-label>
+                  <input matInput formControlName="fullname" #fn maxlength="50" type="text">
+                  <mat-error *ngIf="personaldetails.get('fullname')?.hasError('required')"> Full name
+                    required</mat-error>
+                  <mat-hint align="end">{{fn.value.length}}/50</mat-hint>
+
+                </mat-form-field>
+                <!-- Gender -->
+                <mat-radio-group aria-label="Select an option" labelPosition="before" formControlName="gender">
+                  <mat-label>Gender</mat-label>
+                  <mat-radio-button value="male" color="primary">Male</mat-radio-button>
+                  <mat-radio-button value="female" color="primary">Female</mat-radio-button>
+                  <mat-error *ngIf="personaldetails.get('gender')?.hasError('required')"> Gender
+                    required</mat-error>
+                </mat-radio-group>
+                <!-- Image -->
+                <div class="image mb-4">
+                  <label for="image">Image</label>
+                  <input type="file" (change)="onFileSelected($event)" class="form-control" formControlName="image" #img
+                    required>
+                  <mat-error *ngIf="personaldetails.get('image')?.hasError('required')">
+                    Image required
+                  </mat-error>
+                </div>
+                <!-- nic -->
+                <mat-form-field appearance="outline" class="mt-4">
+                  <mat-label>NIC</mat-label>
+                  <input matInput formControlName="nic">
+                  <mat-error *ngIf="personaldetails.get('nic')?.hasError('required')"> NIC
+                    required</mat-error>
+                  <mat-error
+                    *ngIf="personaldetails.get('nic')?.hasError('maxlength')||personaldetails.get('nic')?.hasError('minlength')">
+                    Must be 10 digits long
+                  </mat-error>
+                </mat-form-field>
+                <!-- buttons -->
+                <div>
+                  <button mat-raised-button color="primary" matStepperPrevious
+                    style=" width: 140px; margin-top: 40px;">Previous</button>
+                  <button mat-raised-button color="primary" matStepperNext
+                    style="float: right; width: 140px; margin-top: 40px;"
+                    [disabled]="!personaldetails.valid">Next</button>
+                </div>
+              </form>
+            </mat-step>
+
+            <!-- Step = 3 -->
+            <mat-step label="Contact Details">
+              <h2>Contact Details</h2>
+              <form [formGroup]="contactdetails">
+                <div>
+                  <!-- address -->
+                  <mat-form-field appearance="outline">
+                    <mat-label>Address</mat-label>
+                    <input matInput formControlName="address" #adrs maxlength="50">
+                    <mat-error *ngIf="contactdetails.get('address')?.hasError('required')"> Address
+                      required</mat-error>
+                    <mat-hint align="end">{{adrs.value.length}}/50</mat-hint>
+                  </mat-form-field>
+
+                  <!-- contact -->
+                  <mat-form-field appearance="outline">
+                    <mat-label>Contact Number</mat-label>
+                    <input matInput formControlName="contact">
+                    <mat-error *ngIf="contactdetails.get('contact')?.hasError('required')"> Contact Number
+                      required</mat-error>
+                    <mat-error
+                      *ngIf="contactdetails.get('contact')?.hasError('minlength') || contactdetails.get('contact')?.hasError('maxlength')">
+                      Must be 10 digits long</mat-error>
+                  </mat-form-field>
+
+                  <!-- Email -->
+                  <mat-form-field appearance="outline">
+                    <mat-label>E-Mail</mat-label>
+                    <input matInput formControlName="email" type="email">
+                    <mat-error *ngIf="contactdetails.get('email')?.hasError('required')">
+                      E-Mail required
+                    </mat-error>
+                    <mat-error *ngIf="contactdetails.get('email')?.hasError('email')">
+                      not a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="contactdetails.get('email')?.hasError('maxlength')">
+                      must be less than 50 characters
+                    </mat-error>
+                    <mat-error *ngIf="contactdetails.get('email')?.hasError('exists')">
+                      Email already exists
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div>
+                  <button mat-raised-button color="primary" matStepperPrevious
+                    style="width: 140px; margin-top: 40px;">Previous</button>
+                  <button mat-raised-button color="primary" matStepperNext
+                    style="float: right; width: 140px; margin-top: 40px;" (click)="register(formdata)"
+                    [disabled]="!contactdetails.valid">Submit</button>
+                </div>
+              </form>
+            </mat-step>
+
+
+          </mat-horizontal-stepper>
+        </div>
+      </div>
+
+
+
+    </div>
+  </div>
+</div>

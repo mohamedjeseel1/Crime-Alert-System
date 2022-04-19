@@ -1,0 +1,70 @@
+<!-- buttons -->
+<div class="example-button-row">
+  <button mat-stroked-button color="warn">Closed</button>
+  <button mat-stroked-button color="accent">Ongoing</button>
+  <button mat-stroked-button color="primary">New</button>
+  <button mat-stroked-button>All</button>
+</div>
+
+<!-- filter -->
+<mat-form-field class="search">
+  <mat-label>Filter</mat-label>
+  <input matInput placeholder="Ex.Mia" #input>
+</mat-form-field>
+<!-- table -->
+<table class="table table-hover ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Crime ID</th>
+      <th scope="col">Admin ID</th>
+      <th scope="col">Crime Type</th>
+      <th scope="col">Full Name</th>
+      <th scope="col">Date</th>
+      <th scope="col">DOB</th>
+      <th scope="col">NIC</th>
+      <th scope="col">Gender</th>
+      <th scope="col">Permanent Address</th>
+      <th scope="col">Current Address</th>
+      <th scope="col">Image</th>
+
+    </tr>
+  </thead>
+  <tbody *ngFor="let criminal of criminals; let i=index">
+    <tr>
+      <th scope="row">{{i+1}}</th>
+      <td>{{criminal.id}}</td>
+      <td>{{criminal.crimeid}}</td>
+      <td>{{criminal.adminid}}</td>
+      <td>{{criminal.category}}</td>
+      <td>{{criminal.fullname}}</td>
+      <td>{{criminal.date}}</td>
+      <td>{{criminal.dob}}</td>
+      <td>{{criminal.nic}}</td>
+      <td>{{criminal.gender}}</td>
+      <td>{{criminal.pAddress}}</td>
+      <td>{{criminal.cAddress}}</td>
+      <td><a href="//{{apiBaseUrl}}{{criminal.image}}" target="_blank">Show</a></td>
+
+      <td>
+        <a matTooltip="View">
+          <mat-icon color="primary" (click)="openDialog(criminal.id)">visibility</mat-icon>
+        </a>
+        <a matTooltip="Edit" *ngIf="logged_user_role=='admin'">
+          <mat-icon class="material-icons-outlined" (click)="edit(criminal.id)">
+            edit
+          </mat-icon>
+        </a>
+        <a matTooltip="Delete">
+          <mat-icon color="warn" (click)="deleteCriminal(criminal.id)">delete</mat-icon>
+        </a>
+        <a matTooltip="Print" *ngIf="(logged_user_role=='public'||logged_user_role=='police')">
+          <mat-icon>print</mat-icon>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Paginator -->
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of crimes"></mat-paginator>

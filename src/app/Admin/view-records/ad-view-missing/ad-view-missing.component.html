@@ -1,0 +1,60 @@
+<!-- buttons -->
+<div class="example-button-row">
+  <button mat-stroked-button color="warn">Closed</button>
+  <button mat-stroked-button color="accent">Ongoing</button>
+  <button mat-stroked-button color="primary">New</button>
+  <button mat-stroked-button>All</button>
+</div>
+
+<!-- filter -->
+<mat-form-field class="search">
+  <mat-label>Filter</mat-label>
+  <input matInput placeholder="Ex. Mia" #input>
+</mat-form-field>
+<!-- table -->
+<table class="table table-hover ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Admin ID</th>
+      <th scope="col">Crime category</th>
+      <th scope="col">Identification</th>
+      <th scope="col">Date</th>
+      <th scope="col">Location</th>
+      <!-- <th scope="col">Description</th> -->
+
+
+    </tr>
+  </thead>
+  <tbody *ngFor="let missed of misseds;let i=index">
+    <tr>
+      <th scope="row">{{i+1}}</th>
+      <td>{{missed.id}}</td>
+      <td>{{missed.adminid}}</td>
+      <td>{{missed.category}}</td>
+      <td>{{missed.identification}}</td>
+      <td>{{missed.date}}</td>
+      <td>{{missed.location}}</td>
+      <!-- <td>{{missed.description}}</td> -->
+      <td>
+        <a matTooltip="View">
+          <mat-icon color="primary" (click)="view(missed.id)">visibility</mat-icon>
+        </a>
+        <a matTooltip="Edit" *ngIf="logged_user_role=='admin'">
+          <mat-icon class="material-icons-outlined" (click)="edit(missed.id)">
+            edit
+          </mat-icon>
+        </a>
+        <a matTooltip="Delete">
+          <mat-icon color="warn" (click)="deleteMissed(missed.id)">delete</mat-icon>
+        </a>
+        <a matTooltip="Print" *ngIf="(logged_user_role=='public'||logged_user_role=='police')">
+          <mat-icon>print</mat-icon>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Paginator -->
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of crimes"></mat-paginator>

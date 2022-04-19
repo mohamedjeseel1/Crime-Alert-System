@@ -1,0 +1,154 @@
+<mat-card>
+  <!-- card title -->
+  <mat-card-title>Crime Area </mat-card-title>
+  <!-- card content    -->
+  <mat-card-content>
+    <div class="row">
+      <div class="col-6">
+        <form [formGroup]="crimeArea">
+
+          <!-- auto admin id -->
+          <mat-form-field appearance="outline">
+            <mat-label>Admin ID</mat-label>
+            <input matInput tyep="text" formControlName="adminid" #aid>
+          </mat-form-field>
+
+          <!-- crime id -->
+          <mat-form-field appearance="outline" style="margin-left: 4%;">
+            <mat-label>Area Code</mat-label>
+            <input matInput formControlName="areaCode" #areaCode>
+            <mat-error *ngIf="crimeArea.get('areaCode')?.hasError('required')">
+              Area Code required
+            </mat-error>
+          </mat-form-field>
+
+          <!-- date and time picker-->
+          <mat-form-field appearance="outline">
+            <mat-label>current Date</mat-label>
+            <input matInput type="date" formControlName="date" #date>
+            <mat-error *ngIf="crimeArea.get('date')?.hasError('required')">
+              Date required
+            </mat-error>
+          </mat-form-field>
+
+          <!-- crime category -->
+          <mat-form-field appearance="outline" style="margin-left: 4%;">
+            <mat-label>category</mat-label>
+            <mat-select formControlName="category" #categ>
+              <mat-option value="Vehicle">Vehicle</mat-option>
+              <mat-option value="Gold">Gold</mat-option>
+              <mat-option value="Animal">Animal</mat-option>
+              <mat-option value="Other">Other</mat-option>
+            </mat-select>
+            <mat-error *ngIf="crimeArea.get('category')?.hasError('required')">
+              Crime category required
+            </mat-error>
+          </mat-form-field>
+
+
+
+          <!-- title -->
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Title</mat-label>
+            <input matInput type="text"  maxlength="50" formControlName="title" #title>
+            <mat-hint align="end">{{title.value.length}}/50</mat-hint>
+            <mat-error *ngIf="crimeArea.get('title')?.hasError('required')">
+              Title required
+            </mat-error>
+            <mat-error *ngIf="crimeArea.get('title')?.hasError('minlength')">
+              must be at least 6 character long
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Description -->
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Description</mat-label>
+            <textarea matInput  maxlength="250" type="text" formControlName="description" #desc></textarea>
+            <mat-error *ngIf="crimeArea.get('description')?.hasError('required')">
+              Description required
+            </mat-error>
+            <mat-hint align="end">{{desc.value.length}}/250</mat-hint>
+            <mat-error *ngIf="crimeArea.get('description')?.hasError('minlength')">
+              must be at least 20 character
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Location -->
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Location</mat-label>
+            <textarea matInput type="text"  maxlength="50" formControlName="location" #location></textarea>
+            <mat-hint align="end">{{location.value.length}}/50</mat-hint>
+            <mat-error *ngIf="crimeArea.get('location')?.hasError('required')">
+              Location required
+            </mat-error>
+            <mat-error *ngIf="crimeArea.get('location')?.hasError('minlength')">
+              must be at least 10 character long
+            </mat-error>
+
+          </mat-form-field>
+
+
+          <!-- Duration -->
+          <mat-label>Duration</mat-label> <br>
+          <!-- start date -->
+          <mat-form-field appearance="outline">
+            <mat-label>Start date</mat-label>
+            <input matInput type="date"  formControlName="start_date_time" #start_date_time>
+            <mat-error *ngIf="crimeArea.get('start_date_time')?.hasError('required')">
+              Start date required
+            </mat-error>
+          </mat-form-field>
+
+          <!-- end date -->
+          <mat-form-field appearance="outline" style="margin-left: 4%;">
+            <mat-label>End date</mat-label>
+            <input matInput type="date"  formControlName="end_date_time" #end_date_time>
+            <mat-error *ngIf="crimeArea.get('end_date_time')?.hasError('required')">
+              End date required
+            </mat-error>
+          </mat-form-field>
+
+        </form>
+      </div>
+      <!-- card -->
+      <div class="col-6">
+
+        <mat-card class="card">
+          <mat-card-title class="header">
+            <img src=".\assets\create-logo.png" alt="logo"
+              style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
+            <p class="h5">{{categ.value}}</p>
+          </mat-card-title>
+          <p style="text-align: right;">Admin - {{aid.value}}</p>
+
+          <hr>
+          
+          <p>{{date.value}}</p>
+          <p>Area code: {{areaCode.value}}</p>
+          <h4> <u>{{title.value}}</u> </h4>
+          
+          <mat-card-content>
+            {{desc.value}}<br>
+            <u>Location</u><br>
+            <p>{{location.value}}</p>  
+            <p>Start date : {{start_date_time.value}}</p>
+            <p>End date : {{end_date_time.value}}</p>
+          </mat-card-content>
+          <mat-card-actions></mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="buttons row">
+      <div class="col-sm-6 ">
+        <button mat-raised-button color="warn" #cancel>Cancel</button>
+      </div>
+      <div class="col-sm-6 ">
+        <button mat-raised-button color="primary" class="submit" (click)="createArea()">Add</button>
+      </div>
+    </div>
+
+  </mat-card-actions>
+
+</mat-card>

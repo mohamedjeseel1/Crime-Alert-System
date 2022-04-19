@@ -1,0 +1,113 @@
+<!-- background svg img -->
+<app-background></app-background>
+
+<!-- navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-dark  ">
+  <div class="container-fluid ">
+    <a class="navbar-brand" href="#"><img src="assets\logo.png" alt="LOGO"
+        style="height: 100px; width: 100px; margin-left: 50px;"></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#togmenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end " id="togmenu">
+      <ul class="navbar-nav mt-5">
+        <li class="nav-item"><a href="#" class="nav-link h5 disabled text-muted">ChatBox</a> </li>
+        <li class="nav-item "><a href="#about" class="nav-link h5 text-warning">About</a></li>
+        <li class="nav-item"><a href="#contact_us" class="nav-link h5 text-warning">Contact us</a></li>
+        <li class="nav-item"><a href="#" class="nav-link h5 text-warning" routerLink="login">| Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<br>
+<br>
+
+
+<!-- home card -->
+<div class="card-container ">
+  <div class="card-body bg-light text-center p-5 ">
+    <div class="card-title ">
+      <p class="h3">The community needs your support</p>
+    </div>
+    <div class="card-text px-5">
+      <p class="h6 mt-4">Everyone can use this application from anywhere at any time in a safe and secure manner.
+        It's like a bridge between the police and the general public.
+        Thus, everyone can stay updated and reduce crime in a shorter amount of time.
+      </p>
+    </div>
+    <button mat-raised-button class="loginbtn mt-5" routerLink="/register">Join now</button>
+
+  </div>
+</div>
+
+
+<!-- About -->
+
+<div class="about" id="about">
+  <div class="row">
+    <div class="col-md-8">
+      <p class="heading h3">About Us</p>
+      <p>In now a days, we can see lots of crimes are cannot be control. it will increasing day by day.
+        Therefore
+        peoples trusting level is decreasing day by day. but without the peoples support police department cannot
+        control the crimes. Thus, we are introducing a best and smart System to control those types of crimes. By This,
+        system, people can easily interact with the neared police station and police officers can
+        accurately reach them, and control that crimes also.</p>
+
+
+    </div>
+    <div class="col-md-4" style="text-align: center;">
+      <img alt="photo" class="img-about" src="../../assets/Questions-amico.png" />
+    </div>
+  </div>
+</div>
+
+
+<!-- common question -->
+<div class="question">
+  <!-- 1st -->
+  <div class="box box1">
+    <span class="h3">What is Crime Alert System?</span>
+    <img alt="photo" src="../../assets/Questions-pana.png" />
+
+    <p>By using this application, everyone can inform the crimes with the exact locations of that crime
+      happens at a
+      time without any ambiguous. Everyone can use this application from anywhere and anytime in safe and secure
+      manner. It's like a bridge between the police and the people. Thus, everyone can stay updated and reduce crime
+      in less amount of times.
+    </p>
+  </div>
+  <!-- 2nd -->
+  <div class="box box2">
+    <span class="h3">How does it work?</span>
+    <img alt="photo" src="../../assets/Invoice-amico.png" />
+
+    <p>There are three primary users. Admin, Police, and the General Public. Each user has the same plateform based on
+      their user type. The Admin will act like a bridge between the police and general users. Everything was verified by
+      the admin.
+      They can be able to access several common features and some discrete features.</p>
+    <p>The system work flow is,</p>
+    <p><b>Common features:</b> The admin can be able to create, retrieve, update, and delete the system data. Other
+      users can
+      view it.</p>
+    <p><b>Discrete features:</b> Any individual can access the discrete features, which will be verified and resolved by
+      the admin.
+    </p>
+
+
+  </div>
+</div>
+
+
+<!-- Contact us -->
+<div class="contact" id="contact_us">
+  <div class="row">
+    <div class="col-md-8">
+      <h1 class="heading text-primary">Contact Us</h1>
+      <p>Contact us page</p>
+    </div>
+    <div class="col-md-4" style="text-align: center;">
+      <img alt="photo" class="img-about" src="../../assets/Questions-amico.png" />
+    </div>
+  </div>
+</div>

@@ -1,0 +1,97 @@
+<mat-toolbar mat-dialog-title class="h4 bg-light">Edit Rule</mat-toolbar>
+
+<div mat-dialog-content>
+
+  <div class="row">
+    <form [formGroup]="newrule" (ngSubmit)="updateRule()">
+      <!-- date -->
+      <mat-form-field appearance="outline" style="width: 48%; ">
+        <mat-label>Current date</mat-label>
+        <input matInput type="date" #date formControlName="date">
+        <mat-error *ngIf="newrule.get('date')?.hasError('required')">
+          Date required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Crime category -->
+      <mat-form-field appearance="outline" style="width: 48%; margin-left: 4%;">
+        <mat-label>Crime category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option value="Theft">Theft</mat-option>
+          <mat-option value="Murder Attempt">Murder Attempt</mat-option>
+          <mat-option value="Criminal Attempt">Criminal Attempt, Conspiracy, and Aiding and Abetting.</mat-option>
+          <mat-option value="Drugs">Drugs</mat-option>
+          <mat-option value="Sexual attack">Sexual attack</mat-option>
+          <mat-option value="Violent">Violent</mat-option>
+          <mat-option value="other">Other</mat-option>
+        </mat-select>
+        <mat-error *ngIf="newrule.get('category')?.hasError('required')">
+          Crime category required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- title -->
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input matInput type="text" #title maxlength="50" formControlName="title">
+        <mat-hint align="end">{{title.value.length}}/50</mat-hint>
+        <mat-error *ngIf="newrule.get('title')?.hasError('required')">
+          Title required
+        </mat-error>
+        <mat-error *ngIf="newrule.get('title')?.hasError('minlength')">
+          must be at least 6 character long
+        </mat-error>
+      </mat-form-field>
+
+      <!-- rule document(optional) -->
+      <div class="RuleDoc mb-4">
+        <label for="RuleDoc"> Rule Document</label>
+        <mat-hint>(optional)</mat-hint>
+        <input type="file" class="form-control" formControlName="RuleDoc">
+      </div>
+      <!-- <mat-form-field appearance="outline" style="width: 45%; ">
+          <mat-label> Rule Document</mat-label>
+          <mat-hint>(optional)</mat-hint>
+          <input matInput type="file" formControlName="RuleDoc">
+        </mat-form-field> -->
+
+
+
+      <!-- Description -->
+      <mat-form-field appearance="outline" style="width: 50%;">
+        <mat-label>Description</mat-label>
+        <textarea matInput #desc maxlength="250" type="text" formControlName="description"></textarea>
+        <mat-error *ngIf="newrule.get('description')?.hasError('required')">
+          Description required
+        </mat-error>
+        <mat-hint align="end">{{desc.value.length}}/250</mat-hint>
+        <mat-error *ngIf="newrule.get('description')?.hasError('minlength')">
+          must be at least 20 character
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Action -->
+      <mat-form-field appearance="outline" style="width: 45%; margin-left: 5%;">
+        <mat-label>Action against misuse</mat-label>
+        <textarea matInput #action maxlength="250" type="text" formControlName="action"></textarea>
+        <mat-hint align="end">{{action.value.length}}/250</mat-hint>
+        <mat-error *ngIf="newrule.get('action')?.hasError('required')">
+          action required
+        </mat-error>
+        <mat-error *ngIf="newrule.get('action')?.hasError('minlength')">
+          must be at least 10 character
+        </mat-error>
+      </mat-form-field>
+    </form>
+
+
+    <div mat-dialog-actions>
+      <div class="buttons row">
+        <div class="col-sm-6 ">
+          <button mat-raised-button color="warn" #cancel mat-dialog-close>Cancel</button>
+        </div>
+        <div class="col-sm-6 ">
+          <button mat-raised-button color="primary" type="submit" class="submit" (click)="updateRule()">Update</button>
+        </div>
+      </div>
+    </div>

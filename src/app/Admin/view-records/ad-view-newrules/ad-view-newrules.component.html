@@ -1,0 +1,62 @@
+<!-- buttons -->
+<div class="button">
+  <button mat-stroked-button color="warn">Closed</button>
+  <button mat-stroked-button color="accent">Ongoing</button>
+  <button mat-stroked-button color="primary">New</button>
+  <button mat-stroked-button>All</button>
+</div>
+
+<!-- filter -->
+<mat-form-field class="search">
+  <mat-label>Filter</mat-label>
+  <input matInput placeholder="Ex. Mia" #input>
+</mat-form-field>
+<!-- table -->
+<table class="table table-hover ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <!-- <th scope="col">Crime ID</th> -->
+      <th scope="col">Date</th>
+      <th scope="col">Crime category</th>
+      <th scope="col">Title</th>
+      <!-- <th scope="col">Description</th> -->
+      <th scope="col">Document</th>
+      <th scope="col">Law of crime</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let rule of rules;let i=index">
+    <tr>
+      <th scope="row">{{i+1}}</th>
+      <td>{{rule.id}}</td>
+      <td>{{rule.date}}</td>
+      <td>{{rule.category}}</td>
+      <td>{{rule.title}}</td>
+      <!-- <td>{{rule.description}}</td> -->
+      <td><a href="//{{apiBaseUrl}}{{rule.documentUrl}}" target="_blank">Show</a></td>
+      <td>{{rule.action}}</td>
+      <td>
+        <a matTooltip="View">
+          <mat-icon color="primary" (click)="view(rule.id)">visibility</mat-icon>
+        </a>
+        <a matTooltip="Edit" *ngIf="logged_user_role=='admin'">
+          <mat-icon class="material-icons-outlined" (click)="edit(rule.id)">
+            edit
+          </mat-icon>
+        </a>
+        <a matTooltip="Delete">
+          <mat-icon color="warn" (click)="deleteRule(rule.id)">delete</mat-icon>
+        </a>
+
+        <a matTooltip="Print" *ngIf="(logged_user_role=='public'||logged_user_role=='police')">
+          <mat-icon>print</mat-icon>
+        </a>
+
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Paginator -->
+<mat-paginator [pageSizeOptions]="[5, 10, 20, 100]" showFirstLastButtons aria-label="Select page of crimes">
+</mat-paginator>

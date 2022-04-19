@@ -1,0 +1,119 @@
+<!-- <button mat-stroked-button color="primary">Rejected</button>
+<button mat-stroked-button color="primary">Accepted</button>
+<button mat-stroked-button color="primary">Panding</button>
+<button mat-stroked-button color="primary">All</button> -->
+
+<!-- filter -->
+<mat-form-field class="search mt-2">
+  <mat-label>Filter</mat-label>
+  <input matInput placeholder="Ex. Mia" #input>
+</mat-form-field>
+
+
+
+
+<!-- table -->
+<!-- <table class="table table-hover ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">User ID</th>
+      <th scope="col">Crime category</th>
+      <th scope="col">subject</th>
+      <th scope="col">Description</th>
+      <th scope="col">Document</th>
+      <th scope="col">Location</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Id</td>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>@mdo</td>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>Mark</td>
+      <td>Otto</td>
+      <td>
+        <a matTooltip="view">
+          <mat-icon color="primary">visibility</mat-icon>
+        </a>
+        <a href="#" matTooltip="delete">
+          <mat-icon color="warn">edit</mat-icon>
+        </a>
+        <a href="#" matTooltip="delete">
+          <mat-icon color="warn">delete</mat-icon>
+        </a>
+
+      </td>
+    </tr>
+  </tbody>
+</table> -->
+<!-- Paginator -->
+<!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of crimes"></mat-paginator> -->
+
+<!-- new -->
+
+<div class="container mt-4">
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 staffTable">
+
+  <ng-container matColumnDef="crimeType">
+    <th mat-header-cell *matHeaderCellDef> crimeType </th>
+    <td mat-cell *matCellDef="let element"> {{element.crimeType}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="subject">
+    <th mat-header-cell *matHeaderCellDef> subject </th>
+    <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef> description </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="document">
+    <th mat-header-cell *matHeaderCellDef> document </th>
+    <td mat-cell *matCellDef="let element"> {{element.document}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="location">
+    <th mat-header-cell *matHeaderCellDef> location </th>
+    <td mat-cell *matCellDef="let element"> {{element.location}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="action">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element">
+      <button mat-icon-button color="primary" matTooltip="Edit">
+        <mat-icon  (click)="onEdit(element)">edit</mat-icon>
+      </button>
+
+      <button mat-icon-button matTooltip="Delete">
+        <mat-icon color="warn" (click)="onDelete(element)">delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+
+<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"
+  class="staffTable">
+
+</mat-paginator>
+
+</div>
+
+  <div class="request">
+    <button mat-fab color="primary" (click)="request()">
+      <mat-icon matTooltip="Request complaint">add</mat-icon>
+    </button>
+  </div>

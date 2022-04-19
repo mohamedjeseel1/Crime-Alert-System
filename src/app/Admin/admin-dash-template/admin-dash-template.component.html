@@ -1,0 +1,72 @@
+<mat-sidenav-container>
+  <!-- navbar -->
+  <mat-sidenav #sidenav mode="side" opened>
+    <img src="assets\logo.png" alt="LOGO" style="height: 100px; width: 100px; margin-left: 50px;">
+    <mat-list class="navbar">
+      <mat-nav-list >
+        <a href="#" mat-list-item routerLink="dashboard" routerLinkActive="active">
+          <mat-icon>dashboard</mat-icon>&nbsp; Dashboard
+        </a>
+      </mat-nav-list>
+
+      <mat-nav-list *ngIf="isAdmin">
+        <a href="#" mat-list-item routerLink="create-records" routerLinkActive="active">
+          <mat-icon>note_add</mat-icon> &nbsp; Create Records
+        </a>
+      </mat-nav-list>
+
+      <mat-nav-list>
+        <a href="#" mat-list-item routerLink="view-records" routerLinkActive="active">
+          <mat-icon>preview</mat-icon> &nbsp; View Records
+        </a>
+      </mat-nav-list>
+
+      <mat-nav-list *ngIf="isAdmin">
+        <a href="#" mat-list-item routerLink="complaints" routerLinkActive="active">
+          <mat-icon>text_snippet</mat-icon>&nbsp; Complaints
+        </a>
+      </mat-nav-list>
+
+      <mat-nav-list *ngIf="isAdmin || isPolice">
+        <a href="#" mat-list-item routerLink="reports" routerLinkActive="active">
+          <mat-icon>verified</mat-icon> &nbsp; Reports
+        </a>
+      </mat-nav-list>
+
+      <mat-nav-list *ngIf="isAdmin">
+        <a href="#" mat-list-item routerLink="user-verify" routerLinkActive="active">
+          <mat-icon>accessibility_new</mat-icon>&nbsp; User Verify
+        </a>
+      </mat-nav-list>
+
+      <mat-nav-list *ngIf="isPublic">
+        <a href="#" mat-list-item routerLink="view-complaint" routerLinkActive="active">
+          <mat-icon>text_snippet</mat-icon>&nbsp; Complaints
+        </a>
+      </mat-nav-list>
+
+    </mat-list>
+
+  </mat-sidenav>
+
+  <!-- content -->
+  <mat-sidenav-content>
+    <!-- toggle -->
+    <button mat-icon-button (click)="sidenav.toggle()" color="primary">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <!-- toolbar -->
+    <mat-toolbar color="primary" class="toptoolbar ">
+      <span>Welcome {{user.username}}</span>
+      <!-- logout -->
+      <div class="logout">
+        <button mat-icon-button>
+          <mat-icon (click)="singOut()" #logout>logout</mat-icon>
+        </button>
+      </div>
+    </mat-toolbar>
+    <!-- main content -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

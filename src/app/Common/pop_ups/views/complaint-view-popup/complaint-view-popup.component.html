@@ -1,0 +1,37 @@
+<div id="contentToConvert" class="container">
+<div class="header bg-light">
+  <img src=".\assets\logo.png" alt="logo" style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
+  <p class="h5">{{complaintData.userId}} - {{complaintData.crimeType}}</p>
+</div>
+<hr>
+<div class="date_section">
+  <p><i>{{complaintData.createdAt}}</i></p>
+  <p><i>{{complaintData.location}}</i></p>
+</div>
+
+
+<h3 mat-dialog-title><u>{{complaintData.subject}}</u></h3>
+<div mat-dialog-content>
+  <p> {{complaintData.description}}
+
+  </p>
+  <h3><u>Location</u></h3>
+  <p>{{complaintData.location}}</p>
+</div>
+</div>
+<!-- buttons -->
+<div mat-dialog-actions class="buttons row">
+  <div class="col-sm-6" *ngIf="complaintData.status=='Pending'">
+    <button mat-raised-button color="warn" (click)="openRemark()" mat-dialog-close>Reject</button>
+  </div>
+  <div class="col-sm-6" *ngIf="complaintData.status=='Pending'">
+    <button mat-raised-button color="primary" (click)="acceptComplaint()">Accept</button>
+  </div>
+  <div class="col-sm-6" style="text-align: left;">
+    <button mat-raised-button color="secondary" mat-dialog-close>Close</button>
+  </div>
+    <div class="col-sm-6" style="text-align: right;" *ngIf="isReportMode">
+    <button mat-raised-button color="primary" (click)="generatePDF()">Get Report</button>
+  </div>
+</div>
+

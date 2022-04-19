@@ -1,0 +1,108 @@
+<mat-card>
+  <!-- card title -->
+  <mat-card-title>Add Crime </mat-card-title>
+  <!-- card content    -->
+  <mat-card-content>
+    <div class="row">
+      <div class="col-6">
+        <form [formGroup]="addcrime">
+          <!-- auto admin id -->
+          <mat-form-field appearance="outline">
+            <mat-label>Admin ID</mat-label>
+            <input matInput tyep="text" formControlName="adminid">
+          </mat-form-field>
+
+          <!-- category -->
+          <mat-form-field appearance="outline" style="margin-left: 4%;">
+            <mat-label>Crime category</mat-label>
+            <mat-select formControlName="category" #categ>
+              <mat-option value="Theft">Theft</mat-option>
+              <mat-option value="Murder Attempt">Murder Attempt</mat-option>
+              <mat-option value="Criminal Attempt">Criminal Attempt, Conspiracy, and Aiding and Abetting.</mat-option>
+              <!--helping to crime -->
+              <mat-option value="Drugs">Drugs</mat-option>
+              <mat-option value="Sexual attack">Sexual attack</mat-option>
+              <mat-option value="Violent">Violent</mat-option>
+              <mat-option value="other">Other</mat-option>
+            </mat-select>
+            <mat-error *ngIf="addcrime.get('category')?.hasError('required')">
+              Crime category required
+            </mat-error>
+          </mat-form-field>
+
+          <!-- title -->
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Title</mat-label>
+            <input matInput type="text" #tit maxlength="50" formControlName="title">
+            <mat-hint align="end">{{tit.value.length}}/50</mat-hint>
+            <mat-error *ngIf="addcrime.get('title')?.hasError('required')">
+              Title required
+            </mat-error>
+            <mat-error *ngIf="addcrime.get('title')?.hasError('minlength')">
+              must be at least 6 character long
+            </mat-error>
+          </mat-form-field>
+
+          <!-- description -->
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <textarea matInput #desc maxlength="250" type="text" formControlName="description"></textarea>
+            <mat-error *ngIf="addcrime.get('description')?.hasError('required')">
+              Description required
+            </mat-error>
+            <mat-hint align="end">{{desc.value.length}}/250</mat-hint>
+            <mat-error *ngIf="addcrime.get('description')?.hasError('minlength')">
+              must be at least 20 character
+            </mat-error>
+          </mat-form-field>
+
+          <!-- action -->
+          <mat-form-field appearance="outline" style="margin-left: 4%;">
+            <mat-label>Law of Crime</mat-label>
+            <textarea matInput maxlength="1250" type="text" #law formControlName="lawOfCrime"></textarea>
+            <!-- <mat-hint align="end">{{law.value.length}}/250</mat-hint> -->
+            <mat-error *ngIf="addcrime.get('lawOfCrime')?.hasError('required')">
+              Law required
+            </mat-error>
+            <mat-error *ngIf="addcrime.get('lawOfCrime')?.hasError('minlength')">
+              must be at least 10 character
+            </mat-error>
+          </mat-form-field>
+        </form>
+      </div>
+
+      <!-- card -->
+      <div class="col-6">
+
+        <mat-card class="card">
+          <mat-card-title class="header">
+            <img src=".\assets\create-logo.png" alt="logo"
+              style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
+            <p class="h5">{{categ.value}}</p>
+          </mat-card-title>
+          <hr>
+          <h4> <u>{{tit.value}}</u> </h4>
+          
+          <mat-card-content>
+            {{desc.value}}<br>
+            <b><u>law Of the Crime</u></b><br>
+            {{law.value}}
+          </mat-card-content>
+          <mat-card-actions></mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="buttons row">
+      <div class="col-sm-6 ">
+        <button mat-raised-button color="warn" #cancel>Cancel</button>
+      </div>
+      <div class="col-sm-6 ">
+        <button mat-raised-button color="primary" class="submit" (click)="createCrime()">Add</button>
+      </div>
+    </div>
+
+  </mat-card-actions>
+
+</mat-card>

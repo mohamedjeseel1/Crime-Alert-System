@@ -1,0 +1,121 @@
+<mat-card>
+  <!-- card title -->
+  <mat-card-title>Emergency Alert </mat-card-title>
+  <!-- card content    -->
+  <mat-card-content>
+    <div class="row">
+      <div class="col-6">
+        <form [formGroup]="emergencyAlert">
+
+          <!-- auto admin id -->
+          <mat-form-field appearance="outline">
+            <mat-label>Admin ID</mat-label>
+            <input matInput tyep="text" formControlName="adminid" #aid>
+          </mat-form-field>
+
+          <!-- crime category -->
+          <mat-form-field appearance="outline" style="margin-left: 4%;">
+            <mat-label>Category</mat-label>
+            <mat-select formControlName="category" #categ>
+              <mat-option value="Theft">Theft</mat-option>
+              <mat-option value="Murder Attempt">Murder Attempt</mat-option>
+              <mat-option value="Criminal Attempt">Criminal Attempt, Conspiracy, and Aiding and Abetting.</mat-option>
+              <!--helping to crime -->
+              <mat-option value="Drugs">Drugs</mat-option>
+              <mat-option value="Sexual attack">Sexual attack</mat-option>
+              <mat-option value="Violent">Violent</mat-option>
+              <mat-option value="other">Other</mat-option>
+            </mat-select>
+            <mat-error *ngIf="emergencyAlert.get('category')?.hasError('required')">
+              category required
+            </mat-error>
+          </mat-form-field>
+
+          <!-- date and time picker-->
+          <mat-form-field appearance="outline">
+            <mat-label>Date</mat-label>
+            <input matInput type="date"  formControlName="date" #date>
+            <mat-error *ngIf="emergencyAlert.get('date')?.hasError('required')">
+              Date required
+            </mat-error>
+          </mat-form-field>
+
+          <!-- title -->
+          <mat-form-field appearance="outline" style="margin-left: 4%;">
+            <mat-label>Title</mat-label>
+            <input matInput type="text"  maxlength="50" formControlName="title" #title>
+            <mat-hint align="end">{{title.value.length}}/50</mat-hint>
+            <mat-error *ngIf="emergencyAlert.get('title')?.hasError('required')">
+              Title required
+            </mat-error>
+            <mat-error *ngIf="emergencyAlert.get('title')?.hasError('minlength')">
+              must be at least 6 character long
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Description -->
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Description</mat-label>
+            <textarea matInput  maxlength="250" type="text" formControlName="description" #desc></textarea>
+            <mat-error *ngIf="emergencyAlert.get('description')?.hasError('required')">
+              Description required
+            </mat-error>
+            <mat-hint align="end">{{desc.value.length}}/250</mat-hint>
+            <mat-error *ngIf="emergencyAlert.get('description')?.hasError('minlength')">
+              must be at least 20 character
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Location -->
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Location</mat-label>
+            <textarea matInput type="text"  maxlength="50" formControlName="location" #location></textarea>
+            <mat-hint align="end">{{location.value.length}}/50</mat-hint>
+            <mat-error *ngIf="emergencyAlert.get('location')?.hasError('required')">
+              Location required
+            </mat-error>
+            <mat-error *ngIf="emergencyAlert.get('location')?.hasError('minlength')">
+              must be at least 10 character long
+            </mat-error>
+          </mat-form-field>
+        </form>
+      </div>
+
+      <!-- card -->
+      <div class="col-6">
+
+        <mat-card class="card">
+          <mat-card-title class="header">
+            <img src=".\assets\create-logo.png" alt="logo"
+              style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
+            <p class="h5">{{categ.value}}</p>
+          </mat-card-title>
+          <p style="text-align: right;">Admin - {{aid.value}}</p>
+
+          <hr>
+          
+          <p>{{date.value}}</p>
+          <h4> <u>{{title.value}}</u> </h4>
+          <mat-card-content>
+           <p>{{desc.value}}</p> <br>
+            <u>Location</u><br>
+            <p>{{location.value}}</p>  
+          </mat-card-content>
+          <mat-card-actions></mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="buttons row">
+      <div class="col-sm-6 ">
+        <button mat-raised-button color="warn" #cancel>Cancel</button>
+      </div>
+      <div class="col-sm-6 ">
+        <button mat-raised-button color="primary" class="submit" (click)="createEmergency()">Add</button>
+      </div>
+    </div>
+
+  </mat-card-actions>
+
+</mat-card>

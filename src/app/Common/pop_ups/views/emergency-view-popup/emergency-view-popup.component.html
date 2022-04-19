@@ -1,0 +1,41 @@
+  
+<div  class="header">      
+  <img src=".\assets\create-logo.png" alt="logo"
+    style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
+  <p class="h6">{{Emergencies.date}}</p>
+  <p class="ad_id"><i>Admin : {{Emergencies.adminid}}</i></p>
+  
+</div>
+<hr>
+  <div mat-dialog-content>
+    <div class="row">
+      <p class="h6 col-11"></p>
+      <p class="box col-1" style="text-align: right;">{{Emergencies.image}}</p>
+
+      <!-- Criminal details -->
+      <table class="table table-hover">
+        <tr>
+          <th>ID </th>
+          <th>Category </th>
+          <th>Title </th>
+          <th>Description </th>
+          <th>Location </th>
+
+        </tr>
+        <tr>
+          <td>{{Emergencies.id}}</td>
+          <td>{{Emergencies.category}}</td>
+          <td>{{Emergencies.title}}</td>
+          <td>{{Emergencies.description}}</td>
+          <td>{{Emergencies.location}}</td>
+         
+        </tr>
+      </table>
+    </div>
+  </div>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>
+
+

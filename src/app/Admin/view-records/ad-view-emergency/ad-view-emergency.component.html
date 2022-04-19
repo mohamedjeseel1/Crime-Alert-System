@@ -1,0 +1,60 @@
+<!-- buttons -->
+<div class="example-button-row">
+  <button mat-stroked-button color="warn">Closed</button>
+  <button mat-stroked-button color="accent">Ongoing</button>
+  <button mat-stroked-button color="primary">New</button>
+  <button mat-stroked-button>All</button>
+</div>
+
+<!-- filter -->
+<mat-form-field class="search">
+  <mat-label>Filter</mat-label>
+  <input matInput placeholder="Ex. Mia" #input>
+</mat-form-field>
+<!-- table -->
+<table class="table table-hover ">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Admin ID</th>
+      <th scope="col">Crime category</th>
+      <th scope="col">Date</th>
+      <th scope="col">Title</th>
+      <!-- <th scope="col">Description</th> -->
+      <th scope="col">Location</th>
+
+    </tr>
+  </thead>
+  <tbody *ngFor="let emrgy of Emergencies; let i = index">
+    <tr>
+      <th scope="row">{{i+1}}</th>
+      <td>{{emrgy.id}}</td>
+      <td>{{emrgy.adminid}}</td>
+      <td>{{emrgy.category}}</td>
+      <td>{{emrgy.date}}</td>
+      <td>{{emrgy.title}}</td>
+      <!-- <td>{{emrgy.description}}</td> -->
+      <td>{{emrgy.location}}</td>
+
+      <td>
+        <a matTooltip="View">
+          <mat-icon color="primary" (click)="openDialog(emrgy.id)">visibility</mat-icon>
+        </a>
+        <a matTooltip="Edit" *ngIf="logged_user_role=='admin'">
+          <mat-icon class="material-icons-outlined" (click)="edit(emrgy.id)">
+            edit
+          </mat-icon>
+        </a>
+        <a matTooltip="Delete">
+          <mat-icon color="warn" (click)="deleteEmergency(emrgy.id)">delete</mat-icon>
+        </a>
+        <a matTooltip="Print" *ngIf="(logged_user_role=='public'||logged_user_role=='police')">
+          <mat-icon>print</mat-icon>
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- Paginator -->
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of crimes"></mat-paginator>

@@ -1,0 +1,69 @@
+<!-- request complaint -->
+
+<!-- card title -->
+<mat-card-title>Request Complaint</mat-card-title>
+<!-- card content    -->
+<form [formGroup]="service.requestComplaint" (submit)="create()">
+  <div class="row">
+    <div class="col-6">
+
+
+      <mat-form-field appearance="outline">
+        <mat-label>User ID</mat-label>
+        <input matInput formControlName="userId">
+      </mat-form-field>
+      <br>
+      <!-- category -->
+      <mat-form-field appearance="outline">
+        <mat-label>Crime Type</mat-label>
+        <mat-select formControlName="crimeType">
+          <mat-option value="Theft">Theft</mat-option>
+          <mat-option value="Murder Attempt">Murder Attempt</mat-option>
+          <mat-option value="Criminal Attempt">Criminal Attempt, Conspiracy, and Aiding and Abetting.</mat-option>
+          <!--helping to crime -->
+          <mat-option value="Drugs">Drugs</mat-option>
+          <mat-option value="Sexual attack">Sexual attack</mat-option>
+          <mat-option value="Violent">Violent</mat-option>
+          <mat-option value="other">Other</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br>
+      <!-- subject -->
+      <mat-form-field appearance="outline">
+        <mat-label>Subject</mat-label>
+        <input matInput formControlName="subject">
+      </mat-form-field>
+      <br>
+      <!-- Description -->
+      <mat-form-field appearance="outline">
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description"></textarea>
+      </mat-form-field>
+
+      <!-- document -->
+      <div class="docs mb-4">
+        <label for="docs"> Rule Document</label>
+        <mat-hint>(optional)</mat-hint>
+        <input type="file" class="form-control" formControlName="document">
+      </div>
+    </div>
+
+    <!-- location -->
+    <div class="col-6">
+      <mat-form-field appearance="outline">
+        <mat-label>Location</mat-label>
+        <input matInput formControlName="location">
+      </mat-form-field>
+    </div>
+    <input type="hidden" formControlName="id">
+  </div>
+  <div class="row mt-5" style="text-align: center;">
+    <div class="col-6">
+      <button mat-raised-button color="warn" #cancel mat-dialog-close>Cancel</button>
+    </div>
+    <div class="col-6">
+      <button mat-raised-button color="primary">Submit</button>
+
+    </div>
+  </div>
+</form>

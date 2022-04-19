@@ -1,0 +1,73 @@
+<div class="row bg-light">
+  <div class="col-6 ">
+    <div class="img">image</div>
+  </div>
+  <div class="col-6">
+    <p class="h5 mt-4">User ID - User name</p>
+  </div>
+</div>
+<hr>
+<div class="date_section">
+  <p><i>Date</i></p>
+</div>
+
+<div mat-dialog-content>
+  <div class="row">
+    <!-- User details -->
+    <table class="table table-hover">
+      <p>User details</p>
+      <tr>
+        <th>User Name</th>
+        <th>Role</th>
+        <th>Password</th>
+      </tr>
+      <tr>
+        <td>Uname</td>
+        <td>role</td>
+        <td>pwd</td>
+      </tr>
+    </table>
+
+    <!-- Personal details -->
+    <table class="table table-hover">
+      <p>Personal details</p>
+      <tr>
+        <th>Full Name</th>
+        <th>Gender</th>
+        <th>Image</th>
+        <th>NIC</th>
+      </tr>
+      <tr>
+        <td>fname</td>
+        <td>gender</td>
+        <td>img</td>
+        <td>nic</td>
+      </tr>
+    </table>
+
+    <!-- contact details -->
+    <table class="table table-hover">
+      <p>contact details</p>
+      <tr>
+        <th>Address</th>
+        <th>Contact</th>
+        <th>Email</th>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td>Contact</td>
+        <td>Email</td>
+      </tr>
+    </table>
+
+  </div>
+</div>
+<!-- buttons -->
+<div mat-dialog-actions class="buttons row">
+  <div class="col-sm-6 ">
+    <button mat-raised-button color="warn" (click)="openRemark()" mat-dialog-close>Reject</button>
+  </div>
+  <div class="col-sm-6 ">
+    <button mat-raised-button color="primary" (click)="changeStatus('Accepted')">Accept</button>
+  </div>
+</div>

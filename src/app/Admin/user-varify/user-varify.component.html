@@ -1,0 +1,74 @@
+<!-- buttons -->
+<button mat-stroked-button color="primary">Rejected</button>
+<button mat-stroked-button color="primary">Accepted</button>
+<button mat-stroked-button color="primary">Panding</button>
+<button mat-stroked-button color="primary" (click)="getAllUser()">All</button>
+
+<!-- filter -->
+<mat-form-field class="search">
+  <mat-label>Filter</mat-label>
+  <input matInput placeholder="Ex. Mia" #input>
+</mat-form-field>
+
+<!-- table -->
+<table class="table align-middle mb-0 bg-white table-hover">
+  <thead class="bg-light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col"></th>
+      <th scope="col">User ID</th>
+      <th scope="col">Role</th>
+      <th scope="col">NIC</th>
+      <th scope="col">Conatct</th>
+      <th scope="col">Status</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usr of users; let i=index">
+      <th scope="row">{{i+1}}</th>
+      <td>
+        <div class="d-flex align-items-center">
+          <img src="//{{apiBaseUrl}}{{usr.image}}" alt="" style="width: 45px; height: 45px" class="rounded-circle" />
+          <div class="ms-3">
+            <p class="fw-bold mb-1">{{usr.username}}</p>
+            <p class="text-muted mb-0">{{usr.email}}</p>
+          </div>
+        </div>
+      </td>
+
+      <td>
+        <p class="fw-normal mb-1">{{usr.id}}</p>
+      </td>
+
+      <td>
+        <p class="fw-normal mb-1">{{usr.role}}</p>
+        <p class="text-muted mb-0">{{usr.gender}}</p>
+      </td>
+
+      <td>
+        <p class="fw-normal mb-1">{{usr.nic}}</p>
+      </td>
+
+      <td>
+        <p class="fw-normal mb-1">{{usr.contact}}</p>
+      </td>
+
+      <td>
+        <p>{{usr.status}}</p>
+      </td>
+
+      <td>
+        <a matTooltip="View">
+          <mat-icon color="primary" (click)="viewUser(usr.id)">visibility</mat-icon>
+        </a>
+        <a matTooltip="Delete">
+          <mat-icon color="warn" (click)="deleteUser(usr.id)">delete</mat-icon>
+        </a>
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+<!-- Paginator -->
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>

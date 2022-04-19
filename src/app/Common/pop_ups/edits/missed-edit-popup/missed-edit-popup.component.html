@@ -1,0 +1,89 @@
+<h1 mat-dialog-title>Edit Missed Details</h1>
+<div mat-dialog-content>
+
+  <div class="row">
+    <form [formGroup]="missedDetails">
+
+      <!-- auto admin id -->
+      <mat-form-field appearance="outline">
+        <mat-label>Admin ID</mat-label>
+        <input matInput tyep="text" formControlName="adminid">
+      </mat-form-field>
+
+      <!-- category -->
+      <mat-form-field appearance="outline" style="margin-left: 4%;">
+        <mat-label>category</mat-label>
+        <mat-select formControlName="category">
+          <mat-option value="Vehicle">Vehicle</mat-option>
+          <mat-option value="Gold">Gold</mat-option>
+          <mat-option value="Animal">Animal</mat-option>
+          <mat-option value="Other">Other</mat-option>
+        </mat-select>
+        <mat-error *ngIf="missedDetails.get('category')?.hasError('required')">
+          Crime category required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Identification -->
+      <mat-form-field appearance="outline">
+        <mat-label>Identification</mat-label>
+        <input matInput formControlName="identification">
+        <mat-error *ngIf="missedDetails.get('identification')?.hasError('required')">
+          Identification required
+        </mat-error>
+        <mat-error *ngIf="missedDetails.get('identification')?.hasError('maxlength')">
+          maximum 20 character
+        </mat-error>
+      </mat-form-field>
+
+      <!-- date and time picker-->
+      <mat-form-field appearance="outline" style="margin-left: 4%;">
+        <mat-label>Missed date</mat-label>
+        <input matInput type="date" #date formControlName="date">
+        <mat-error *ngIf="missedDetails.get('date')?.hasError('required')">
+          Date required
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Location -->
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Location</mat-label>
+        <input matInput type="text" #location maxlength="50" formControlName="location">
+        <mat-hint align="end">{{location.value.length}}/50</mat-hint>
+        <mat-error *ngIf="missedDetails.get('location')?.hasError('required')">
+          Location required
+        </mat-error>
+        <mat-error *ngIf="missedDetails.get('location')?.hasError('minlength')">
+          must be at least 10 character long
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Description -->
+      <mat-form-field appearance="outline" style="width: 100%;">
+        <mat-label>Description</mat-label>
+        <textarea matInput #desc maxlength="250" type="text" formControlName="description"></textarea>
+        <mat-error *ngIf="missedDetails.get('description')?.hasError('required')">
+          Description required
+        </mat-error>
+        <mat-hint align="end">{{desc.value.length}}/250</mat-hint>
+        <mat-error *ngIf="missedDetails.get('description')?.hasError('minlength')">
+          must be at least 20 character
+        </mat-error>
+      </mat-form-field>
+
+    </form>
+  </div>
+
+
+</div>
+<div mat-dialog-actions>
+  <div class="buttons row">
+    <div class="col-sm-6 ">
+      <button mat-raised-button color="warn" #cancel mat-dialog-close>Cancel</button>
+    </div>
+    <div class="col-sm-6 ">
+      <button mat-raised-button color="primary" class="submit" (click)="updateMissed()">Update</button>
+    </div>
+  </div>
+
+</div>

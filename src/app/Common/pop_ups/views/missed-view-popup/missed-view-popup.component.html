@@ -1,0 +1,38 @@
+
+<div  class="header">      
+  <img src=".\assets\create-logo.png" alt="logo"
+    style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
+  <p class="h6">{{misseds.date}}</p>
+  <p class="ad_id"><i>Admin : {{misseds.adminid}}</i></p>
+  
+</div>
+<hr>
+  <div mat-dialog-content>
+    <div class="row">
+      <p class="h6 col-11"></p>
+      <p class="box col-1" style="text-align: right;">{{misseds.image}}</p>
+
+      <!-- Criminal details -->
+      <table class="table table-hover">
+        <tr>
+          <th>Category: </th>
+          <th>Identification</th>
+          <th>Location</th>
+          <th>Description </th>
+        </tr>
+        <tr>
+          <td>{{misseds.category}}</td>
+          <td>{{misseds.identification}}</td>
+          <td>{{misseds.location}}</td>
+
+          <td>{{misseds.description}}</td>
+         
+        </tr>
+      </table>
+    </div>
+  </div>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</div>
+
