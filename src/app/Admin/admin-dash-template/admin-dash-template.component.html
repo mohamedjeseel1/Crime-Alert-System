@@ -1,12 +1,45 @@
-<mat-sidenav-container>
+<mat-sidenav-container >
   <!-- navbar -->
-  <mat-sidenav #sidenav mode="side" opened>
-    <img src="assets\logo.png" alt="LOGO" style="height: 100px; width: 100px; margin-left: 50px;">
-    <mat-list class="navbar">
-      <mat-nav-list >
+  <mat-sidenav #sidenav mode="side" opened >
+    <!-- logo -->
+    <div class="logo" style="text-align: center;">
+        <p class="h3 mt-2" style="color: darkgoldenrod;"><img src="assets\logo.png" alt="LOGO"
+          style="height: 30px; width: 30px;" /> &nbsp; CRIMECON</p>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="profile" style="text-align: center;">
+      <!-- profile section -->
+      <br>
+      <button mat-button [matMenuTriggerFor]="menu"> <img src="assets\user.jpg" alt="LOGO"
+          style="height: 100px; width: 100px;" /><br> {{user.username}}</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item>
+          <mat-icon class="material-icons-round">
+            perm_identity
+          </mat-icon>My Profile
+        </button>
+        <button mat-menu-item>
+          <mat-icon class="material-icons-round">
+            chat_bubble_outline
+          </mat-icon>Chats
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="singOut()">
+          <mat-icon class="material-icons-round" >
+            power_settings_new
+          </mat-icon>Signout
+        </button>
+      </mat-menu>
+    </div>
+    
+    <!-- navbar -->
+    <mat-list class="navbar" >
+      <mat-nav-list>
         <a href="#" mat-list-item routerLink="dashboard" routerLinkActive="active">
           <mat-icon>dashboard</mat-icon>&nbsp; Dashboard
         </a>
+
+
       </mat-nav-list>
 
       <mat-nav-list *ngIf="isAdmin">
@@ -44,9 +77,7 @@
           <mat-icon>text_snippet</mat-icon>&nbsp; Complaints
         </a>
       </mat-nav-list>
-
     </mat-list>
-
   </mat-sidenav>
 
   <!-- content -->
@@ -55,12 +86,17 @@
     <button mat-icon-button (click)="sidenav.toggle()" color="primary">
       <mat-icon>menu</mat-icon>
     </button>
+
     <!-- toolbar -->
-    <mat-toolbar color="primary" class="toptoolbar ">
-      <span>Welcome {{user.username}}</span>
+    <mat-toolbar color="primary" class="toptoolbar">
+      <span>Welcome {{ user.fullname }}</span> 
+
       <!-- logout -->
-      <div class="logout">
-        <button mat-icon-button>
+      <div class="tool-section">
+        <button mat-icon-button class="notification material-icons-round">
+          <mat-icon> notifications_none </mat-icon>
+        </button>
+        <button mat-icon-button class="logout">
           <mat-icon (click)="singOut()" #logout>logout</mat-icon>
         </button>
       </div>
@@ -68,5 +104,4 @@
     <!-- main content -->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
-
 </mat-sidenav-container>

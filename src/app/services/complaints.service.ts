@@ -8,7 +8,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ComplaintsService {
   requestComplaint = new FormGroup({
-    id: new FormControl(null),
+    id: new FormControl(''),
     userId: new FormControl('', [Validators.required]),
     crimeType: new FormControl('', [Validators.required]),
     subject: new FormControl('', [
@@ -41,7 +41,8 @@ export class ComplaintsService {
   }
   //call ekk awa
   updateComplaint(data: any, id: any): Observable<any> {
-    return this.http.put<any>(this.api_url + '/updateComplaint/' + id, data);
+    let url1 = this.api_url + '/updateComplaint/' + id;
+    return this.http.put<any>(url1, data);
   }
   updateStatus(data: any, id: any): Observable<any> {
     return this.http.put<any>(this.api_url + '/update-status/' + id, data);

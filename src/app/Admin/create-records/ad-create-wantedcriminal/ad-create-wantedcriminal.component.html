@@ -22,7 +22,7 @@
           <!-- auto admin id -->
           <mat-form-field appearance="outline" style="margin-left: 4%;">
             <mat-label>Admin ID</mat-label>
-            <input matInput tyep="text" formControlName="adminid" #aid>
+            <input matInput formControlName="adminid" #aid >
           </mat-form-field>
 
           <!-- category -->
@@ -136,12 +136,11 @@
           <mat-card-title class="header">
             <img src=".\assets\create-logo.png" alt="logo"
               style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
-            <p class="h5">{{date.value}}</p>
-            <p class="ad_id"><i>{{aid.value}}</i></p>
           </mat-card-title>
+          <p class="h7">{{date.value}}</p>
+          <p style="text-align: right;"><i>Admin Id: {{aid.value}}</i></p>
 
           <hr>
-
           <mat-card-content>
             <div class="row">
               <div class="col-9">
@@ -156,7 +155,9 @@
                 <p>C_Address: {{cAdd.value}}</p>
               </div>
               <div class="col-3">
-                <p class="box mt-4">{{img.value}}</p>
+                <div class="box" *ngIf="filePath && filePath !== ''">
+                  <img [src]="filePath" alt="img" >
+                </div>
               </div>
             </div>
 

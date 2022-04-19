@@ -9,66 +9,61 @@ import { RequestComponent } from '../request/request.component';
 @Component({
   selector: 'app-view',
   templateUrl: './view.component.html',
-  styleUrls: ['./view.component.scss']
+  styleUrls: ['./view.component.scss'],
 })
 export class ViewComponent implements OnInit {
+  ELEMENT_DATA: view[] = [];
 
-  ELEMENT_DATA: view[]=[];
-
-  displayedColumns:string[]=['crimeType','subject',
+  displayedColumns: string[] = [
+    'crimeType',
+    'subject',
     'description',
     'document',
-    'location', 'action'];
+    'location',
+    'action',
+  ];
 
   dataSource = new MatTableDataSource<view>(this.ELEMENT_DATA);
 
- 
-
   @ViewChild(MatPaginator)
-
   paginator!: MatPaginator;
 
-  constructor(private view_popup: MatDialog,public service: ComplaintsService) { 
-     
-  }
- 
+  constructor(
+    private view_popup: MatDialog,
+    public service: ComplaintsService
+  ) {}
+
   ngOnInit(): void {
     this.AllComplaints();
-    console.log(this.dataSource)
+    console.log(this.dataSource);
   }
 
-   // Pop-Up
-   request(){
-    this.view_popup.open(RequestComponent,{
+  // Pop-Up
+  request() {
+    this.view_popup.open(RequestComponent, {
       height: 'auto',
-      width: '50%'
-  });
-  }
-  
-  AllComplaints(){
-
-    this.service.getAllComplaints().subscribe((data:any)=>{
-      this.dataSource.data=data as view[];
-      this.dataSource.paginator=this.paginator;
-    })
+      width: '50%',
+    });
   }
 
-  onEdit(element:any){
-    console.log(element.id);
+  AllComplaints() {
+    this.service.getAllComplaints().subscribe((data: any) => {
+      this.dataSource.data = data as view[];
+      this.dataSource.paginator = this.paginator;
+    });
+  }
+
+  onEdit(element: any) {
     this.service.iniform(element);
-    this.view_popup.open(RequestComponent,{
+    this.view_popup.open(RequestComponent, {
       height: 'auto',
-      width: '50%'
-  });
+      width: '50%',
+    });
   }
-  onDelete(element:any){
-    this.service.deleteComplaint(element.id).subscribe((data)=>{
-      this.dataSource.data=data;
+  onDelete(element: any) {
+    this.service.deleteComplaint(element.id).subscribe((data) => {
+      this.dataSource.data = data;
       this.AllComplaints();
-
-    })
+    });
   }
-
- 
-
 }

@@ -6,62 +6,72 @@ import { UserService } from 'src/app/services/user.service';
 @Component({
   selector: 'app-user-varify',
   templateUrl: './user-varify.component.html',
-  styleUrls: ['./user-varify.component.scss']
+  styleUrls: ['./user-varify.component.scss'],
 })
 export class UserVarifyComponent implements OnInit {
+  apiBaseUrl = 'localhost:8081/';
 
-  apiBaseUrl ="localhost:8081/";
-
-  users:any =[{
-    id:"",
-    username  : "", 
-    role : "",
-    password : "",
-    cpassword : "",
-    fullname : "",
-    gender : "",
-    image : "",
-    nic : "",
-    address : "",
-    contact : "",
-    email : "",
-    status :"",
-    createdAt: "",
-    updatedAt: ""
-  }];
-  constructor(private service:UserService, private view_popup: MatDialog) { }
+  users: any = [
+    {
+      id: '',
+      username: '',
+      role: '',
+      password: '',
+      cpassword: '',
+      fullname: '',
+      gender: '',
+      image: '',
+      nic: '',
+      address: '',
+      contact: '',
+      email: '',
+      status: '',
+      createdAt: '',
+      updatedAt: '',
+    },
+  ];
+  constructor(private service: UserService, private view_popup: MatDialog) {}
 
   ngOnInit(): void {
     this.getAllUser();
   }
 
-  getAllUser(){
-    this.service.getAllUsers().subscribe((data:any)=>{
+  getAllUser() {
+    this.service.getAllUsers().subscribe((data: any) => {
       console.log(data);
       this.users = data;
-    })
+    });
   }
 
-  viewUser(id:any){
-     this.view_popup.open(UserVerifypopupComponent,{
-        height: 'auto',
-        width: '60%'
-       
-     })
+  viewUser(id: any) {
+    this.view_popup.open(UserVerifypopupComponent, {
+      height: 'auto',
+      width: '60%',
+    });
   }
 
-  deleteUser(id:any){
+  deleteUser(id: any) {
     this.service.deleteUser(id).subscribe(
-      (data:any)=>{
-      console.log(data);
-      console.log("User deleted");
-      this.getAllUser();
+      (data: any) => {
+        console.log(data);
+        console.log('User deleted');
+        this.getAllUser();
       },
-      (error:any)=>{
-      console.log(error);
-        
-      } 
-    )
+      (error: any) => {
+        console.log(error);
+      }
+    );
   }
 
+  getByStatus(status: any) {
+    this.service.getUserByStatus(status).subscribe(
+      (data: any) => {
+        console.log('getByStatus\n' + data);
+        this.users = data;
+      },
+      (error: any) => {
+        console.error('ERROR\n' + error);
+      }
+    );
+  }
 }

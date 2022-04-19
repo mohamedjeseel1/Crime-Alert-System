@@ -3,32 +3,35 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
+  api_url = 'http://localhost:8081/api/user';
+  constructor(private http: HttpClient) {}
 
-  api_url = "http://localhost:8081/api/user";
-  constructor(private http:HttpClient) {}
-
-  rule(){
+  rule() {
     return this.http.get(this.api_url);
   }
 
-  register(data:any):Observable<any>{
-    return this.http.post(this.api_url+'/register',data);
+  register(data: any): Observable<any> {
+    return this.http.post(this.api_url + '/register', data);
   }
 
-  getAllUsers():Observable<any>{
-    return this.http.get(this.api_url+'/getAllusers');
+  getAllUsers(): Observable<any> {
+    return this.http.get(this.api_url + '/getAllusers');
   }
 
-  deleteUser( id:any):Observable<any>{
-    return this.http.delete(this.api_url+"/"+id);
+  deleteUser(id: any): Observable<any> {
+    return this.http.delete(this.api_url + '/' + id);
   }
 
   // login
-  login(username:string, password:any):Observable<any>{
-    return this.http.post(this.api_url+'/login',{username,password});    
+  login(username: string, password: any): Observable<any> {
+    return this.http.post(this.api_url + '/login', { username, password });
   }
 
+  // user verify
+  getUserByStatus(status: string): Observable<any> {
+    return this.http.get(this.api_url + '/get-by-status/' + status);
+  }
 }

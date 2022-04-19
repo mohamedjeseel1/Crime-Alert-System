@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CriminalService } from 'src/app/services/criminal.service';
+import { UserStorageService } from 'src/app/services/user-storage.service'; // for user Id auto
 
 @Component({
   selector: 'app-ad-create-wantedcriminal',
@@ -10,8 +11,18 @@ import { CriminalService } from 'src/app/services/criminal.service';
 export class AdCreateWantedcriminalComponent implements OnInit {
   doc_file_name = '';
   doc_file: File;
+  filePath: string;
 
-  constructor(private service: CriminalService) {}
+  user = {
+    userId: '',
+    username: '',
+    role: '',
+    fullname: '',
+  };
+  constructor(
+    private service: CriminalService,
+    private userStorageService: UserStorageService
+  ) {}
 
   ngOnInit(): void {}
 
@@ -72,6 +83,14 @@ export class AdCreateWantedcriminalComponent implements OnInit {
     if (file) {
       this.doc_file_name = file.name;
       this.doc_file = file;
+
+      // Preprare file path to <image> src [src= filePath]
+      //show the selected image on html card
+      const reader = new FileReader();
+      reader.onload = () => {
+        this.filePath = reader.result as string;
+      };
+      reader.readAsDataURL(file);
     }
   }
 }
