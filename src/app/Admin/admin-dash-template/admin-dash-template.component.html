@@ -1,45 +1,25 @@
-<mat-sidenav-container >
+<mat-sidenav-container>
   <!-- navbar -->
-  <mat-sidenav #sidenav mode="side" opened >
+  <mat-sidenav #sidenav mode="side" opened>
     <!-- logo -->
     <div class="logo" style="text-align: center;">
-        <p class="h3 mt-2" style="color: darkgoldenrod;"><img src="assets\logo.png" alt="LOGO"
+      <p class="h3 mt-2" style="color: darkgoldenrod;"><img src="assets\logo.png" alt="LOGO"
           style="height: 30px; width: 30px;" /> &nbsp; CRIMECON</p>
     </div>
     <mat-divider></mat-divider>
     <div class="profile" style="text-align: center;">
       <!-- profile section -->
       <br>
-      <button mat-button [matMenuTriggerFor]="menu"> <img src="assets\user.jpg" alt="LOGO"
-          style="height: 100px; width: 100px;" /><br> {{user.username}}</button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon class="material-icons-round">
-            perm_identity
-          </mat-icon>My Profile
-        </button>
-        <button mat-menu-item>
-          <mat-icon class="material-icons-round">
-            chat_bubble_outline
-          </mat-icon>Chats
-        </button>
-        <mat-divider></mat-divider>
-        <button mat-menu-item (click)="singOut()">
-          <mat-icon class="material-icons-round" >
-            power_settings_new
-          </mat-icon>Signout
-        </button>
-      </mat-menu>
+      <a href="#" style="text-decoration: none; color: white;"> <img src="assets\user.jpg" alt="LOGO" /><br>
+        {{user.username}}</a>
     </div>
-    
+
     <!-- navbar -->
-    <mat-list class="navbar" >
+    <mat-list class="navbar">
       <mat-nav-list>
         <a href="#" mat-list-item routerLink="dashboard" routerLinkActive="active">
           <mat-icon>dashboard</mat-icon>&nbsp; Dashboard
         </a>
-
-
       </mat-nav-list>
 
       <mat-nav-list *ngIf="isAdmin">
@@ -83,19 +63,42 @@
   <!-- content -->
   <mat-sidenav-content>
     <!-- toggle -->
-    <button mat-icon-button (click)="sidenav.toggle()" color="primary">
+    <button mat-icon-button (click)="sidenav.toggle()" color="primary" style="position: absolute;">
       <mat-icon>menu</mat-icon>
     </button>
 
+    <div class="profile-menu" style="text-align: right; margin-top: 0;">
+      <button mat-button [matMenuTriggerFor]="menu"> <img src="assets\user.jpg" alt="LOGO" /> {{user.username}}</button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item (click)="myprofile()">
+          <mat-icon class="material-icons-round">
+            perm_identity
+          </mat-icon>My Profile
+        </button>
+        <button mat-menu-item>
+          <mat-icon class="material-icons-round">
+            chat_bubble_outline
+          </mat-icon>Chats
+        </button>
+        <mat-divider></mat-divider>
+        <button mat-menu-item (click)="singOut()">
+          <mat-icon class="material-icons-round">
+            power_settings_new
+          </mat-icon>Signout
+        </button>
+      </mat-menu>
+    </div>
     <!-- toolbar -->
     <mat-toolbar color="primary" class="toptoolbar">
-      <span>Welcome {{ user.fullname }}</span> 
+      <span>Welcome {{ user.fullname }}</span>
 
-      <!-- logout -->
+      <!-- tools -->
       <div class="tool-section">
+        <!-- notifications -->
         <button mat-icon-button class="notification material-icons-round">
-          <mat-icon> notifications_none </mat-icon>
+          <mat-icon matBadge="15" matBadgeColor="warn"> notifications_none </mat-icon>
         </button>
+        <!-- signout -->
         <button mat-icon-button class="logout">
           <mat-icon (click)="singOut()" #logout>logout</mat-icon>
         </button>

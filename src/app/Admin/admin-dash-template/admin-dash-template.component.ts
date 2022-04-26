@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MyprofileComponent } from 'src/app/Common/pop_ups/myprofile/myprofile.component';
 import { UserStorageService } from 'src/app/services/user-storage.service';
 import { ROLES } from 'src/app/user-auth/roles-enum';
 
@@ -22,7 +24,10 @@ export class AdminDashTemplateComponent implements OnInit {
   isPolice = false;
   isPublic = false;
 
-  constructor(private userStorageService: UserStorageService) {}
+  constructor(
+    private userStorageService: UserStorageService,
+    private view_popup: MatDialog
+  ) {}
 
   ngOnInit(): void {
     this.user = JSON.parse(this.userStorageService.getUser());
@@ -30,7 +35,12 @@ export class AdminDashTemplateComponent implements OnInit {
     this.isPolice = this.user.role == this.roles.POLICE;
     this.isPublic = this.user.role == this.roles.PUBLIC;
   }
+  // My Profile
+  myprofile() {
+    this.view_popup.open(MyprofileComponent);
+  }
 
+  // sign out
   singOut(): void {
     this.userStorageService.signOut();
   }

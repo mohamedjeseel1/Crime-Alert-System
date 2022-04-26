@@ -20,6 +20,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatBadgeModule } from '@angular/material/badge';
 
 const materialComponents = [
   MatTabsModule,
@@ -42,6 +43,7 @@ const materialComponents = [
   MatDialogModule,
   MatProgressBarModule,
   MatMenuModule,
+  MatBadgeModule,
 ];
 @NgModule({
   imports: [materialComponents],

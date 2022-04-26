@@ -92,21 +92,22 @@
 
                 </mat-form-field>
                 <!-- Gender -->
-                <mat-radio-group aria-label="Select an option" labelPosition="before" formControlName="gender">
-                  <mat-label>Gender</mat-label>
+                <mat-radio-group aria-label="Select an option" labelPosition="before" formControlName="gender" required>
+              <mat-label >Gender</mat-label>
                   <mat-radio-button value="male" color="primary">Male</mat-radio-button>
                   <mat-radio-button value="female" color="primary">Female</mat-radio-button>
-                  <mat-error *ngIf="personaldetails.get('gender')?.hasError('required')"> Gender
-                    required</mat-error>
-                </mat-radio-group>
+                  <!-- <mat-error *ngIf="personaldetails.get('gender')?.hasError('required')"> *</mat-error> -->
+
+                  </mat-radio-group>
                 <!-- Image -->
                 <div class="image mb-4">
                   <label for="image">Image</label>
                   <input type="file" (change)="onFileSelected($event)" class="form-control" formControlName="image" #img
                     required>
                   <mat-error *ngIf="personaldetails.get('image')?.hasError('required')">
-                    Image required
+                  *<mat-hint align="end">image must be 100px*100px</mat-hint> 
                   </mat-error>
+
                 </div>
                 <!-- nic -->
                 <mat-form-field appearance="outline" class="mt-4">
@@ -116,7 +117,7 @@
                     required</mat-error>
                   <mat-error
                     *ngIf="personaldetails.get('nic')?.hasError('maxlength')||personaldetails.get('nic')?.hasError('minlength')">
-                    Must be 10 digits long
+                    Must be 10(V/X) or 12 digits long
                   </mat-error>
                 </mat-form-field>
                 <!-- buttons -->

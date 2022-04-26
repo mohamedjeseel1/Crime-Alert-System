@@ -9,7 +9,6 @@ import { LoginComponent } from './user-auth/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialsModule } from './materials/materials.module';
-import { SidenavbarComponent } from './sidenavbar/sidenavbar.component';
 // Admin
 import { CreateRecordsComponent } from './Admin/create-records/create-records.component';
 import { ViewRecordsComponent } from './Admin/view-records/view-records.component';
@@ -32,14 +31,6 @@ import { AdCreateMissingComponent } from './Admin/create-records/ad-create-missi
 import { AdCreateCrimeComponent } from './Admin/create-records/ad-create-crime/ad-create-crime.component';
 import { AdCreateCrimeareaComponent } from './Admin/create-records/ad-create-crimearea/ad-create-crimearea.component';
 import { AdCreateEmergencyComponent } from './Admin/create-records/ad-create-emergency/ad-create-emergency.component';
-import { ViewreportComponent } from './Admin/admin-popups/viewreport/viewreport.component';
-import { CriminalDetailsComponent } from './Common/criminal-details/criminal-details.component';
-import { MissingComponent } from './Common/missing/missing.component';
-import { NewrulesComponent } from './Common/newrules/newrules.component';
-import { CrimendLawComponent } from './Common/crimend-law/crimend-law.component';
-import { CrimeareaComponent } from './Common/crimearea/crimearea.component';
-import { EmergencyComponent } from './Common/emergency/emergency.component';
-import { ReportsComponent } from './Police/reports/reports.component';
 import { BackgroundComponent } from './Common/background/background.component';
 // http
 import { HttpClientModule } from '@angular/common/http';
@@ -52,8 +43,6 @@ import { CAreaViewPopupComponent } from './Common/pop_ups/views/c-area-view-popu
 import { EmergencyViewPopupComponent } from './Common/pop_ups/views/emergency-view-popup/emergency-view-popup.component';
 import { ComplaintViewPopupComponent } from './Common/pop_ups/views/complaint-view-popup/complaint-view-popup.component';
 import { RejectRemarksPopupComponent } from './Common/pop_ups/views/complaint-view-popup/reject-remarks-popup/reject-remarks-popup.component';
-import { AcceptedPopupComponent } from './Common/pop_ups/accepted-popup/accepted-popup.component';
-import { RejectedPopupComponent } from './Common/pop_ups/rejected-popup/rejected-popup.component';
 import { RuleEditPopupComponent } from './Common/pop_ups/edits/rule-edit-popup/rule-edit-popup.component';
 import { WantedCriminalEditPopupComponent } from './Common/pop_ups/edits/wanted-criminal-edit-popup/wanted-criminal-edit-popup.component';
 import { MissedEditPopupComponent } from './Common/pop_ups/edits/missed-edit-popup/missed-edit-popup.component';
@@ -65,17 +54,17 @@ import { ViewComponent } from './Public/complaint/view/view.component';
 import { RequestComponent } from './Public/complaint/request/request.component';
 import { UserVerifypopupComponent } from './Common/pop_ups/views/user-verifypopup/user-verifypopup.component';
 
+// new
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { MyprofileComponent } from './Common/pop_ups/myprofile/myprofile.component';
 
 @NgModule({
   declarations: [
-
     //common
     AppComponent,
     HomeComponent,
     RegisterComponent,
     LoginComponent,
-    SidenavbarComponent,
-    
 
     // Admin
     AdminDashboardComponent,
@@ -99,14 +88,6 @@ import { UserVerifypopupComponent } from './Common/pop_ups/views/user-verifypopu
     AdminComplaintComponent,
     AdNewcomplaintComponent,
     AdComplaintprogressComponent,
-    ViewreportComponent,
-    CriminalDetailsComponent,
-    MissingComponent,
-    NewrulesComponent,
-    CrimendLawComponent,
-    CrimeareaComponent,
-    EmergencyComponent,
-    ReportsComponent,
     BackgroundComponent,
     // pop_up
     RuleViewPopupComponent,
@@ -117,8 +98,6 @@ import { UserVerifypopupComponent } from './Common/pop_ups/views/user-verifypopu
     EmergencyViewPopupComponent,
     ComplaintViewPopupComponent,
     RejectRemarksPopupComponent,
-    AcceptedPopupComponent,
-    RejectedPopupComponent,
     RuleEditPopupComponent,
     WantedCriminalEditPopupComponent,
     MissedEditPopupComponent,
@@ -128,8 +107,8 @@ import { UserVerifypopupComponent } from './Common/pop_ups/views/user-verifypopu
     ComplaintEditPopupComponent,
     ViewComponent,
     RequestComponent,
-    UserVerifypopupComponent
-
+    UserVerifypopupComponent,
+    MyprofileComponent,
   ],
   imports: [
     BrowserModule,
@@ -140,13 +119,10 @@ import { UserVerifypopupComponent } from './Common/pop_ups/views/user-verifypopu
     MaterialsModule, // importing material component module.
     HttpClientModule, // http
 
-
-
+    // new
+    FlexLayoutModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
-  
+  bootstrap: [AppComponent],
 })
-export class AppModule {
-  
- }
+export class AppModule {}

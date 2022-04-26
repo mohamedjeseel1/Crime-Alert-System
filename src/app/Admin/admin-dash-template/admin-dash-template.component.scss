@@ -8,14 +8,29 @@
     background-color: rgb(13, 49, 49);
 }
 
+.profile-menu img{
+    width: 20px;
+    height: 20px;
+    border: 1px solid;
+    border-radius: 50%;
+}
+.mat-menu-item{
+    width: 150px;
+    margin-right: 20px;
+}
+
 .navbar{
     padding: 10px;
     margin-left: 8%;
     margin-top: 20px;   
 }
 .profile img{
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
 }
+
+
 .mat-nav-list{
     padding: 0;   
     display: flex;
@@ -25,7 +40,11 @@
     font-size: 18px;   
     color: white;
 }
-
+.toptoolbar{
+    width: 100%;
+    height: auto;
+    padding: 10px;
+}
 .tool-section{
     margin-left: auto;
 

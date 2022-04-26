@@ -7,10 +7,16 @@ import { RulesService } from 'src/app/services/rules.service';
   styleUrls: ['./admin-dashboard.component.scss'],
 })
 export class AdminDashboardComponent implements OnInit {
+  gridColumns = 3;
+
   constructor(private ruleService: RulesService) {}
 
   ngOnInit(): void {
     this.getAllRules();
+  }
+  // toggle for columns
+  toggleGridColumns() {
+    this.gridColumns = this.gridColumns === 3 ? 4 : 3;
   }
   getAllRules() {
     this.ruleService.getAllRules().subscribe((data) => {});

@@ -1,10 +1,10 @@
 <!-- component content -->
 
-<div class="container ">
-  <div class="row ">
+<!-- <div class="container ">
+  <div class="row "> -->
 
-    <!-- rules -->
-    <div class="col-md-4 col-sm-6 ">
+<!-- rules -->
+<!-- <div class="col-md-4 col-sm-6 ">
       <mat-card>
         <mat-card-title>Rules</mat-card-title>
         <mat-card-content>
@@ -12,10 +12,10 @@
         </mat-card-content>
         <mat-card-actions></mat-card-actions>
       </mat-card>
-    </div>
+    </div> -->
 
-    <!-- Wanted Criminal -->
-    <div class="col-md-4 col-sm-6">
+<!-- Wanted Criminal -->
+<!-- <div class="col-md-4 col-sm-6">
       <mat-card>
         <mat-card-title>Wanted Criminal</mat-card-title>
         <mat-card-content>
@@ -23,10 +23,10 @@
         </mat-card-content>
         <mat-card-actions></mat-card-actions>
       </mat-card>
-    </div>
+    </div> -->
 
-    <!-- Missing Details -->
-    <div class="col-md-4 col-sm-6">
+<!-- Missing Details -->
+<!-- <div class="col-md-4 col-sm-6">
       <mat-card>
         <mat-card-title>Missing Details</mat-card-title>
         <mat-card-content>
@@ -34,10 +34,10 @@
         </mat-card-content>
         <mat-card-actions></mat-card-actions>
       </mat-card>
-    </div>
+    </div> -->
 
-    <!-- Crime Details -->
-    <div class="col-md-4 col-sm-6 ">
+<!-- Crime Details -->
+<!-- <div class="col-md-4 col-sm-6 ">
       <mat-card>
         <mat-card-title>Crime Details</mat-card-title>
         <mat-card-content>
@@ -45,10 +45,10 @@
         </mat-card-content>
         <mat-card-actions></mat-card-actions>
       </mat-card>
-    </div>
+    </div> -->
 
-    <!-- Crime Areas -->
-    <div class="col-md-4 col-sm-6">
+<!-- Crime Areas -->
+<!-- <div class="col-md-4 col-sm-6">
       <mat-card>
         <mat-card-title>Crime Areas</mat-card-title>
         <mat-card-content>
@@ -56,11 +56,11 @@
         </mat-card-content>
         <mat-card-actions></mat-card-actions>
       </mat-card>
-    </div>
+    </div> -->
 
 
-    <!-- Emergency Alerts -->
-    <div class="col-md-4 col-sm-6">
+<!-- Emergency Alerts -->
+<!-- <div class="col-md-4 col-sm-6">
       <mat-card>
         <mat-card-title>Emergency Alerts</mat-card-title>
         <mat-card-content>
@@ -70,4 +70,107 @@
       </mat-card>
     </div>
   </div>
+</div> -->
+
+<!-- new -->
+
+<div style="text-align: right;">
+  <button mat-button (click)="toggleGridColumns()" fxHide.lt-md>
+    <span *ngIf="gridColumns === 4">3 Columns</span>
+    <span *ngIf="gridColumns === 3">4 Columns</span>
+  </button>
 </div>
+
+<div class="content">
+  <div fxLayout="row wrap" fxLayoutGap="16px grid">
+    <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let num of [1,2,3,4,5,6,7]">
+      <mat-card class="mat-elevation-z4">
+        <mat-card-header>
+          <mat-card-title *ngIf="num==1">Rules {{num}}</mat-card-title>
+          <mat-card-title *ngIf="num==2">Wanted Criminal {{num}}</mat-card-title>
+          <mat-card-title *ngIf="num==3">Missed Details {{num}}</mat-card-title>
+          <mat-card-title *ngIf="num==4">Crime {{num}}</mat-card-title>
+          <mat-card-title *ngIf="num==5">Crime Area {{num}}</mat-card-title>
+          <mat-card-title *ngIf="num==6">Emergency Alert {{num}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <!-- rules card -->
+          <div class="row">
+            <tr>
+              <!-- icon -->
+              <div class="left-section">
+                <!-- rules -->
+                <mat-icon class="material-icons-round " *ngIf="num==1">
+                  trending_up
+                </mat-icon>
+                <!-- Wanted Criminal -->
+                <mat-icon class="material-icons-round " *ngIf="num==2">
+                  trending_up
+                </mat-icon>
+                <!-- Missing Details -->
+                <mat-icon class="material-icons-round " *ngIf="num==3">
+                  trending_up
+                </mat-icon>
+                <!-- Crime Details -->
+                <mat-icon class="material-icons-round " *ngIf="num==4">
+                  trending_up
+                </mat-icon>
+                <!-- Crime Areas -->
+                <mat-icon class="material-icons-round " *ngIf="num==5">
+                  trending_up
+                </mat-icon>
+                <!-- Emergency Alerts -->
+                <mat-icon class="material-icons-round " *ngIf="num==6">
+                  trending_up
+                </mat-icon>
+
+              </div>
+              <!-- total -->
+              <div class="right-section">
+                <!-- rules -->
+                <p class="h4" *ngIf="num==1">Total : 20K</p>
+                <!-- Wanted Criminal -->
+                <p class="h4" *ngIf="num==2">Total : 30K</p>
+                <!-- Missing Details -->
+                <p class="h4" *ngIf="num==3">Total : 40K</p>
+                <!-- Crime Details -->
+                <p class="h4" *ngIf="num==4">Total : 50K</p>
+                <!-- Crime Areas -->
+                <p class="h4" *ngIf="num==5">Total : 60K</p>
+                <!-- Emergency Alerts -->
+                <p class="h4" *ngIf="num==6">Total : 70K</p>
+              </div>
+            </tr>
+          </div>
+        </mat-card-content>
+        <mat-card-actions>
+         
+          <!-- <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button> -->
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    crimes chart(increase/decrease)  - line chart<br>
+    user chart(people involvement day by day) - ""<br>
+    complaints - bar chart.
+  </div>
+</div>
+
+
+
+
+<!-- new1 -->
+<!-- <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px" class="stats-cards">
+  <mat-card fxFlex="25">
+      <p label="New Users" total="12k" percentage="50" ></p>
+  </mat-card>
+  <mat-card fxFlex="25">
+      <p label="Users retention" total="10k" percentage="40" ></p>
+  </mat-card>
+  <mat-card fxFlex="25">
+      <p label="Users engagement" total="8k" percentage="30" ></p>
+  </mat-card>
+  <mat-card fxFlex="25">
+      <p label="Referral" total="6k" percentage="20" ></p>
+  </mat-card>
+</div> -->
