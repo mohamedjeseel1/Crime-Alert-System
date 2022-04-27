@@ -4,23 +4,22 @@
     <form [formGroup]="crimeArea">
 
       <!-- auto admin id -->
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="d-none">
         <mat-label>Admin ID</mat-label>
-        <input matInput tyep="text" formControlName="adminid">
+        <input matInput formControlName="adminid">
       </mat-form-field>
 
-      <!-- crime id -->
-      <mat-form-field appearance="outline" style="margin-left: 4%;">
+      <!-- Area code -->
+      <mat-form-field appearance="outline" >
         <mat-label>Area Code</mat-label>
-        <input matInput formControlName="areaCode">
+        <input matInput formControlName="areaCode" #areaCode>
         <mat-error *ngIf="crimeArea.get('areaCode')?.hasError('required')">
           Area Code required
         </mat-error>
-
       </mat-form-field>
 
       <!-- date and time picker-->
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" style="margin-left: 4%;">
         <mat-label>current Date</mat-label>
         <input matInput type="date" #date formControlName="date">
         <mat-error *ngIf="crimeArea.get('date')?.hasError('required')">
@@ -29,7 +28,7 @@
       </mat-form-field>
 
       <!-- crime category -->
-      <mat-form-field appearance="outline" style="margin-left: 4%;">
+      <mat-form-field appearance="outline" >
         <mat-label>category</mat-label>
         <mat-select formControlName="category">
           <mat-option value="Vehicle">Vehicle</mat-option>
@@ -45,7 +44,7 @@
 
 
       <!-- title -->
-      <mat-form-field appearance="outline" style="width: 100%;">
+      <mat-form-field appearance="outline" style="margin-left: 4%;">
         <mat-label>Title</mat-label>
         <input matInput type="text" #title maxlength="50" formControlName="title">
         <mat-hint align="end">{{title.value.length}}/50</mat-hint>

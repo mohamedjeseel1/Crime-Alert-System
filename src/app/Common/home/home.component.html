@@ -100,14 +100,108 @@
 
 
 <!-- Contact us -->
-<div class="contact" id="contact_us">
-  <div class="row">
-    <div class="col-md-8">
-      <h1 class="heading text-primary">Contact Us</h1>
-      <p>Contact us page</p>
-    </div>
-    <div class="col-md-4" style="text-align: center;">
-      <img alt="photo" class="img-about" src="../../assets/Questions-amico.png" />
-    </div>
-  </div>
+<!--container-->
+<div class="container bg-light " id="contact_us">
+  <section class="mb-4">
+
+    <!--Section heading-->
+    <p class="h3 responsive text-center my-4">Contact us</p>
+    <!--Section description-->
+    <p class="h6 text-center w-responsive mx-auto mb-4">Do you have any questions? Please do not hesitate to contact us
+      directly. Our team will come back to you within
+      a matter of hours to help you.</p>
+
+    <div class="row">
+
+      <!--Grid column-->
+      <div class="col-md-9 mb-md-0 mb-5">
+        <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+
+          <!--Grid row-->
+          <div class="row">
+
+            <!--Grid column-->
+            <div class="form-group w-50">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-user text-info"></i></div>
+                </div>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="User Name"
+                  required>
+              </div>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="form-group w-50">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-envelope text-info"></i></div>
+                </div>
+                <input type="email" class="form-control" id="nombre" name="email" placeholder="Email"
+                  required>
+              </div>
+            </div>
+            <!--Grid column-->
+
+          </div>
+          <!--Grid row-->
+
+          <!--Grid row-->
+          <div class="row">
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fas fa-edit text-info"></i></div>
+                </div>
+                <textarea class="form-control" placeholder="Subject" required></textarea>
+              </div>
+            </div>
+          </div>
+          <!--Grid row-->
+
+          <!--Grid row-->
+          <div class="row">
+
+            <!--Grid column-->
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-comment text-info"></i></div>
+                </div>
+                <textarea class="form-control" placeholder="Message" required></textarea>
+              </div>
+            </div>
+          </div>
+          <!--Grid row-->
+
+        </form>
+
+        <div class="text-center text-md-left mb-4">
+          <a class="btn btn-primary" class="btn btn-info btn-block rounded-2 py-2">Send</a>
+        </div>
+      </div>
+      <!--Grid column-->
+
+<!--Grid column-->
+<div class="col-md-3 text-center">
+  <ul class="list-unstyled mb-0">
+    <li><i class="fas fa-map-marker-alt fa-2x "></i>
+      <p>331 Olcott Mawatha, Colombo, Sri Lanka</p>
+    </li>
+
+    <li><i class="fas fa-phone mt-4 fa-2x"></i>
+      <p>0112 421 111</p>
+    </li>
+
+    <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+      <p>crimeAlert@system.com</p>
+    </li>
+  </ul>
+</div>
+<!--Grid column-->
+
+</div>
+
+</section>
 </div>

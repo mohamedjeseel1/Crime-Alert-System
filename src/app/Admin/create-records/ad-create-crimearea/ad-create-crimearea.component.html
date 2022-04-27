@@ -8,13 +8,13 @@
         <form [formGroup]="crimeArea">
 
           <!-- auto admin id -->
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" class="d-none">
             <mat-label>Admin ID</mat-label>
-            <input matInput tyep="text" formControlName="adminid" #aid>
+            <input matInput formControlName="adminid">
           </mat-form-field>
 
-          <!-- crime id -->
-          <mat-form-field appearance="outline" style="margin-left: 4%;">
+          <!-- Area code -->
+          <mat-form-field appearance="outline" >
             <mat-label>Area Code</mat-label>
             <input matInput formControlName="areaCode" #areaCode>
             <mat-error *ngIf="crimeArea.get('areaCode')?.hasError('required')">
@@ -23,7 +23,7 @@
           </mat-form-field>
 
           <!-- date and time picker-->
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" style="margin-left: 4%;">
             <mat-label>current Date</mat-label>
             <input matInput type="date" formControlName="date" #date>
             <mat-error *ngIf="crimeArea.get('date')?.hasError('required')">
@@ -32,13 +32,17 @@
           </mat-form-field>
 
           <!-- crime category -->
-          <mat-form-field appearance="outline" style="margin-left: 4%;">
-            <mat-label>category</mat-label>
+          <mat-form-field appearance="outline" >
+            <mat-label>Crime category</mat-label>
             <mat-select formControlName="category" #categ>
-              <mat-option value="Vehicle">Vehicle</mat-option>
-              <mat-option value="Gold">Gold</mat-option>
-              <mat-option value="Animal">Animal</mat-option>
-              <mat-option value="Other">Other</mat-option>
+              <mat-option value="Theft">Theft</mat-option>
+              <mat-option value="Murder Attempt">Murder Attempt</mat-option>
+              <mat-option value="Criminal Attempt">Criminal Attempt, Conspiracy, and Aiding and Abetting.</mat-option>
+              <!--helping to crime -->
+              <mat-option value="Drugs">Drugs</mat-option>
+              <mat-option value="Sexual attack">Sexual attack</mat-option>
+              <mat-option value="Violent">Violent</mat-option>
+              <mat-option value="other">Other</mat-option>
             </mat-select>
             <mat-error *ngIf="crimeArea.get('category')?.hasError('required')">
               Crime category required
@@ -47,8 +51,9 @@
 
 
 
+
           <!-- title -->
-          <mat-form-field appearance="outline" style="width: 100%;">
+          <mat-form-field appearance="outline" style="margin-left: 4%;">
             <mat-label>Title</mat-label>
             <input matInput type="text"  maxlength="50" formControlName="title" #title>
             <mat-hint align="end">{{title.value.length}}/50</mat-hint>
@@ -119,7 +124,7 @@
               style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
             <p class="h5">{{categ.value}}</p>
           </mat-card-title>
-          <p style="text-align: right;">Admin - {{aid.value}}</p>
+          <p style="text-align: right;">Admin - {{user.userId}}</p>
 
           <hr>
           

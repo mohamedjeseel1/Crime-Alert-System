@@ -5,13 +5,13 @@
     <form [formGroup]="emergencyAlert">
 
       <!-- auto admin id -->
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="d-none">
         <mat-label>Admin ID</mat-label>
         <input matInput tyep="text" formControlName="adminid">
       </mat-form-field>
 
       <!-- crime category -->
-      <mat-form-field appearance="outline" style="margin-left: 4%;">
+      <mat-form-field appearance="outline" >
         <mat-label>Category</mat-label>
         <mat-select formControlName="category">
           <mat-option value="Theft">Theft</mat-option>
@@ -29,7 +29,7 @@
       </mat-form-field>
 
       <!-- date and time picker-->
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" style="margin-left: 4%;">
         <mat-label>Date</mat-label>
         <input matInput type="date" #date formControlName="date">
         <mat-error *ngIf="emergencyAlert.get('date')?.hasError('required')">
@@ -38,7 +38,7 @@
       </mat-form-field>
 
       <!-- title -->
-      <mat-form-field appearance="outline" style="margin-left: 4%;">
+      <mat-form-field appearance="outline"  style="width: 100%;">
         <mat-label>Title</mat-label>
         <input matInput type="text" #title maxlength="50" formControlName="title">
         <mat-hint align="end">{{title.value.length}}/50</mat-hint>

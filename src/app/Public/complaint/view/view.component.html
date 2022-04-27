@@ -3,6 +3,11 @@
 <button mat-stroked-button color="primary">Panding</button>
 <button mat-stroked-button color="primary">All</button> -->
 
+<!-- buttons -->
+<button mat-stroked-button color="primary" (click)="getByStatus('Rejected')">Rejected</button>
+<button mat-stroked-button color="primary" (click)="getByStatus('Accepted')">Accepted</button>
+<button mat-stroked-button color="primary" (click)="getByStatus('Pending')">Panding</button>
+<button mat-stroked-button color="primary" (click)="AllComplaints()">All</button>
 <!-- filter -->
 <mat-form-field class="search mt-2">
   <mat-label>Filter</mat-label>
@@ -62,6 +67,11 @@
 
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 staffTable">
 
+  <ng-container matColumnDef="updatedAt">
+    <th mat-header-cell *matHeaderCellDef> Date </th>
+    <td mat-cell *matCellDef="let element"> {{element.updatedAt}} </td>
+  </ng-container>
+
   <ng-container matColumnDef="crimeType">
     <th mat-header-cell *matHeaderCellDef> crimeType </th>
     <td mat-cell *matCellDef="let element"> {{element.crimeType}} </td>
@@ -70,11 +80,6 @@
   <ng-container matColumnDef="subject">
     <th mat-header-cell *matHeaderCellDef> subject </th>
     <td mat-cell *matCellDef="let element"> {{element.subject}} </td>
-  </ng-container>
-
-  <ng-container matColumnDef="description">
-    <th mat-header-cell *matHeaderCellDef> description </th>
-    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
   </ng-container>
 
   <ng-container matColumnDef="document">
@@ -87,16 +92,25 @@
     <td mat-cell *matCellDef="let element"> {{element.location}} </td>
   </ng-container>
 
+  <ng-container matColumnDef="status">
+    <th mat-header-cell *matHeaderCellDef> status </th>
+    <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+  </ng-container>
+
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef> Action </th>
     <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="primary" matTooltip="Edit">
-        <mat-icon  (click)="onEdit(element)">edit</mat-icon>
-      </button>
 
-      <button mat-icon-button matTooltip="Delete">
+      <a matTooltip="View">
+        <mat-icon color="" >visibility</mat-icon>
+      </a>
+      <a  color="primary" matTooltip="Edit">
+        <mat-icon  (click)="onEdit(element)">edit</mat-icon>
+      </a>
+
+      <a  matTooltip="Delete">
         <mat-icon color="warn" (click)="onDelete(element)">delete</mat-icon>
-      </button>
+      </a>
     </td>
   </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
@@ -105,7 +119,7 @@
 
 
 
-<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"
+<mat-paginator [pageSizeOptions]="[4, 10, 20]" showFirstLastButtons aria-label="Select page of periodic elements"
   class="staffTable">
 
 </mat-paginator>

@@ -5,13 +5,13 @@
     <form [formGroup]="missedDetails">
 
       <!-- auto admin id -->
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="d-none">
         <mat-label>Admin ID</mat-label>
         <input matInput tyep="text" formControlName="adminid">
       </mat-form-field>
 
       <!-- category -->
-      <mat-form-field appearance="outline" style="margin-left: 4%;">
+      <mat-form-field appearance="outline" >
         <mat-label>category</mat-label>
         <mat-select formControlName="category">
           <mat-option value="Vehicle">Vehicle</mat-option>
@@ -25,7 +25,7 @@
       </mat-form-field>
 
       <!-- Identification -->
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" style="margin-left: 4%;">
         <mat-label>Identification</mat-label>
         <input matInput formControlName="identification">
         <mat-error *ngIf="missedDetails.get('identification')?.hasError('required')">
@@ -37,7 +37,7 @@
       </mat-form-field>
 
       <!-- date and time picker-->
-      <mat-form-field appearance="outline" style="margin-left: 4%;">
+      <mat-form-field appearance="outline" style="width: 100%;" >
         <mat-label>Missed date</mat-label>
         <input matInput type="date" #date formControlName="date">
         <mat-error *ngIf="missedDetails.get('date')?.hasError('required')">

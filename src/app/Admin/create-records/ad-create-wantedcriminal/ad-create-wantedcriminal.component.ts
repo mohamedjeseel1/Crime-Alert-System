@@ -1,7 +1,10 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CrimeService } from 'src/app/services/crime.service';
 import { CriminalService } from 'src/app/services/criminal.service';
 import { UserStorageService } from 'src/app/services/user-storage.service'; // for user Id auto
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ad-create-wantedcriminal',
@@ -19,16 +22,48 @@ export class AdCreateWantedcriminalComponent implements OnInit {
     role: '',
     fullname: '',
   };
+
+  crimes: any = [
+    {
+      id: '',
+      adminid: '',
+      category: '',
+      title: '',
+      description: '',
+      lawOfCrime: '',
+      createdAt: '',
+      updatedAt: '',
+    },
+  ];
   constructor(
     private service: CriminalService,
-    private userStorageService: UserStorageService
+    private userStorageService: UserStorageService,
+    private crimeservice: CrimeService
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getAll();
+    this.user = JSON.parse(this.userStorageService.getUser());
+    // patch the current adminid
+    this.wantedCriminal.patchValue({
+      adminid: this.user.userId,
+    });
+  }
+  getAll() {
+    this.crimeservice.getAllCrimes().subscribe(
+      (data: any) => {
+        this.crimes = data;
+        console.log(data);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
 
   wantedCriminal = new FormGroup({
     crimeid: new FormControl('', [Validators.required]),
-    adminid: new FormControl('', [Validators.required]),
+    adminid: new FormControl(this.user.userId, [Validators.required]),
     category: new FormControl('', [Validators.required]),
     fullname: new FormControl('', [
       Validators.required,
@@ -70,7 +105,13 @@ export class AdCreateWantedcriminalComponent implements OnInit {
     this.service.createCriminal(formData).subscribe(
       (data: any) => {
         console.log(data);
-        alert('successfully added!');
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Created Successfully',
+          showConfirmButton: true,
+          timer: 1500,
+        });
       },
       (err: any) => {
         console.log(err);

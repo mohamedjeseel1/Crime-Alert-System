@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CriminalService } from 'src/app/services/criminal.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-wanted-criminal-edit-popup',
@@ -59,7 +60,17 @@ export class WantedCriminalEditPopupComponent implements OnInit {
       .updateCriminal(this.wantedCriminal.value, this.data.criminal.id)
       .subscribe(
         (data) => {
-          alert('update success');
+          Swal.fire({
+            background: '',
+            color: '',
+            width: '300px',
+            heightAuto: true,
+            position: 'center',
+            icon: 'success',
+            title: 'Updated Successfully',
+            showConfirmButton: true,
+            timer: 1500,
+          });
           console.log(data);
           location.reload();
         },

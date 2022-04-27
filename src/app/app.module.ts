@@ -16,8 +16,6 @@ import { UserVarifyComponent } from './Admin/user-varify/user-varify.component';
 import { ReportComponent } from './Admin/report/report.component';
 import { AdminDashboardComponent } from './Admin/admin-dashboard/admin-dashboard.component';
 import { AdminComplaintComponent } from './Admin/admin-complaint/admin-complaint.component';
-import { AdNewcomplaintComponent } from './Admin/admin-complaint/ad-newcomplaint/ad-newcomplaint.component';
-import { AdComplaintprogressComponent } from './Admin/admin-complaint/ad-complaintprogress/ad-complaintprogress.component';
 import { AdminDashTemplateComponent } from './Admin/admin-dash-template/admin-dash-template.component';
 import { AdViewNewrulesComponent } from './Admin/view-records/ad-view-newrules/ad-view-newrules.component';
 import { AdViewWantedcriminalComponent } from './Admin/view-records/ad-view-wantedcriminal/ad-view-wantedcriminal.component';
@@ -49,7 +47,6 @@ import { MissedEditPopupComponent } from './Common/pop_ups/edits/missed-edit-pop
 import { EmergencyEditPopupComponent } from './Common/pop_ups/edits/emergency-edit-popup/emergency-edit-popup.component';
 import { CrimeEditPopupComponent } from './Common/pop_ups/edits/crime-edit-popup/crime-edit-popup.component';
 import { CAreaEditPopupComponent } from './Common/pop_ups/edits/c-area-edit-popup/c-area-edit-popup.component';
-import { ComplaintEditPopupComponent } from './Common/pop_ups/edits/complaint-edit-popup/complaint-edit-popup.component';
 import { ViewComponent } from './Public/complaint/view/view.component';
 import { RequestComponent } from './Public/complaint/request/request.component';
 import { UserVerifypopupComponent } from './Common/pop_ups/views/user-verifypopup/user-verifypopup.component';
@@ -86,8 +83,6 @@ import { MyprofileComponent } from './Common/pop_ups/myprofile/myprofile.compone
     AdCreateCrimeareaComponent,
     AdCreateEmergencyComponent,
     AdminComplaintComponent,
-    AdNewcomplaintComponent,
-    AdComplaintprogressComponent,
     BackgroundComponent,
     // pop_up
     RuleViewPopupComponent,
@@ -104,7 +99,6 @@ import { MyprofileComponent } from './Common/pop_ups/myprofile/myprofile.compone
     EmergencyEditPopupComponent,
     CrimeEditPopupComponent,
     CAreaEditPopupComponent,
-    ComplaintEditPopupComponent,
     ViewComponent,
     RequestComponent,
     UserVerifypopupComponent,

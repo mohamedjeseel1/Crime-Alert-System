@@ -16,11 +16,12 @@ export class ViewComponent implements OnInit {
 
   displayedColumns: string[] = [
     'crimeType',
+    'updatedAt',
     'subject',
-    'description',
     'document',
     'location',
     'action',
+    'status',
   ];
 
   dataSource = new MatTableDataSource<view>(this.ELEMENT_DATA);
@@ -65,5 +66,17 @@ export class ViewComponent implements OnInit {
       this.dataSource.data = data;
       this.AllComplaints();
     });
+  }
+
+  getByStatus(status: any) {
+    this.service.getComplaintByStatus(status).subscribe(
+      (data: any) => {
+        console.log('getByStatus\n' + data);
+        this.displayedColumns = data;
+      },
+      (error: any) => {
+        console.error('ERROR\n' + error);
+      }
+    );
   }
 }

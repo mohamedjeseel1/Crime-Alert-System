@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ComplaintsService } from 'src/app/services/complaints.service';
+import { UserStorageService } from 'src/app/services/user-storage.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-request',
@@ -7,9 +9,25 @@ import { ComplaintsService } from 'src/app/services/complaints.service';
   styleUrls: ['./request.component.scss'],
 })
 export class RequestComponent implements OnInit {
-  constructor(public service: ComplaintsService) {}
+  user = {
+    userId: '',
+    username: '',
+    role: '',
+    fullname: '',
+  };
 
-  ngOnInit(): void {}
+  constructor(
+    public service: ComplaintsService,
+    private userStorageService: UserStorageService
+  ) {}
+
+  ngOnInit(): void {
+    this.user = JSON.parse(this.userStorageService.getUser());
+    // patch the current adminid
+    this.service.requestComplaint.patchValue({
+      userId: this.user.userId,
+    });
+  }
 
   create() {
     if (this.service.requestComplaint.value.id > 0) {
@@ -21,6 +39,18 @@ export class RequestComponent implements OnInit {
         )
         .subscribe((data) => {
           console.log(data);
+          Swal.fire({
+            background: '',
+            color: '',
+            width: '',
+            heightAuto: true,
+            position: 'center',
+            icon: 'success',
+            title: 'Updated Successfully',
+            showConfirmButton: true,
+            timer: 1500,
+          });
+          location.reload();
         });
     } else {
       ////
@@ -28,6 +58,20 @@ export class RequestComponent implements OnInit {
         .createComplaint(this.service.requestComplaint.value)
         .subscribe((data) => {
           console.log(data);
+
+          Swal.fire({
+            background: '',
+            color: '',
+            width: '',
+            heightAuto: true,
+            position: 'center',
+            icon: 'success',
+            title: 'Requested Successfully',
+            showConfirmButton: true,
+            timer: 1500,
+          });
+
+          location.reload();
         });
     }
   }

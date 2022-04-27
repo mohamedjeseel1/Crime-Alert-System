@@ -7,45 +7,28 @@
       <div class="col-6">
         <form [formGroup]="wantedCriminal">
 
+          <!-- auto admin id -->
+          <mat-form-field appearance="outline" class="d-none">
+            <mat-label>Admin ID</mat-label>
+            <input matInput formControlName="adminid">
+          </mat-form-field>
+
           <!-- crime id -->
-          <mat-form-field appearance="outline">
-            <mat-label>Crime ID</mat-label>
-            <input matInput formControlName="crimeid" #cid>
+          <mat-form-field appearance="outline" style="width: 100%;">
+            <mat-label>Crime?</mat-label>
+            <mat-select matInput formControlName="crimeid" #cid>
+              <mat-option *ngFor="let crime of crimes" value="{{crime.id}}">{{crime.title}}</mat-option>
+            </mat-select>
             <mat-error *ngIf="wantedCriminal.get('crimeid')?.hasError('required')">
-              Crime ID required
+              Crime required
             </mat-error>
             <mat-error *ngIf="wantedCriminal.get('crimeid')?.hasError('minlength')">
               must be at least 5 digits
             </mat-error>
           </mat-form-field>
 
-          <!-- auto admin id -->
-          <mat-form-field appearance="outline" style="margin-left: 4%;">
-            <mat-label>Admin ID</mat-label>
-            <input matInput formControlName="adminid" #aid >
-          </mat-form-field>
-
-          <!-- category -->
-          <mat-form-field appearance="outline">
-            <mat-label>Crime category</mat-label>
-            <mat-select formControlName="category" #categ>
-              <mat-option value="Theft">Theft</mat-option>
-              <mat-option value="Murder Attempt">Murder Attempt</mat-option>
-              <mat-option value="Criminal Attempt,Conspiracy,and Aiding and Abetting.">Criminal Attempt,Conspiracy,and
-                Aiding and Abetting.</mat-option>
-              <!--helping to crime -->
-              <mat-option value="Drugs">Drugs</mat-option>
-              <mat-option value="Sexual attack">Sexual attack</mat-option>
-              <mat-option value="Violent">Violent</mat-option>
-              <mat-option value="other">Other</mat-option>
-            </mat-select>
-            <mat-error *ngIf="wantedCriminal.get('category')?.hasError('required')">
-              Crime category required
-            </mat-error>
-          </mat-form-field>
-
           <!-- Full name -->
-          <mat-form-field appearance="outline" style="margin-left: 4%;">
+          <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Full name</mat-label>
             <input matInput formControlName="fullname" #fname>
             <mat-error *ngIf="wantedCriminal.get('fullname')?.hasError('required')">
@@ -87,7 +70,6 @@
             <mat-label>Gender</mat-label>
             <mat-radio-button value="male" #gend color="primary" [checked]="true">Male</mat-radio-button>
             <mat-radio-button value="female" #gend color="primary">Female</mat-radio-button>
-
           </mat-radio-group>
 
           <!-- Image -->
@@ -138,7 +120,7 @@
               style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
           </mat-card-title>
           <p class="h7">{{date.value}}</p>
-          <p style="text-align: right;"><i>Admin Id: {{aid.value}}</i></p>
+          <p style="text-align: right;"><i>Admin Id: {{user.userId}} </i></p>
 
           <hr>
           <mat-card-content>
@@ -146,8 +128,7 @@
               <div class="col-9">
                 <p class="h6"> <u>Criminal Details</u> </p>
                 <p>Name: {{fname.value}}</p>
-                <p>Crime ID: {{cid.value}}</p>
-                <p>Crime Type: {{categ.value}}</p>
+                <p>Crime id {{cid.value}}</p>
                 <p>DOB: {{dob.value}}</p>
                 <p>NIC: {{nic.value}}</p>
                 <p>Gender: {{gend.value}}</p>
@@ -156,7 +137,7 @@
               </div>
               <div class="col-3">
                 <div class="box" *ngIf="filePath && filePath !== ''">
-                  <img [src]="filePath" alt="img" >
+                  <img [src]="filePath" alt="img">
                 </div>
               </div>
             </div>

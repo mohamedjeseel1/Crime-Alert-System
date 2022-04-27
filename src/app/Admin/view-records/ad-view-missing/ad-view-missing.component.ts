@@ -4,6 +4,7 @@ import { MissedEditPopupComponent } from 'src/app/Common/pop_ups/edits/missed-ed
 import { MissedViewPopupComponent } from 'src/app/Common/pop_ups/views/missed-view-popup/missed-view-popup.component';
 import { MissedService } from 'src/app/services/missed.service';
 import { UserStorageService } from 'src/app/services/user-storage.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ad-view-missing',
@@ -75,7 +76,13 @@ export class AdViewMissingComponent implements OnInit {
     this.missed.deleteMissed(id).subscribe(
       (data) => {
         console.log(data);
-        console.log('missed deleted');
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Deleted Successfully',
+          showConfirmButton: false,
+          timer: 1500,
+        });
         this.getAllMisseds();
       },
       (error: any) => {

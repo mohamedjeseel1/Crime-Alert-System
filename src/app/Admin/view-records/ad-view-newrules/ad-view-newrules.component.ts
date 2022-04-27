@@ -4,6 +4,7 @@ import { RuleViewPopupComponent } from 'src/app/Common/pop_ups/views/rule-view-p
 import { RuleEditPopupComponent } from 'src/app/Common/pop_ups/edits/rule-edit-popup/rule-edit-popup.component';
 import { RulesService } from 'src/app/services/rules.service';
 import { UserStorageService } from 'src/app/services/user-storage.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ad-view-newrules',
@@ -80,7 +81,13 @@ export class AdViewNewrulesComponent implements OnInit {
     this.rule.deleteRule(id).subscribe(
       (data: any) => {
         console.log(data);
-        alert('rule deleted');
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Deleted Successfully',
+          showConfirmButton: false,
+          timer: 1500,
+        });
         this.getAllRules();
       },
       (error: any) => {

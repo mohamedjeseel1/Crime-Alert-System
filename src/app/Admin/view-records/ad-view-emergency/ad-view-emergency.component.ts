@@ -4,6 +4,7 @@ import { EmergencyEditPopupComponent } from 'src/app/Common/pop_ups/edits/emerge
 import { EmergencyViewPopupComponent } from 'src/app/Common/pop_ups/views/emergency-view-popup/emergency-view-popup.component';
 import { EmergencyService } from 'src/app/services/emergency.service';
 import { UserStorageService } from 'src/app/services/user-storage.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ad-view-emergency',
@@ -76,6 +77,13 @@ export class AdViewEmergencyComponent implements OnInit {
     this.emergency.deleteEmergency(id).subscribe(
       (data: any) => {
         this.Emergencies = data;
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Deleted Successfully',
+          showConfirmButton: false,
+          timer: 1500,
+        });
         this.getAllEmergencies();
       },
       (error: any) => {

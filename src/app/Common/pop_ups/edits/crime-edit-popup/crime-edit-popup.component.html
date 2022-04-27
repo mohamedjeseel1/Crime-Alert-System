@@ -4,13 +4,13 @@
   <div class="row">
     <form [formGroup]="addcrime">
       <!-- auto admin id -->
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="d-none">
         <mat-label>Admin ID</mat-label>
         <input matInput tyep="text" formControlName="adminid">
       </mat-form-field>
 
       <!-- category -->
-      <mat-form-field appearance="outline" style="margin-left: 4%;">
+      <mat-form-field appearance="outline" style="width: 100%;">
         <mat-label>Crime category</mat-label>
         <mat-select formControlName="category">
           <mat-option value="Theft">Theft</mat-option>

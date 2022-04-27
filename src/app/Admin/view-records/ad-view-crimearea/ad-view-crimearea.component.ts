@@ -4,6 +4,7 @@ import { CAreaEditPopupComponent } from 'src/app/Common/pop_ups/edits/c-area-edi
 import { CAreaViewPopupComponent } from 'src/app/Common/pop_ups/views/c-area-view-popup/c-area-view-popup.component';
 import { CrimeAreaService } from 'src/app/services/crime-area.service';
 import { UserStorageService } from 'src/app/services/user-storage.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ad-view-crimearea',
@@ -80,6 +81,13 @@ export class AdViewCrimeareaComponent implements OnInit {
     this.area.deleteArea(id).subscribe(
       (data: any) => {
         this.areas = data;
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Deleted Successfully',
+          showConfirmButton: false,
+          timer: 1500,
+        });
         this.getAllAreas();
       },
       (error: any) => {

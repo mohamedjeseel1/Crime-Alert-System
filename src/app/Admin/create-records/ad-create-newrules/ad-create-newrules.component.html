@@ -7,6 +7,12 @@
       <div class="col-6">
         <form [formGroup]="formNewrule">
 
+           <!-- auto admin id -->
+           <mat-form-field appearance="outline" class="d-none">
+            <mat-label>Admin ID</mat-label>
+            <input matInput formControlName="adminid">
+          </mat-form-field>
+          
           <!-- date -->
           <mat-form-field appearance="outline" style="width: 48%; ">
             <mat-label>Current date</mat-label>
@@ -93,7 +99,7 @@
             style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
           <p class="h5">{{categ.value}}</p>
         </mat-card-title>
-        <p style="text-align: right;">{{date.value}}</p>
+        <p style="text-align: right;">{{date.value}}</p>{{user.userId}}
 
         <hr>
         

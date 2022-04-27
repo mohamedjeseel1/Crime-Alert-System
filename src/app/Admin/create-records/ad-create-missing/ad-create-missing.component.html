@@ -7,14 +7,14 @@
       <div class="col-6">
         <form [formGroup]="missingForm">
 
-          <!-- auto admin id -->
-          <mat-form-field appearance="outline">
+           <!-- auto admin id -->
+           <mat-form-field appearance="outline" class="d-none">
             <mat-label>Admin ID</mat-label>
-            <input matInput tyep="text" formControlName="adminid" #aid>
+            <input matInput formControlName="adminid">
           </mat-form-field>
 
           <!-- category -->
-          <mat-form-field appearance="outline" style="margin-left: 4%;">
+          <mat-form-field appearance="outline" >
             <mat-label>category</mat-label>
             <mat-select formControlName="category" #categ>
               <mat-option value="Vehicle">Vehicle</mat-option>
@@ -28,7 +28,7 @@
           </mat-form-field>
 
           <!-- date and time picker-->
-          <mat-form-field appearance="outline" >
+          <mat-form-field appearance="outline" style="margin-left: 4%;">
             <mat-label>Missed date</mat-label>
             <input matInput type="date"  formControlName="date" #mdate>
             <mat-error *ngIf="missingForm.get('date')?.hasError('required')">
@@ -37,7 +37,7 @@
           </mat-form-field>
 
           <!-- title -->
-          <mat-form-field appearance="outline" style="margin-left: 4%;">
+          <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Title</mat-label>
             <input matInput type="text"  maxlength="50" formControlName="title" #title>
             <mat-hint align="end">{{title.value.length}}/50</mat-hint>
@@ -99,7 +99,7 @@
               style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
             <p class="h5">{{categ.value}}</p>
           </mat-card-title>
-          <p style="text-align: right;">Admin - {{aid.value}}</p>
+          <p style="text-align: right;">Admin - {{user.userId}}</p>
 
           <hr>
           

@@ -4,6 +4,7 @@ import { WantedCriminalEditPopupComponent } from 'src/app/Common/pop_ups/edits/w
 import { WantedCriminalViewPopupComponent } from 'src/app/Common/pop_ups/views/wanted-criminal-view-popup/wanted-criminal-view-popup.component';
 import { CriminalService } from 'src/app/services/criminal.service';
 import { UserStorageService } from 'src/app/services/user-storage.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-ad-view-wantedcriminal',
@@ -76,6 +77,13 @@ export class AdViewWantedcriminalComponent implements OnInit {
   deleteCriminal(id: any) {
     this.criminal.deleteCriminal(id).subscribe(
       (data: any) => {
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Deleted Successfully',
+          showConfirmButton: false,
+          timer: 1500,
+        });
         this.getAllCriminals();
       },
       (error: any) => {
