@@ -1,3 +1,12 @@
+.container {
+    padding: 20px;
+    position: relative;
+    // max-width: 800px;
+    /* Maximum width */
+    margin: 0 auto;
+    font-weight: bold;
+    
+}
 // card
 .mat-card{
     height: auto;
@@ -11,14 +20,11 @@
 .h6{
     text-align: right;
 }
-.ad_id{
-    text-align: right;
-}
 u{
     text-decoration: underline;
     text-decoration-color: rgb(205, 201, 201);     
 }
-.box{
+.box img{
     width: 70px;
     height: 70px;
     border: solid 1px;

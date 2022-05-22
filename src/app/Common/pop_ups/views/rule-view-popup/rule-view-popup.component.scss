@@ -1,5 +1,13 @@
 
-
+.container {
+    padding: 20px;
+    position: relative;
+    // max-width: 800px;
+    /* Maximum width */
+    margin: 0 auto;
+    font-weight: bold;
+    
+}
 // card
 .mat-card{
     height: auto;
@@ -20,7 +28,4 @@ u{
     text-decoration: underline;
     text-decoration-color: rgb(205, 201, 201);     
 }
-.close{
-    justify-content: end;
-    
-}
+

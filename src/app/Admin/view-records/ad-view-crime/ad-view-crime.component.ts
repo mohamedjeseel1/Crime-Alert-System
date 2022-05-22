@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import html2canvas from 'html2canvas';
+import jspdf from 'jspdf';
 import { CrimeEditPopupComponent } from 'src/app/Common/pop_ups/edits/crime-edit-popup/crime-edit-popup.component';
 import { CrimeViewPopupComponent } from 'src/app/Common/pop_ups/views/crime-view-popup/crime-view-popup.component';
 import { CrimeService } from 'src/app/services/crime.service';
@@ -15,10 +17,35 @@ export class AdViewCrimeComponent implements OnInit {
   logged_user_role = '';
   apiBaseUrl = 'localhost:8081/';
 
+  searchText: string;
+  filtered_option: any;
+
+  filter_options = [
+    {
+      name: 'ID',
+      key: 'id',
+    },
+
+    {
+      name: 'Title',
+      key: 'title',
+    },
+
+    {
+      name: 'Category',
+      key: 'category',
+    },
+    {
+      name: 'Date',
+      key: 'date',
+    },
+  ];
+
   crimes: any = [
     {
       id: '',
       adminid: '',
+      date: '',
       category: '',
       title: '',
       description: '',
@@ -84,6 +111,23 @@ export class AdViewCrimeComponent implements OnInit {
         timer: 1500,
       });
       this.getAllCrimes();
+    });
+  }
+
+  public GenerateReport() {
+    let myCanvas = <HTMLCanvasElement>document.getElementById('print_mark');
+    html2canvas(myCanvas).then((canvas) => {
+      // Few necessary setting options
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = (canvas.height * imgWidth) / canvas.width;
+      var heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png');
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+      pdf.save('Crime_report.pdf'); // Generated PDF
     });
   }
 }

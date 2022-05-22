@@ -9,63 +9,21 @@
 <button mat-stroked-button color="primary" (click)="getByStatus('Pending')">Panding</button>
 <button mat-stroked-button color="primary" (click)="AllComplaints()">All</button>
 <!-- filter -->
-<mat-form-field class="search mt-2">
+<mat-form-field class="search">
   <mat-label>Filter</mat-label>
   <input matInput placeholder="Ex. Mia" #input>
 </mat-form-field>
 
-
-
+<div class="genrate">
+  <button mat-raised-button (click)="GenerateReport()">
+    <mat-icon>print</mat-icon> Generate report
+  </button>
+</div>
 
 <!-- table -->
-<!-- <table class="table table-hover ">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">ID</th>
-      <th scope="col">User ID</th>
-      <th scope="col">Crime category</th>
-      <th scope="col">subject</th>
-      <th scope="col">Description</th>
-      <th scope="col">Document</th>
-      <th scope="col">Location</th>
+<div class="container mt-4" >
 
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Id</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>
-        <a matTooltip="view">
-          <mat-icon color="primary">visibility</mat-icon>
-        </a>
-        <a href="#" matTooltip="delete">
-          <mat-icon color="warn">edit</mat-icon>
-        </a>
-        <a href="#" matTooltip="delete">
-          <mat-icon color="warn">delete</mat-icon>
-        </a>
-
-      </td>
-    </tr>
-  </tbody>
-</table> -->
-<!-- Paginator -->
-<!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of crimes"></mat-paginator> -->
-
-<!-- new -->
-
-<div class="container mt-4">
-
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 staffTable">
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8 staffTable" id="print_mark">
 
   <ng-container matColumnDef="updatedAt">
     <th mat-header-cell *matHeaderCellDef> Date </th>
@@ -102,10 +60,10 @@
     <td mat-cell *matCellDef="let element">
 
       <a matTooltip="View">
-        <mat-icon color="" >visibility</mat-icon>
+        <mat-icon color="dark" (click)="viewUser(element.id)">visibility</mat-icon>
       </a>
-      <a  color="primary" matTooltip="Edit">
-        <mat-icon  (click)="onEdit(element)">edit</mat-icon>
+      <a  matTooltip="Edit">
+        <mat-icon color="primary"  (click)="onEdit(element)">edit</mat-icon>
       </a>
 
       <a  matTooltip="Delete">

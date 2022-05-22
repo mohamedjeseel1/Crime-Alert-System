@@ -5,6 +5,8 @@ import { RuleEditPopupComponent } from 'src/app/Common/pop_ups/edits/rule-edit-p
 import { RulesService } from 'src/app/services/rules.service';
 import { UserStorageService } from 'src/app/services/user-storage.service';
 import Swal from 'sweetalert2';
+import html2canvas from 'html2canvas'; // pdf report
+import jspdf from 'jspdf'; // pdf report
 
 @Component({
   selector: 'app-ad-view-newrules',
@@ -14,6 +16,9 @@ import Swal from 'sweetalert2';
 export class AdViewNewrulesComponent implements OnInit {
   logged_user_role = '';
   apiBaseUrl = 'localhost:8081/';
+
+  searchText: string;
+  filtered_option: any;
 
   rules: any = [
     {
@@ -27,6 +32,23 @@ export class AdViewNewrulesComponent implements OnInit {
       action: '',
       createdAt: '',
       updatedAt: '',
+    },
+  ];
+
+  filter_options = [
+    {
+      name: 'ID',
+      key: 'id',
+    },
+
+    {
+      name: 'Title',
+      key: 'title',
+    },
+
+    {
+      name: 'Date',
+      key: 'date',
     },
   ];
 
@@ -94,5 +116,22 @@ export class AdViewNewrulesComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  public GenerateReport() {
+    let myCanvas = <HTMLCanvasElement>document.getElementById('print_mark');
+    html2canvas(myCanvas).then((canvas) => {
+      // Few necessary setting options
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = (canvas.height * imgWidth) / canvas.width;
+      var heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png');
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+      pdf.save('Rules_report.pdf'); // Generated PDF
+    });
   }
 }

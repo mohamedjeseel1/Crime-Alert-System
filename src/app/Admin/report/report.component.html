@@ -1,15 +1,26 @@
-<!-- buttons -->
-<button mat-stroked-button color="primary">Closed</button>
-<button mat-stroked-button color="primary" matTooltip="Ongoing process">On Process</button>
-<button mat-stroked-button color="primary">All</button>
+
+<!-- generate button -->
+<button mat-raised-button (click)="GenerateReport()">
+  <mat-icon>print</mat-icon> Generate report
+</button>
 
 <!-- filter -->
 <mat-form-field class="search">
   <mat-label>Filter</mat-label>
-  <input matInput placeholder="Ex. Mia" #input>
+  <input matInput placeholder="Ex. Mia" #input [(ngModel)]="searchText">
 </mat-form-field>
+<!-- filter option -->
+<mat-form-field class="filter-option mt-2" style="width: 70px; margin-left: 18%; position: absolute;">
+  <mat-label>Criteria</mat-label>
+  <mat-select [(ngModel)]="filtered_option">
+    <mat-option *ngFor="let item of filter_options" [value]="item.key">
+      {{item.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+  
 <!-- table -->
-<table class="table table-hover ">
+<table class="table table-hover " id="print_mark" *ngIf="(complaintData | filter:searchText:filtered_option).length>0; else noResults ">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -17,15 +28,17 @@
       <th scope="col">Complaint ID</th>
       <th scope="col">Category</th>
       <th scope="col">Subject</th>
-      <th scope="col">Document</th>
+      <th scope="col">Location</th>
+      <!-- <th scope="col">Document</th> -->
     </tr>
   </thead>
-  <tbody *ngFor="let reportData of complaintData; let i=index">
+  <tbody *ngFor="let reportData of complaintData | filter:searchText:filtered_option; let i=index">
     <tr>
       <th scope="row">{{i+1}}</th>
       <td>{{reportData.id}}</td>   
       <td>{{reportData.crimeType}}</td>
       <td>{{reportData.subject}}</td>
+      <td>{{reportData.location}}</td>
       <!-- <td><a href="//{{apiBaseUrl}}{{reportData.document}}" target="_blank">Download</a></td> -->
       <td>
         <a href="#" matTooltip="delete">
@@ -38,5 +51,12 @@
     </tr>
   </tbody>
 </table>
+<!-- if no search data found-->
+<ng-template #noResults>
+  <div class="noData" style="text-align: center; margin-top: 70px;">
+    <p>No results found for "{{searchText}}".</p>
+  </div>
+</ng-template>
 <!-- Paginator -->
 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+

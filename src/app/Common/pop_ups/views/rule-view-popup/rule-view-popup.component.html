@@ -1,8 +1,9 @@
+<div class="container" id="contentToConvert">
 <div  class="header">      
   <img src=".\assets\create-logo.png" alt="logo"
     style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
-  <p class="h6">{{rules.date}}</p>
-  <!-- <p class="ad_id"><i>Admin : {{rules.adminid}}</i></p> -->
+    <p class="h6"> Rule <br>{{rules.date}}</p>
+    <!-- <p class="h6"> Rule <br><i>Admin : {{rules.adminid}}</i> <br>{{rules.date}}</p> -->
   
 </div>
 <hr>
@@ -36,8 +37,13 @@
       </table>
     </div>
   </div>
-
+</div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close class="close">Close</button>
+  <div class="col-sm-6" style="text-align: left;">
+    <button mat-raised-button color="warn" mat-dialog-close style="width: 50%;">Close</button>
+  </div>
+  <div class="col-sm-6" style="text-align: right;" >
+    <button mat-raised-button color="primary" style="width: 50%;" (click)="generatePDF()">Get Report</button>
+  </div>
 </div>
 

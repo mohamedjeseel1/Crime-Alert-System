@@ -16,6 +16,7 @@ mat-toolbar {
 
 .content {
     padding: 16px;
+    
 }
 
 .content > mat-card {
@@ -23,15 +24,15 @@ mat-toolbar {
    
 }
 .left-section {
-    margin-left: 0;
-    position: absolute;
+    overflow: hidden;
 }
 
 
 .right-section{
-    text-align: right;
+    overflow: hidden;
+
 }
-.h4{
-    font-weight: 500;
-}
+// .h4{
+//     font-weight: 500;
+// }
 

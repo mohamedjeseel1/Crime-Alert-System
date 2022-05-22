@@ -17,7 +17,7 @@ export class ComplaintsService {
     ]),
     description: new FormControl('', [Validators.required]),
     document: new FormControl(''),
-    status: new FormControl(''),
+    status: new FormControl('pending'),
     location: new FormControl('', [Validators.required]),
     updatedAt: new FormControl(''),
     createdAt: new FormControl(''),
@@ -39,7 +39,6 @@ export class ComplaintsService {
   createComplaint(data: any): Observable<any> {
     return this.http.post<any>(this.api_url + '/create', data);
   }
-  //call ekk awa
   updateComplaint(data: any, id: any): Observable<any> {
     let url1 = this.api_url + '/updateComplaint/' + id;
     return this.http.put<any>(url1, data);
@@ -50,5 +49,11 @@ export class ComplaintsService {
 
   deleteComplaint(id: any): Observable<any> {
     return this.http.delete(this.api_url + '/' + id);
+  }
+
+  ComplaintsCountByDate(year: number, month: number): Observable<any> {
+    return this.http.get(
+      this.api_url + '/complaints_countBy_date/' + year + '/' + month
+    );
   }
 }

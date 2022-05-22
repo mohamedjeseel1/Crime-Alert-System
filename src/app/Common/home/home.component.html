@@ -107,15 +107,15 @@
     <!--Section heading-->
     <p class="h3 responsive text-center my-4">Contact us</p>
     <!--Section description-->
-    <p class="h6 text-center w-responsive mx-auto mb-4">Do you have any questions? Please do not hesitate to contact us
-      directly. Our team will come back to you within
+    <p class="h6 text-center w-responsive mx-auto mb-4">Do you have any questions? or Do you have any crime informations?, Please do not hesitate to contact us
+      directly. we will come back to you within
       a matter of hours to help you.</p>
 
     <div class="row">
 
       <!--Grid column-->
       <div class="col-md-9 mb-md-0 mb-5">
-        <form id="contact-form" name="contact-form" action="mail.php" method="POST">
+        <form [formGroup]="contact_form">
 
           <!--Grid row-->
           <div class="row">
@@ -126,8 +126,11 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text"><i class="fa fa-user text-info"></i></div>
                 </div>
-                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="User Name"
-                  required>
+                <input class="form-control" formControlName="userId" placeholder="User ID">
+                <!-- <mat-error *ngIf="contact_form.get('userId')?.hasError('required')">
+                  user Id required
+                </mat-error> -->
+                <!-- <mat-error *ngIf="userId?.invalid && (userId?.dirty || userId?.touched)">userId is required</mat-error> -->
               </div>
             </div>
             <!--Grid column-->
@@ -138,7 +141,7 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text"><i class="fa fa-envelope text-info"></i></div>
                 </div>
-                <input type="email" class="form-control" id="nombre" name="email" placeholder="Email"
+                <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email"
                   required>
               </div>
             </div>
@@ -154,7 +157,7 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text"><i class="fas fa-edit text-info"></i></div>
                 </div>
-                <textarea class="form-control" placeholder="Subject" required></textarea>
+                <textarea class="form-control" placeholder="Subject" formControlName="subject" required></textarea>
               </div>
             </div>
           </div>
@@ -169,7 +172,7 @@
                 <div class="input-group-prepend">
                   <div class="input-group-text"><i class="fa fa-comment text-info"></i></div>
                 </div>
-                <textarea class="form-control" placeholder="Message" required></textarea>
+                <textarea class="form-control" formControlName="message" placeholder="Message" required></textarea>
               </div>
             </div>
           </div>
@@ -178,30 +181,32 @@
         </form>
 
         <div class="text-center text-md-left mb-4">
-          <a class="btn btn-primary" class="btn btn-info btn-block rounded-2 py-2">Send</a>
+          <a class="btn btn-primary" class="btn btn-info btn-block rounded-2 py-2" (click)="contactForm()">Send</a>
         </div>
       </div>
       <!--Grid column-->
 
-<!--Grid column-->
-<div class="col-md-3 text-center">
-  <ul class="list-unstyled mb-0">
-    <li><i class="fas fa-map-marker-alt fa-2x "></i>
-      <p>331 Olcott Mawatha, Colombo, Sri Lanka</p>
-    </li>
+      <!--Grid column-->
+      <div class="col-md-3 text-center">
+        <ul class="list-unstyled mb-0">
+          <li><i class="fas fa-map-marker-alt fa-2x "></i>
+            <p>331 Olcott Mawatha, Colombo, Sri Lanka</p>
+          </li>
 
-    <li><i class="fas fa-phone mt-4 fa-2x"></i>
-      <p>0112 421 111</p>
-    </li>
+          <li><i class="fas fa-phone mt-4 fa-2x"></i>
+            <p>0112 421 111</p>
+          </li>
 
-    <li><i class="fas fa-envelope mt-4 fa-2x"></i>
-      <p>crimeAlert@system.com</p>
-    </li>
-  </ul>
-</div>
-<!--Grid column-->
+          <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+            <p>crimeAlert@system.com</p>
+          </li>
+        </ul>
+      </div>
+      <!--Grid column-->
 
-</div>
+    </div>
 
-</section>
+  </section>
+
+
 </div>

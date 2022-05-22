@@ -1,20 +1,21 @@
+<div class="container" id="contentToConvert">
 <div  class="header">      
   <img src=".\assets\create-logo.png" alt="logo"
     style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
-  <p class="h6">{{criminals.date}}</p>
-  <p class="ad_id"><i>Admin : {{criminals.adminid}}</i></p>
+  <p class="h6">Wanted Criminal <br><i>Admin : {{criminals.adminid}}</i> <br>{{criminals.date}}</p>
   
 </div>
 <hr>
   <div mat-dialog-content>
     <div class="row">
       <p class="h6 col-11"></p>
-      <p class="box col-1" style="text-align: right;">{{criminals.image}}</p>
+      <p class="box col-1" style="text-align: right;"><td><img [src]="filePath" alt="image" /></td></p>
 
       <!-- Criminal details -->
       <table class="table table-hover">
         <tr>
-          <th>Name: </th>
+          <th>ID </th>
+          <th>Name </th>
           <th>Crime ID</th>
           <th>Crime Type</th>
 
@@ -25,6 +26,7 @@
           <th>C_Address</th>
         </tr>
         <tr>
+          <td>{{criminals.id}}</td>
           <td>{{criminals.fullname}}</td>
           <td>{{criminals.crimeid}}</td>
           <td>{{criminals.category}}</td>
@@ -38,9 +40,14 @@
       </table>
     </div>
   </div>
-
+</div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
+  <div class="col-sm-6" style="text-align: left;">
+    <button mat-raised-button color="warn" mat-dialog-close style="width: 50%;">Close</button>
+  </div>
+  <div class="col-sm-6" style="text-align: right;">
+    <button mat-raised-button color="primary" style="width: 50%;" (click)="generatePDF()">Get Report</button>
+  </div>
 </div>
 
 <!-- 

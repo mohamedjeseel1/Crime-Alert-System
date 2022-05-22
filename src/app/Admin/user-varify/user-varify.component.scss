@@ -1,11 +1,15 @@
 button{
     float:right;
-}
-.search{
+    margin-top: 10px;
+    color: blue;
+    margin-bottom: 10px;
+  }
+  .search{
+    margin-top: 8px;
     height: 10px;
-}
-.table{
-    margin-top: 20px;
+    position: absolute;
+    
+  }
+  .table{
     width: 100%;
-    // margin-left: 10%;
-}
+  }

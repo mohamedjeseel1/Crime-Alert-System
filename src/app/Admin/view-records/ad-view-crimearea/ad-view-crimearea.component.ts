@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import html2canvas from 'html2canvas';
+import jspdf from 'jspdf';
 import { CAreaEditPopupComponent } from 'src/app/Common/pop_ups/edits/c-area-edit-popup/c-area-edit-popup.component';
 import { CAreaViewPopupComponent } from 'src/app/Common/pop_ups/views/c-area-view-popup/c-area-view-popup.component';
 import { CrimeAreaService } from 'src/app/services/crime-area.service';
@@ -15,6 +17,33 @@ export class AdViewCrimeareaComponent implements OnInit {
   logged_user_role = '';
   apiBaseUrl = 'localhost:8081/';
 
+  searchText: string;
+  filtered_option: any;
+
+  filter_options = [
+    {
+      name: 'ID',
+      key: 'id',
+    },
+
+    {
+      name: 'Category',
+      key: 'category',
+    },
+    {
+      name: 'Date',
+      key: 'date',
+    },
+
+    {
+      name: 'Location',
+      key: 'location',
+    },
+    {
+      name: 'AreaCode',
+      key: 'areaCode',
+    },
+  ];
   areas: any = [
     {
       // DB column name
@@ -22,6 +51,7 @@ export class AdViewCrimeareaComponent implements OnInit {
       adminid: '',
       category: '',
       date: '',
+      areaCode: '',
       title: '',
       description: '',
       location: '',
@@ -94,5 +124,22 @@ export class AdViewCrimeareaComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  public GenerateReport() {
+    let myCanvas = <HTMLCanvasElement>document.getElementById('print_mark');
+    html2canvas(myCanvas).then((canvas) => {
+      // Few necessary setting options
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = (canvas.height * imgWidth) / canvas.width;
+      var heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png');
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+      pdf.save('CrimeArea_report.pdf'); // Generated PDF
+    });
   }
 }

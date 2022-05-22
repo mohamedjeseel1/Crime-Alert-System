@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import html2canvas from 'html2canvas';
+import jspdf from 'jspdf';
 import { EmergencyEditPopupComponent } from 'src/app/Common/pop_ups/edits/emergency-edit-popup/emergency-edit-popup.component';
 import { EmergencyViewPopupComponent } from 'src/app/Common/pop_ups/views/emergency-view-popup/emergency-view-popup.component';
 import { EmergencyService } from 'src/app/services/emergency.service';
@@ -15,6 +17,28 @@ export class AdViewEmergencyComponent implements OnInit {
   logged_user_role = '';
   apiBaseUrl = 'localhost:8081/';
 
+  searchText: string;
+  filtered_option: any;
+
+  filter_options = [
+    {
+      name: 'ID',
+      key: 'id',
+    },
+    {
+      name: 'Date',
+      key: 'date',
+    },
+    {
+      name: 'Category',
+      key: 'category',
+    },
+
+    {
+      name: 'Location',
+      key: 'location',
+    },
+  ];
   Emergencies: any = [
     {
       // DB column name
@@ -90,5 +114,22 @@ export class AdViewEmergencyComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  public GenerateReport() {
+    let myCanvas = <HTMLCanvasElement>document.getElementById('print_mark');
+    html2canvas(myCanvas).then((canvas) => {
+      // Few necessary setting options
+      var imgWidth = 208;
+      var pageHeight = 295;
+      var imgHeight = (canvas.height * imgWidth) / canvas.width;
+      var heightLeft = imgHeight;
+
+      const contentDataURL = canvas.toDataURL('image/png');
+      let pdf = new jspdf('p', 'mm', 'a4'); // A4 size page of PDF
+      var position = 0;
+      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
+      pdf.save('Emergency_report.pdf'); // Generated PDF
+    });
   }
 }

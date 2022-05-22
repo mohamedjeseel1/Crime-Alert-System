@@ -1,18 +1,24 @@
 <!-- buttons -->
-<div class="example-button-row">
-  <button mat-stroked-button color="warn">Closed</button>
-  <button mat-stroked-button color="accent">Ongoing</button>
-  <button mat-stroked-button color="primary">New</button>
-  <button mat-stroked-button>All</button>
+<div class="button">
+  <button mat-raised-button color="primary"  (click)="GenerateReport()"><mat-icon>print</mat-icon> Generate report</button> 
 </div>
 
 <!-- filter -->
 <mat-form-field class="search">
   <mat-label>Filter</mat-label>
-  <input matInput placeholder="Ex. Mia" #input>
+  <input matInput placeholder="Ex. Search" #input [(ngModel)]="searchText">
+</mat-form-field>
+&nbsp;
+<mat-form-field class="filter-option" style="width: 70px;" >
+  <mat-label>Criteria</mat-label>
+  <mat-select [(ngModel)]="filtered_option">
+    <mat-option *ngFor="let item of filter_options" [value]="item.key">
+      {{item.name}}
+    </mat-option>
+  </mat-select>
 </mat-form-field>
 <!-- table -->
-<table class="table table-hover ">
+<table class="table table-hover " id="print_mark" *ngIf="(misseds | filter: searchText:filtered_option).length > 0; else noResults">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -27,7 +33,7 @@
 
     </tr>
   </thead>
-  <tbody *ngFor="let missed of misseds;let i=index">
+  <tbody *ngFor="let missed of misseds | filter: searchText :filtered_option;let i=index">
     <tr>
       <th scope="row">{{i+1}}</th>
       <td>{{missed.id}}</td>
@@ -49,12 +55,18 @@
         <a matTooltip="Delete">
           <mat-icon color="warn" (click)="deleteMissed(missed.id)">delete</mat-icon>
         </a>
-        <a matTooltip="Print" *ngIf="(logged_user_role=='public'||logged_user_role=='police')">
+        <!-- <a matTooltip="Print" *ngIf="(logged_user_role=='public'||logged_user_role=='police')">
           <mat-icon>print</mat-icon>
-        </a>
+        </a> -->
       </td>
     </tr>
   </tbody>
 </table>
+<!-- if no search data found-->
+<ng-template #noResults>
+  <div class="noData" style="text-align: center; margin-top: 70px;">
+    <p>No results found for "{{searchText}}".</p>
+  </div>
+</ng-template>
 <!-- Paginator -->
 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of crimes"></mat-paginator>

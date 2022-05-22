@@ -1,21 +1,24 @@
 button{
-    float:right;
-    margin-top: 10px;
-  }
-  .search{
-    height: 10px;
-  }
-  .request button{
+  float:right;
+  // margin-top: 10px;
+  color: blue;
+  margin-bottom: 10px;
+}
+.search{
+  // margin-top: 8px;
+  position: absolute;
+  
+}
+.genrate button{
+  position: absolute;
+  margin-left: 20%;
+}
+
+.request button{
+  margin-top: 10px;
     margin-right: 3%;
   }
   
-  .table{
-    width: 100%;
-    // margin-left: 10%;
-  }
-
-  // new
-
   .staffTable {
     margin: 0px auto;
       width: 95%;

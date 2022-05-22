@@ -34,4 +34,18 @@ export class UserService {
   getUserByStatus(status: string): Observable<any> {
     return this.http.get(this.api_url + '/get-by-status/' + status);
   }
+
+  getUserById(id: any): Observable<any> {
+    return this.http.get(this.api_url + '/getOneUser/' + id);
+  }
+
+  updateStatus(data: any, id: any): Observable<any> {
+    return this.http.put<any>(this.api_url + '/update-status/' + id, data);
+  }
+
+  UsersCountByDate(year: number, month: number): Observable<any> {
+    return this.http.get(
+      this.api_url + '/users_countBy_date/' + year + '/' + month
+    );
+  }
 }

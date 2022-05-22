@@ -55,6 +55,11 @@ import { UserVerifypopupComponent } from './Common/pop_ups/views/user-verifypopu
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MyprofileComponent } from './Common/pop_ups/myprofile/myprofile.component';
 
+// filter
+import { FilterPipe } from './filter.pipe';
+import { ChartExampleComponent } from './services/chart-example/chart-example.component';
+import { MessagesComponent } from './Admin/messages/messages.component';
+
 @NgModule({
   declarations: [
     //common
@@ -103,6 +108,11 @@ import { MyprofileComponent } from './Common/pop_ups/myprofile/myprofile.compone
     RequestComponent,
     UserVerifypopupComponent,
     MyprofileComponent,
+
+    // filter
+    FilterPipe,
+     ChartExampleComponent,
+     MessagesComponent,
   ],
   imports: [
     BrowserModule,

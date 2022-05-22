@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MyprofileComponent } from 'src/app/Common/pop_ups/myprofile/myprofile.component';
 import { UserStorageService } from 'src/app/services/user-storage.service';
+import { UserService } from 'src/app/services/user.service';
 import { ROLES } from 'src/app/user-auth/roles-enum';
 
 @Component({
@@ -12,11 +13,30 @@ import { ROLES } from 'src/app/user-auth/roles-enum';
 export class AdminDashTemplateComponent implements OnInit {
   roles = ROLES;
 
+  filePath: string;
+
   user = {
     userId: '',
     username: '',
     role: '',
     fullname: '',
+  };
+
+  userProfile = {
+    id: 5,
+    username: '',
+    role: '',
+    password: '',
+    fullname: '',
+    gender: '',
+    image: '',
+    nic: '',
+    address: '',
+    contact: '',
+    email: '',
+    status: '',
+    createdAt: '',
+    updatedAt: '',
   };
 
   //To identify curent user is admin or not:purpose - customize slidebar links
@@ -26,7 +46,8 @@ export class AdminDashTemplateComponent implements OnInit {
 
   constructor(
     private userStorageService: UserStorageService,
-    private view_popup: MatDialog
+    private view_popup: MatDialog,
+    private usrservice: UserService
   ) {}
 
   ngOnInit(): void {
@@ -34,6 +55,9 @@ export class AdminDashTemplateComponent implements OnInit {
     this.isAdmin = this.user.role == this.roles.ADMIN;
     this.isPolice = this.user.role == this.roles.POLICE;
     this.isPublic = this.user.role == this.roles.PUBLIC;
+
+    // this.getAllUsers();
+    this.getUserById();
   }
   // My Profile
   myprofile() {
@@ -43,5 +67,15 @@ export class AdminDashTemplateComponent implements OnInit {
   // sign out
   singOut(): void {
     this.userStorageService.signOut();
+  }
+
+  getUserById() {
+    this.usrservice.getUserById(this.user.userId).subscribe((data: any) => {
+      // console.log('==============this: user');
+      // console.log(this.user); // this.users.userId
+      console.log(data);
+      this.userProfile = data;
+      this.filePath = 'http://localhost:8081/' + this.userProfile.image;
+    });
   }
 }

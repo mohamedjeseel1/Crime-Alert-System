@@ -13,6 +13,7 @@ import { UserVarifyComponent } from './Admin/user-varify/user-varify.component';
 import { ViewRecordsComponent } from './Admin/view-records/view-records.component';
 import { RequestComponent } from './Public/complaint/request/request.component';
 import { ViewComponent } from './Public/complaint/view/view.component';
+import { MessagesComponent } from './Admin/messages/messages.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -28,6 +29,7 @@ const routes: Routes = [
       { path: 'complaints', component: AdminComplaintComponent },
       { path: 'reports', component: ReportComponent },
       { path: 'user-verify', component: UserVarifyComponent },
+      { path: 'messages', component: MessagesComponent },
     ],
   },
 

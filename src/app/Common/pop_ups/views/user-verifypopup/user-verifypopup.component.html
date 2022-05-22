@@ -1,14 +1,14 @@
 <div class="row bg-light">
   <div class="col-6 ">
-    <div class="img">image</div>
+    <div class="img"><img class="img" [src]="user.image" alt="userPic" /></div>
   </div>
   <div class="col-6">
-    <p class="h5 mt-4">User ID - User name</p>
+    <p class="h5 mt-4">{{user.id}} - {{user.username}}</p>
   </div>
 </div>
 <hr>
 <div class="date_section">
-  <p><i>Date</i></p>
+  <p><i>{{user.updatedAt}}</i></p>
 </div>
 
 <div mat-dialog-content>
@@ -22,9 +22,9 @@
         <th>Password</th>
       </tr>
       <tr>
-        <td>Uname</td>
-        <td>role</td>
-        <td>pwd</td>
+        <td>{{user.username}}</td>
+        <td>{{user.role}}</td>
+        <td>{{user.password}}</td>
       </tr>
     </table>
 
@@ -38,10 +38,10 @@
         <th>NIC</th>
       </tr>
       <tr>
-        <td>fname</td>
-        <td>gender</td>
-        <td>img</td>
-        <td>nic</td>
+        <td>{{user.fullname}}</td>
+        <td>{{user.gender}}</td>
+        <td>{{user.image}}</td>
+        <td>{{user.nic}}</td>
       </tr>
     </table>
 
@@ -54,9 +54,9 @@
         <th>Email</th>
       </tr>
       <tr>
-        <td>Address</td>
-        <td>Contact</td>
-        <td>Email</td>
+        <td>{{user.address}}</td>
+        <td>{{user.contact}}</td>
+        <td>{{user.email}}</td>
       </tr>
     </table>
 
@@ -68,6 +68,6 @@
     <button mat-raised-button color="warn" (click)="openRemark()" mat-dialog-close>Reject</button>
   </div>
   <div class="col-sm-6 ">
-    <button mat-raised-button color="primary" (click)="changeStatus('Accepted')">Accept</button>
+    <button mat-raised-button color="primary" (click)="updateStatus('Accepted')" mat-dialog-close>Accept</button>
   </div>
 </div>

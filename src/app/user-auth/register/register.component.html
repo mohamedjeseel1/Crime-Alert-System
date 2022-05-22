@@ -142,6 +142,7 @@
                     <input matInput formControlName="address" #adrs maxlength="50">
                     <mat-error *ngIf="contactdetails.get('address')?.hasError('required')"> Address
                       required</mat-error>
+                    <mat-hint align="end">If the user type is police, you should enter the branch code as address</mat-hint> &nbsp;
                     <mat-hint align="end">{{adrs.value.length}}/50</mat-hint>
                   </mat-form-field>
 

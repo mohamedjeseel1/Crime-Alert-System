@@ -69,14 +69,14 @@ export class AdCreateNewrulesComponent implements OnInit {
   createRule(): void {
     const formData = new FormData();
 
-    formData.append('date', this.formNewrule.value.adminid);
+    formData.append('adminid', this.formNewrule.value.adminid);
     formData.append('date', this.formNewrule.value.date);
     formData.append('category', this.formNewrule.value.category);
     formData.append('title', this.formNewrule.value.title);
     formData.append('description', this.formNewrule.value.description);
     formData.append('RuleDoc', this.formNewrule.value.RuleDoc);
     formData.append('action', this.formNewrule.value.action);
-    formData.append('document', this.doc_file);
+    formData.append('documentUrl', this.doc_file);
 
     this.service.createRule(formData).subscribe(
       (data: any) => {

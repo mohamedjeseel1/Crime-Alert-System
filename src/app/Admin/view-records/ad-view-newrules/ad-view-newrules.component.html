@@ -1,18 +1,24 @@
 <!-- buttons -->
 <div class="button">
-  <button mat-stroked-button color="warn">Closed</button>
-  <button mat-stroked-button color="accent">Ongoing</button>
-  <button mat-stroked-button color="primary">New</button>
-  <button mat-stroked-button>All</button>
+  <button mat-raised-button color="primary" (click)="GenerateReport()"><mat-icon>print</mat-icon> Generate report</button> 
 </div>
 
 <!-- filter -->
 <mat-form-field class="search">
   <mat-label>Filter</mat-label>
-  <input matInput placeholder="Ex. Mia" #input>
+  <input matInput placeholder="Ex. Search" #input [(ngModel)]="searchText">
+</mat-form-field> &nbsp;
+
+<mat-form-field class="filter-option" style="width: 70px;" >
+  <mat-label>Criteria</mat-label>
+  <mat-select [(ngModel)]="filtered_option">
+    <mat-option *ngFor="let item of filter_options" [value]="item.key">
+      {{item.name}}
+    </mat-option>
+  </mat-select>
 </mat-form-field>
 <!-- table -->
-<table class="table table-hover ">
+<table class="table table-hover " id="print_mark" *ngIf="(rules | filter: searchText:filtered_option).length > 0; else noResults">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -26,7 +32,7 @@
       <th scope="col">Law of crime</th>
     </tr>
   </thead>
-  <tbody *ngFor="let rule of rules;let i=index">
+  <tbody *ngFor="let rule of rules | filter: searchText:filtered_option ;let i=index">
     <tr>
       <th scope="row">{{i+1}}</th>
       <td>{{rule.id}}</td>
@@ -36,6 +42,7 @@
       <!-- <td>{{rule.description}}</td> -->
       <td><a href="//{{apiBaseUrl}}{{rule.documentUrl}}" target="_blank">Show</a></td>
       <td>{{rule.action}}</td>
+      
       <td>
         <a matTooltip="View">
           <mat-icon color="primary" (click)="view(rule.id)">visibility</mat-icon>
@@ -57,6 +64,12 @@
     </tr>
   </tbody>
 </table>
+<!-- if no search data found-->
+<ng-template #noResults>
+  <div class="noData" style="text-align: center; margin-top: 70px;">
+    <p>No results found for "{{searchText}}".</p>
+  </div>
+</ng-template>
 <!-- Paginator -->
 <mat-paginator [pageSizeOptions]="[5, 10, 20, 100]" showFirstLastButtons aria-label="Select page of crimes">
 </mat-paginator>

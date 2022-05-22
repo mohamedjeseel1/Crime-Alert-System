@@ -1,22 +1,38 @@
-
-    <!-- buttons -->
-<button mat-stroked-button color="primary" (click)="getByStatus('Rejected')">Rejected</button>
-<button mat-stroked-button color="primary" (click)="getByStatus('Accepted')">Accepted</button>
-<button mat-stroked-button color="primary" (click)="getByStatus('Pending')">Panding</button>
-<button mat-stroked-button color="primary" (click)="getAll()">All</button>
+<!-- buttons -->
+<button mat-raised-button  (click)="getByStatus('Rejected')">Rejected</button>
+<button mat-raised-button  (click)="getByStatus('Accepted')">Accepted</button>
+<button mat-raised-button  (click)="getByStatus('Pending')">Panding</button>
+<button mat-raised-button  (click)="getAll()">All</button>
 
 <!-- filter -->
 <mat-form-field class="search">
   <mat-label>Filter</mat-label>
-  <input matInput placeholder="Ex. Mia" #input>
+  <input matInput placeholder="Ex. Search" #input [(ngModel)]="searchText">
 </mat-form-field>
+
+&nbsp;
+<mat-form-field class="filter-option mt-2" style="width: 70px; margin-left: 18%; position: absolute;">
+  <mat-label>Criteria</mat-label>
+  <mat-select [(ngModel)]="filtered_option">
+    <mat-option *ngFor="let item of filter_options" [value]="item.key">
+      {{item.name}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+
+<!-- generate button -->
+<button mat-raised-button (click)="GenerateReport()" style="float:none;margin-left: 27%">
+  <mat-icon>print</mat-icon> Generate report
+</button>
+
 <!-- table -->
-<table class="table table-hover ">
+<table class="table table-hover mt-2" id="print_mark" *ngIf="(complaintData | filter: searchText:filtered_option).length > 0; else noResults">
   <thead>
     <tr>
       <th scope="col">#</th>
       <th scope="col">ID</th>
       <th scope="col">User ID</th>
+      <th scope="col">Date</th>
       <th scope="col">Crime category</th>
       <th scope="col">subject</th>
       <!-- <th scope="col">Description</th> -->
@@ -26,15 +42,16 @@
 
     </tr>
   </thead>
-  <tbody *ngFor="let complaints of complaintData; let i=index">
+  <tbody *ngFor="let complaints of complaintData | filter: searchText:filtered_option; let i=index">
     <tr>
       <th scope="row">{{i+1}}</th>
       <td>{{complaints.id}}</td>
       <td>{{complaints.userId}}</td>
+      <td>{{complaints.date}}</td>
       <td>{{complaints.crimeType}}</td>
       <td>{{complaints.subject}}</td>
       <!-- <td>{{complaints.description}}</td> -->
-      <td>{{complaints.document}}</td>
+      <td><a href="//{{apiBaseUrl}}{{complaints.document}}" target="_blank">Download</a></td>
       <td>{{complaints.location}}</td>
       <td>{{complaints.status}}</td>
       <td>
@@ -49,6 +66,13 @@
     </tr>
   </tbody>
 </table>
+
+<!-- if no search data found-->
+<ng-template #noResults>
+  <div class="noData" style="text-align: center; margin-top: 70px;">
+    <p>No results found for "{{searchText}}".</p>
+  </div>
+</ng-template>
 <!-- Paginator -->
 <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of crimes"></mat-paginator>
 

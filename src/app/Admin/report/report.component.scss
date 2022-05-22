@@ -1,11 +1,18 @@
 button{
-    float:right;
+  float:right;
+  margin-top: 10px;
+  color: blue;
+  margin-bottom: 10px;
 }
 .search{
-    height: 10px;
+  margin-top: 8px;
+  position: absolute;
+  
+}
+.genrate button{
+  position: absolute;
+  margin-left: 20%;
 }
 .table{
-    margin-top: 20px;
-    width: 100%;
-    // margin-left: 10%;
+  width: 100%;
 }
