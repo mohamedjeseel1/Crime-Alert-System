@@ -42,7 +42,7 @@
 
       <mat-nav-list *ngIf="isAdmin || isPolice">
         <a href="#" mat-list-item routerLink="reports" routerLinkActive="active">
-          <mat-icon>verified</mat-icon> &nbsp; Reports
+          <mat-icon>verified</mat-icon> &nbsp; FIRs
         </a>
       </mat-nav-list>
 
@@ -52,19 +52,20 @@
         </a>
       </mat-nav-list>
 
-      <mat-nav-list *ngIf="isAdmin">
+      <mat-nav-list *ngIf="isPublic">
+        <a href="#" mat-list-item routerLink="view-complaint" routerLinkActive="active">
+          <mat-icon>text_snippet</mat-icon>&nbsp; Complaints
+        </a>
+      </mat-nav-list>
+
+      <mat-nav-list >
         <a href="#" mat-list-item routerLink="messages" routerLinkActive="active">
           <mat-icon><span class="material-symbols-outlined">
             contact_mail
             </span></mat-icon>&nbsp; Messages
         </a>
       </mat-nav-list>
-
-      <mat-nav-list *ngIf="isPublic">
-        <a href="#" mat-list-item routerLink="view-complaint" routerLinkActive="active">
-          <mat-icon>text_snippet</mat-icon>&nbsp; Complaints
-        </a>
-      </mat-nav-list>
+      
     </mat-list>
   </mat-sidenav>
 
@@ -97,7 +98,7 @@
       </mat-menu>
     </div>
     <!-- toolbar -->
-    <mat-toolbar color="primary" class="toptoolbar">
+    <mat-toolbar class="toptoolbar">
       <span>Welcome {{ user.fullname }}</span>
 
       <!-- tools -->

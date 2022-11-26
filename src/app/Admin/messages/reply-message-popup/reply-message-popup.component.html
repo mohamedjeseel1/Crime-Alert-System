@@ -1,0 +1,94 @@
+<!-- Contact us - reply-->
+<button mat-mini-fab color="warn" style=" margin-left: 93%;"  aria-label="cancel" mat-dialog-close>
+  <mat-icon>cancel</mat-icon>
+</button>
+<!--container-->
+    <div class="container bg-light " id="contact_us" >
+  <section>
+
+    <!--Section heading-->
+    <p class="h5 responsive text-left ">Reply to (userId)</p>
+
+    <div class="row">
+
+      <!--Grid column-->
+      <div class="col-md-12 mb-md-0 mb-5">
+        <form [formGroup]="reply_message">
+
+          <!--Grid row-->
+          <div class="row">
+
+            <!--Grid column-->
+            <div class="form-group w-50">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-user text-primary"></i></div>
+                </div>
+                <input class="form-control" formControlName="userid">
+                <!-- <mat-error *ngIf="contact_form.get('userId')?.hasError('required')">
+                  user Id required
+                </mat-error> -->
+                <!-- <mat-error *ngIf="userId?.invalid && (userId?.dirty || userId?.touched)">userId is required</mat-error> -->
+              </div>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="form-group w-50">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-user text-primary"></i></div>
+                </div>
+                <input type="text" class="form-control" id="adminid" formControlName="adminid" 
+                  >
+              </div>
+            </div>
+            <!--Grid column-->
+
+          </div>
+          <!--Grid row-->
+
+          <!-- Grid row-->
+          <!-- <div class="row">
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fas fa-edit text-primary"></i></div>
+                </div>
+                <textarea class="form-control" placeholder="Subject" formControlName="subject" required></textarea>
+              </div>
+            </div>
+          </div> -->
+          <!--Grid row -->
+
+          <!--Grid row-->
+          <div class="row">
+
+            <!--Grid column-->
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><i class="fa fa-comment text-primary"></i></div>
+                </div>
+                <textarea class="form-control" formControlName="Re_message" placeholder="Message" required></textarea>
+              </div>
+            </div>
+          </div>
+          <!--Grid row-->
+
+        </form>
+
+        <div class="text-center text-md-left mb-4 text-light">
+          <a class="btn btn-primary" class="btn btn-primary btn-block rounded-2 py-2" (click)="reply()">Send</a>
+        </div>
+      </div>
+      <!--Grid column-->
+
+      
+
+    </div>
+
+  </section>
+
+
+</div>

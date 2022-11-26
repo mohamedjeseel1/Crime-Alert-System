@@ -54,6 +54,14 @@ export class ViewComponent implements OnInit {
     console.log(this.dataSource);
   }
 
+  // filter
+  filter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+  AllData() {
+    location.reload();
+  }
   // Pop-Up
   request() {
     this.view_popup.open(RequestComponent, {
@@ -93,22 +101,14 @@ export class ViewComponent implements OnInit {
   onDelete(element: any) {
     this.service.deleteComplaint(element.id).subscribe((data) => {
       this.dataSource.data = data;
-      this.AllComplaints();
+      // location.reload();
     });
+    this.AllComplaints();
   }
 
   getByStatus(status: any) {
-    this.service.getComplaintByStatus(status).subscribe(
-      (data: any) => {
-        console.log('getByStatus\n' + data);
-        let dataList = data.filter((o: any) => o.userId == this.user.userId);
-        // this.displayedColumns = data;
-        this.displayedColumns = dataList;
-      },
-      (error: any) => {
-        console.error('ERROR\n' + error);
-      }
-    );
+    const filterValue = status;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   // generate with filter

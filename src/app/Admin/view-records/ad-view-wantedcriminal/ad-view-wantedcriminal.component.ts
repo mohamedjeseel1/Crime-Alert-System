@@ -8,6 +8,9 @@ import { CriminalService } from 'src/app/services/criminal.service';
 import { UserStorageService } from 'src/app/services/user-storage.service';
 import Swal from 'sweetalert2';
 
+import moment from 'moment';
+import { FormControl, FormGroup } from '@angular/forms';
+
 @Component({
   selector: 'app-ad-view-wantedcriminal',
   templateUrl: './ad-view-wantedcriminal.component.html',
@@ -19,6 +22,17 @@ export class AdViewWantedcriminalComponent implements OnInit {
 
   searchText: string;
   filtered_option: any;
+
+  // filter(date_between)
+  from_date: any;
+  to_date: any;
+
+  filterGroup = new FormGroup({
+    searchtText: new FormControl(''),
+    criteria: new FormControl(''),
+    fromDate: new FormControl(''),
+    toDate: new FormControl(''),
+  });
 
   filter_options = [
     {
@@ -43,6 +57,26 @@ export class AdViewWantedcriminalComponent implements OnInit {
   ];
 
   criminals: any = [
+    {
+      id: '',
+      crimeid: '',
+      adminid: '',
+      category: '',
+      fullname: '',
+      date: '',
+      dob: '',
+      nic: '',
+      gender: '',
+      pAddress: '',
+      cAddress: '',
+      image: '',
+      createdAt: '',
+      updatedAt: '',
+    },
+  ];
+
+  // After the date between
+  criminals_data: any = [
     {
       id: '',
       crimeid: '',
@@ -98,6 +132,10 @@ export class AdViewWantedcriminalComponent implements OnInit {
   getAllCriminals() {
     this.criminal.getAllCriminals().subscribe((data) => {
       this.criminals = data;
+      // date between(filter)
+      this.criminals_data = data;
+      console.log('========= criminals_data');
+      console.log(this.criminals_data);
     });
   }
 
@@ -134,5 +172,26 @@ export class AdViewWantedcriminalComponent implements OnInit {
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
       pdf.save('WantedCriminal_report.pdf'); // Generated PDF
     });
+  }
+
+  // date between
+  dateSelected() {
+    this.filterByBetweenDate();
+  }
+
+  filterByBetweenDate() {
+    if (this.from_date != '' && this.to_date != '') {
+      let filteredCriminals = this.criminals.filter((r: any) => {
+        return moment(r.date).isBetween(this.from_date, this.to_date);
+      });
+      this.criminals_data = filteredCriminals;
+    } else {
+      this.criminals_data = this.criminals;
+    }
+  }
+
+  clearDateBetweenFilter() {
+    this.criminals_data = this.criminals;
+    this.filterGroup.reset();
   }
 }

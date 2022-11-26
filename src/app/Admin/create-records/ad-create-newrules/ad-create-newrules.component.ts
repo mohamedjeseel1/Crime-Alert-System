@@ -41,7 +41,6 @@ export class AdCreateNewrulesComponent implements OnInit {
   }
 
   formNewrule = new FormGroup({
-    date: new FormControl('', [Validators.required]),
     category: new FormControl('', [Validators.required]),
     title: new FormControl('', [Validators.required, Validators.minLength(6)]),
     description: new FormControl('', [
@@ -70,7 +69,6 @@ export class AdCreateNewrulesComponent implements OnInit {
     const formData = new FormData();
 
     formData.append('adminid', this.formNewrule.value.adminid);
-    formData.append('date', this.formNewrule.value.date);
     formData.append('category', this.formNewrule.value.category);
     formData.append('title', this.formNewrule.value.title);
     formData.append('description', this.formNewrule.value.description);

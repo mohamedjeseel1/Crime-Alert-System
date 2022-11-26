@@ -41,6 +41,7 @@ const routes: Routes = [
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'view-records', component: ViewRecordsComponent },
       { path: 'reports', component: ReportComponent },
+      { path: 'messages', component: MessagesComponent },
     ],
   },
 
@@ -52,6 +53,7 @@ const routes: Routes = [
       { path: 'dashboard', component: AdminDashboardComponent },
       { path: 'view-records', component: ViewRecordsComponent },
       { path: 'view-complaint', component: ViewComponent },
+      { path: 'messages', component: MessagesComponent },
     ],
   },
 ];

@@ -8,6 +8,9 @@ import { EmergencyService } from 'src/app/services/emergency.service';
 import { UserStorageService } from 'src/app/services/user-storage.service';
 import Swal from 'sweetalert2';
 
+import moment from 'moment'; // filter between
+import { FormControl, FormGroup } from '@angular/forms';
+
 @Component({
   selector: 'app-ad-view-emergency',
   templateUrl: './ad-view-emergency.component.html',
@@ -19,6 +22,16 @@ export class AdViewEmergencyComponent implements OnInit {
 
   searchText: string;
   filtered_option: any;
+  // filter(date_between)
+  from_date: any;
+  to_date: any;
+
+  filterGroup = new FormGroup({
+    searchtText: new FormControl(''),
+    criteria: new FormControl(''),
+    fromDate: new FormControl(''),
+    toDate: new FormControl(''),
+  });
 
   filter_options = [
     {
@@ -40,6 +53,21 @@ export class AdViewEmergencyComponent implements OnInit {
     },
   ];
   Emergencies: any = [
+    {
+      // DB column name
+      id: '',
+      adminid: '',
+      category: '',
+      date: '',
+      title: '',
+      description: '',
+      location: '',
+      createdAt: '',
+      updatedAt: '',
+    },
+  ];
+
+  Emergencies_data: any = [
     {
       // DB column name
       id: '',
@@ -94,6 +122,10 @@ export class AdViewEmergencyComponent implements OnInit {
   getAllEmergencies(): void {
     this.emergency.getAllEmergencies().subscribe((data) => {
       this.Emergencies = data;
+
+      this.Emergencies_data = data;
+      console.log('========= Emergencies_data');
+      console.log(this.Emergencies_data);
     });
   }
 
@@ -131,5 +163,25 @@ export class AdViewEmergencyComponent implements OnInit {
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
       pdf.save('Emergency_report.pdf'); // Generated PDF
     });
+  }
+
+  // between filter
+  dateSelected() {
+    this.filterByBetweenDate();
+  }
+
+  filterByBetweenDate() {
+    if (this.from_date != '' && this.to_date != '') {
+      let filteredEmergencies = this.Emergencies.filter((r: any) => {
+        return moment(r.date).isBetween(this.from_date, this.to_date);
+      });
+      this.Emergencies_data = filteredEmergencies;
+    } else {
+      this.Emergencies_data = this.Emergencies;
+    }
+  }
+  clearDateBetweenFilter() {
+    this.Emergencies_data = this.Emergencies;
+    this.filterGroup.reset();
   }
 }

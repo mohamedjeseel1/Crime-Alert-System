@@ -34,7 +34,7 @@
           <!-- title -->
           <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Title</mat-label>
-            <input matInput type="text" #tit maxlength="50" formControlName="title">
+            <input matInput type="text" #tit maxlength="50" formControlName="title" placeholder="Title of the new Crime">
             <mat-hint align="end">{{tit.value.length}}/50</mat-hint>
             <mat-error *ngIf="addcrime.get('title')?.hasError('required')">
               Title required
@@ -47,7 +47,7 @@
           <!-- description -->
           <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
-            <textarea matInput #desc maxlength="250" type="text" formControlName="description"></textarea>
+            <textarea matInput #desc maxlength="250" type="text" formControlName="description" placeholder="Enter some more information, regarding to the title."></textarea>
             <mat-error *ngIf="addcrime.get('description')?.hasError('required')">
               Description required
             </mat-error>
@@ -60,7 +60,7 @@
           <!-- action -->
           <mat-form-field appearance="outline" style="margin-left: 4%;">
             <mat-label>Law of Crime</mat-label>
-            <textarea matInput maxlength="1250" type="text" #law formControlName="lawOfCrime"></textarea>
+            <textarea matInput maxlength="1250" type="text" #law formControlName="lawOfCrime" placeholder="Law for the mentioned crime"></textarea>
             <!-- <mat-hint align="end">{{law.value.length}}/250</mat-hint> -->
             <mat-error *ngIf="addcrime.get('lawOfCrime')?.hasError('required')">
               Law required
@@ -80,7 +80,7 @@
             <img src=".\assets\create-logo.png" alt="logo"
               style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
             <p class="h5">{{categ.value}}</p>
-            <p class="h5">jjjj{{user.userId}}</p>
+            <p class="h5">{{user.userId}}</p>
           </mat-card-title>
           <hr>
           <h4> <u>{{tit.value}}</u> </h4>

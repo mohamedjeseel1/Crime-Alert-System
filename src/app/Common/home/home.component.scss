@@ -22,12 +22,14 @@
 }
 
   .about {
-    width: 100%;
-    background-color: white;
+    width: 90%;
+    margin-left: 5%;
+    background-image: linear-gradient(to right, rgb(234, 143, 143), #f0f0f0);
     padding: 30px;
     text-align: justify;
     font-size: 18px;
     margin-top: 50px;
+    color: white;
   }
   
   .about h1 {

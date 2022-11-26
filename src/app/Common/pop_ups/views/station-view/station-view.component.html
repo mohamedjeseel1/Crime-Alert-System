@@ -1,0 +1,52 @@
+<div class="container" id="contentToConvert">
+    <div  class="header">      
+      <img src=".\assets\create-logo.png" alt="logo"
+        style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
+      <p class="h6"> Station <br><i>Admin : {{station.adminid}}</i> <br>{{station.date}}</p>
+      
+    </div>
+    <hr>
+      <div mat-dialog-content>
+        <div class="row">
+          <p class="h6 col-11"></p>
+          <p class="box col-1" style="text-align: right;">{{station.image}}</p>
+    
+          <!-- Criminal details -->
+          <table class="table table-hover">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Admin ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">District</th>
+                <th scope="col">Branch Code</th>
+                <th scope="col">Station Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Contact</th>
+            
+            </tr>
+            <tr>
+              <td>{{station.id}}</td>
+              <td>{{station.adminid}}</td>
+              <td>{{station.date}}</td>
+              <td>{{station.district}}</td>
+              <td>{{station.branchCode}}</td>
+              <td>{{station.Sname}}</td>
+              <td>{{station.email}}</td>
+              <td>{{station.contact}}</td>
+             
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div mat-dialog-actions>
+      <div class="col-sm-6" style="text-align: left;">
+        <button mat-raised-button color="warn" mat-dialog-close style="width: 50%;">Close</button>
+      </div>
+      <div class="col-sm-6" style="text-align: right;" >
+        <button mat-raised-button color="primary" style="width: 50%;" (click)="generatePDF()">Get Report</button>
+      </div>
+    </div>
+    
+    
+      

@@ -8,6 +8,9 @@ import { MissedService } from 'src/app/services/missed.service';
 import { UserStorageService } from 'src/app/services/user-storage.service';
 import Swal from 'sweetalert2';
 
+import moment from 'moment'; // filter between
+import { FormControl, FormGroup } from '@angular/forms';
+
 @Component({
   selector: 'app-ad-view-missing',
   templateUrl: './ad-view-missing.component.html',
@@ -17,8 +20,19 @@ export class AdViewMissingComponent implements OnInit {
   logged_user_role = '';
   apiBaseUrl = 'localhost:8081/';
 
+  // filter
   searchText: string;
   filtered_option: any;
+  // filter(date_between)
+  from_date: any;
+  to_date: any;
+
+  filterGroup = new FormGroup({
+    searchtText: new FormControl(''),
+    criteria: new FormControl(''),
+    fromDate: new FormControl(''),
+    toDate: new FormControl(''),
+  });
 
   filter_options = [
     {
@@ -41,6 +55,20 @@ export class AdViewMissingComponent implements OnInit {
     },
   ];
   misseds: any = [
+    {
+      id: '',
+      adminid: '',
+      category: '',
+      identification: '',
+      date: '',
+      location: '',
+      description: '',
+      createdAt: '',
+      updatedAt: '',
+    },
+  ];
+
+  misseds_data: any = [
     {
       id: '',
       adminid: '',
@@ -94,6 +122,9 @@ export class AdViewMissingComponent implements OnInit {
   getAllMisseds(): void {
     this.missed.getAllMisseds().subscribe((data) => {
       this.misseds = data;
+      this.misseds_data = data;
+      console.log('=========.misseds_data');
+      console.log(this.misseds_data);
     });
   }
 
@@ -131,5 +162,27 @@ export class AdViewMissingComponent implements OnInit {
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
       pdf.save('Missed_report.pdf'); // Generated PDF
     });
+  }
+
+  // filter between
+
+  dateSelected() {
+    this.filterByBetweenDate();
+  }
+
+  filterByBetweenDate() {
+    if (this.from_date != '' && this.to_date != '') {
+      let filteredMisseds = this.misseds.filter((r: any) => {
+        return moment(r.date).isBetween(this.from_date, this.to_date);
+      });
+      this.misseds_data = filteredMisseds;
+    } else {
+      this.misseds_data = this.misseds;
+    }
+  }
+
+  clearDateBetweenFilter() {
+    this.misseds_data = this.misseds;
+    this.filterGroup.reset();
   }
 }

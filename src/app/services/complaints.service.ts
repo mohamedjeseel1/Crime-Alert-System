@@ -19,6 +19,7 @@ export class ComplaintsService {
     document: new FormControl(''),
     status: new FormControl('pending'),
     location: new FormControl('', [Validators.required]),
+    date: new FormControl(''),
     updatedAt: new FormControl(''),
     createdAt: new FormControl(''),
   });

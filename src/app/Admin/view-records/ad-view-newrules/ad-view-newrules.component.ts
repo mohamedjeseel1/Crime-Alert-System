@@ -8,6 +8,9 @@ import Swal from 'sweetalert2';
 import html2canvas from 'html2canvas'; // pdf report
 import jspdf from 'jspdf'; // pdf report
 
+import moment from 'moment';
+import { FormControl, FormGroup } from '@angular/forms';
+
 @Component({
   selector: 'app-ad-view-newrules',
   templateUrl: './ad-view-newrules.component.html',
@@ -17,10 +20,36 @@ export class AdViewNewrulesComponent implements OnInit {
   logged_user_role = '';
   apiBaseUrl = 'localhost:8081/';
 
+  // filter
   searchText: string;
   filtered_option: any;
+  // filter(date_between)
+  from_date: any;
+  to_date: any;
+
+  filterGroup = new FormGroup({
+    searchtText: new FormControl(''),
+    criteria: new FormControl(''),
+    fromDate: new FormControl(''),
+    toDate: new FormControl(''),
+  });
 
   rules: any = [
+    {
+      // DB column name
+      id: '',
+      date: '',
+      category: '',
+      title: '',
+      description: '',
+      documentUrl: '',
+      action: '',
+      createdAt: '',
+      updatedAt: '',
+    },
+  ];
+
+  rules_list: any = [
     {
       // DB column name
       id: '',
@@ -49,6 +78,10 @@ export class AdViewNewrulesComponent implements OnInit {
     {
       name: 'Date',
       key: 'date',
+    },
+    {
+      name: 'Category',
+      key: 'category',
     },
   ];
 
@@ -95,6 +128,9 @@ export class AdViewNewrulesComponent implements OnInit {
   getAllRules(): void {
     this.rule.getAllRules().subscribe((data) => {
       this.rules = data;
+      this.rules_list = data;
+      console.log('========= rules_list');
+      console.log(this.rules_list);
     });
   }
 
@@ -133,5 +169,26 @@ export class AdViewNewrulesComponent implements OnInit {
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
       pdf.save('Rules_report.pdf'); // Generated PDF
     });
+  }
+
+  // filter between
+  dateSelected() {
+    this.filterByBetweenDate();
+  }
+
+  filterByBetweenDate() {
+    if (this.from_date != '' && this.to_date != '') {
+      let filteredRules = this.rules.filter((r: any) => {
+        return moment(r.date).isBetween(this.from_date, this.to_date);
+      });
+      this.rules_list = filteredRules;
+    } else {
+      this.rules_list = this.rules;
+    }
+  }
+
+  clearDateBetweenFilter() {
+    this.rules_list = this.rules;
+    this.filterGroup.reset();
   }
 }

@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StationService } from 'src/app/services/station.service';
 import { UserService } from 'src/app/services/user.service';
 import Swal from 'sweetalert2';
 
@@ -19,14 +20,32 @@ export class RegisterComponent implements OnInit {
   doc_file_name = '';
   doc_file: File;
 
+  //  station data for police branchcode
+  station: any = [
+    {
+      adminid: '',
+      province: '',
+      district: '',
+      branchCode: '',
+      Sname: '',
+      contact: '',
+      email: '',
+      date: '',
+      createdAt: '',
+      updatedAt: '',
+    },
+  ];
+
   constructor(
     private fb: FormBuilder,
     private service: UserService,
+    private Stationservice: StationService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     console.log(this.formdata.values);
+    this.getAllStation();
   }
 
   userdetails = this.fb.group(
@@ -58,7 +77,7 @@ export class RegisterComponent implements OnInit {
       '',
       Validators.compose([
         Validators.required,
-        Validators.pattern('[a-zA-Z]*'),
+        // Validators.pattern('[a-zA-Z]*'),
         Validators.minLength(10),
       ]),
     ],
@@ -129,6 +148,17 @@ export class RegisterComponent implements OnInit {
       }
       return errors;
     };
+  }
+
+  //  get station data for police branchcode
+  getAllStation() {
+    return this.Stationservice.getAllStations().subscribe((data: any) => {
+      this.station = data;
+      // filter between
+
+      console.log('=========.station');
+      console.log(this.station);
+    });
   }
 
   register(data: any) {

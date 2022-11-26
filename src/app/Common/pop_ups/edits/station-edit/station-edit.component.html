@@ -1,0 +1,109 @@
+<h1 mat-dialog-title>Update Ploice Station</h1>
+<div mat-dialog-content>
+
+        <form [formGroup]="station">
+            
+          <!-- auto admin id -->
+          <mat-form-field appearance="outline" class="d-none">
+            <mat-label>Admin ID</mat-label>
+            <input matInput formControlName="adminid">
+          </mat-form-field>
+
+             <!-- Province code -->
+             <mat-form-field appearance="outline" style="width: 48%; ">
+              <mat-label>Province</mat-label>
+              <mat-select formControlName="province" #province>
+                <mat-option *ngFor="let station of stations" value="{{station.province_name}}">{{station.province_name}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="station.get('province')?.hasError('required')">
+                Province required
+              </mat-error>
+            </mat-form-field>
+
+             <!-- Destrict -->
+          <mat-form-field appearance="outline" style="width: 48%; margin-left:4%;">
+              <mat-label>District</mat-label>
+              <mat-select formControlName="district" #district>
+                <mat-option *ngFor="let station of stations" value="{{station.district_name}}">{{station.district_name}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="station.get('district')?.hasError('required')">
+              Destrict required
+              </mat-error>
+            </mat-form-field>
+
+            <!-- Town -->
+          <mat-form-field appearance="outline" style="width: 48%; ">
+            <mat-label>Town</mat-label>
+            <mat-select formControlName="town" #town>
+              <mat-option *ngFor="let station of stations" value="{{station.ps_name}}">{{station.ps_name}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="station.get('town')?.hasError('required')">
+              Town required
+            </mat-error>
+          </mat-form-field>
+
+          <!-- BranchCode -->
+          <mat-form-field appearance="outline" style="width: 48%; margin-left:4%;">
+            <mat-label>Branch Code</mat-label>
+            <mat-select formControlName="branchCode" #branchCode>
+              <mat-option *ngFor="let station of stations" value="{{station.gnd_id}}">{{station.gnd_id}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="station.get('branchCode')?.hasError('required')">
+              Branch Code required
+            </mat-error>
+          </mat-form-field>
+
+            <!-- Station Name -->
+            <mat-form-field appearance="outline" style="width: 48%; ">
+              <mat-label>Station Name</mat-label>
+              <mat-select formControlName="Sname" #sname>
+                <mat-option *ngFor="let station of stations" value="{{station.name}}">{{station.name}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="station.get('Sname')?.hasError('required')">
+                  Station Name required
+              </mat-error>
+            </mat-form-field>
+
+              <!-- contact -->
+          <mat-form-field appearance="outline" style="width: 48%; margin-left:4%;">
+            <mat-label>Contact Number</mat-label>
+            <input matInput type="number" formControlName="contact" #contact>
+            <mat-error *ngIf="station.get('contact')?.hasError('required')"> Contact Number
+              required</mat-error>
+            <mat-error
+              *ngIf="station.get('contact')?.hasError('minlength') || station.get('contact')?.hasError('maxlength')">
+              Must be 10 digits long</mat-error>
+          </mat-form-field>
+
+          <!-- Email -->
+          <mat-form-field appearance="outline" style="width: 100%;">
+              <mat-label>E-Mail</mat-label>
+              <input matInput formControlName="email" type="email" #email>
+              <mat-error *ngIf="station.get('email')?.hasError('required')">
+                E-Mail required
+              </mat-error>
+              <mat-error *ngIf="station.get('email')?.hasError('email')">
+                not a valid email address
+              </mat-error>
+              <mat-error *ngIf="station.get('email')?.hasError('maxlength')">
+                must be less than 50 characters
+              </mat-error>
+              <mat-error *ngIf="station.get('email')?.hasError('exists')">
+                Email already exists
+              </mat-error>
+            </mat-form-field>
+        </form>
+    <!-- buttons -->
+    <div mat-dialog-actions>
+      <div class="buttons row">
+        <div class="col-sm-6 ">
+          <button mat-raised-button color="warn" #cancel mat-dialog-close>Cancel</button>
+        </div>
+        <div class="col-sm-6 ">
+          <button mat-raised-button color="primary" type="submit" class="submit" (click)="updateStation()">Update</button>
+        </div>
+      </div>
+    </div>
+  
+
+  

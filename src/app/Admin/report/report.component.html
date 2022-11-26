@@ -5,47 +5,66 @@
 </button>
 
 <!-- filter -->
-<mat-form-field class="search">
-  <mat-label>Filter</mat-label>
-  <input matInput placeholder="Ex. Mia" #input [(ngModel)]="searchText">
-</mat-form-field>
-<!-- filter option -->
-<mat-form-field class="filter-option mt-2" style="width: 70px; margin-left: 18%; position: absolute;">
-  <mat-label>Criteria</mat-label>
-  <mat-select [(ngModel)]="filtered_option">
-    <mat-option *ngFor="let item of filter_options" [value]="item.key">
-      {{item.name}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<form [formGroup]="filterGroup" class="mt-2" >
+  <mat-form-field class="search">
+    <mat-label>Filter</mat-label>
+    <input matInput placeholder="Ex. Search" #input [(ngModel)]="searchText" formControlName="searchtText">
+  </mat-form-field>
+  
+  &nbsp;
+  <mat-form-field class="filter-option" style="width: 70px;" >
+    <mat-label>Criteria</mat-label>
+    <mat-select [(ngModel)]="filtered_option" formControlName="criteria">
+      <mat-option *ngFor="let item of filter_options" [value]="item.key" >
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <!-- filter between -->
+  &nbsp;
+  <mat-form-field class="from-date" style="width: 100px;" >
+  <mat-label>From</mat-label>
+  <input matInput type="date" [(ngModel)]="from_date" (change)="dateSelected()" formControlName="fromDate" >
+  </mat-form-field>
+  &nbsp;
+  <mat-form-field class="from-date" style="width: 100px;" >
+    <mat-label>To</mat-label>
+    <input matInput type="date"  [(ngModel)]="to_date" (change)="dateSelected()" formControlName="toDate">
+    </mat-form-field>
+    
+    <a mat-icon-button color="warn" (click)="clearDateBetweenFilter()"><mat-icon>cancel</mat-icon> </a> 
+  </form>
   
 <!-- table -->
-<table class="table table-hover " id="print_mark" *ngIf="(complaintData | filter:searchText:filtered_option).length>0; else noResults ">
+<table class="table table-hover " id="print_mark" *ngIf="(complaintData_list | filter:searchText:filtered_option).length>0; else noResults ">
   <thead>
     <tr>
       <th scope="col">#</th>
       <!-- <th scope="col">Report ID</th> -->
       <th scope="col">Complaint ID</th>
+      <th scope="col">Date</th>
       <th scope="col">Category</th>
       <th scope="col">Subject</th>
       <th scope="col">Location</th>
       <!-- <th scope="col">Document</th> -->
     </tr>
   </thead>
-  <tbody *ngFor="let reportData of complaintData | filter:searchText:filtered_option; let i=index">
+  <tbody *ngFor="let reportData of complaintData_list | filter:searchText:filtered_option; let i=index">
     <tr>
       <th scope="row">{{i+1}}</th>
       <td>{{reportData.id}}</td>   
+      <td>{{reportData.date}}</td>   
       <td>{{reportData.crimeType}}</td>
       <td>{{reportData.subject}}</td>
       <td>{{reportData.location}}</td>
       <!-- <td><a href="//{{apiBaseUrl}}{{reportData.document}}" target="_blank">Download</a></td> -->
       <td>
-        <a href="#" matTooltip="delete">
-          <mat-icon color="warn">delete</mat-icon>
+        <a  matTooltip="delete">
+          <mat-icon color="warn" (click)="deleteReport(reportData.id)">delete</mat-icon>
         </a>
         <a matTooltip="print">
-          <mat-icon (click)="generateReport(reportData.id)">print</mat-icon>
+          <mat-icon (click)="PrintReport(reportData.id)">print</mat-icon>
         </a>
       </td>
     </tr>

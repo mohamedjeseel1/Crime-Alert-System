@@ -40,7 +40,7 @@ export class ReportService {
     return this.http.put<any>(this.api_url + '/update-status/' + id, data);
   }
 
-  deleteReport(id: any): Observable<any> {
-    return this.http.delete(this.api_url + '/' + id);
+  deleteReport(complaintId: any): Observable<any> {
+    return this.http.delete(this.api_url + '/' + complaintId);
   }
 }

@@ -6,12 +6,12 @@
 <!-- buttons -->
 <button mat-stroked-button color="primary" (click)="getByStatus('Rejected')">Rejected</button>
 <button mat-stroked-button color="primary" (click)="getByStatus('Accepted')">Accepted</button>
-<button mat-stroked-button color="primary" (click)="getByStatus('Pending')">Panding</button>
-<button mat-stroked-button color="primary" (click)="AllComplaints()">All</button>
+<button mat-stroked-button color="primary" (click)="getByStatus('Pending')">Pending</button>
+<button mat-stroked-button color="primary" (click)="AllData()">All</button>
 <!-- filter -->
 <mat-form-field class="search">
   <mat-label>Filter</mat-label>
-  <input matInput placeholder="Ex. Mia" #input>
+  <input  matInput (keyup)="filter($event)"placeholder="Ex. Mia" #input>
 </mat-form-field>
 
 <div class="genrate">
@@ -20,6 +20,11 @@
   </button>
 </div>
 
+<div class="request">
+  <button mat-fab color="primary" (click)="request()">
+    <mat-icon matTooltip="Request complaint">add</mat-icon>
+  </button>
+</div>
 <!-- table -->
 <div class="container mt-4" >
 
@@ -84,10 +89,6 @@
 
 </div>
 
-  <div class="request">
-    <button mat-fab color="primary" (click)="request()">
-      <mat-icon matTooltip="Request complaint">add</mat-icon>
-    </button>
-  </div>
+  
 
   

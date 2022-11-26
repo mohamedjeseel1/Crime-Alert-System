@@ -55,7 +55,7 @@
           <!-- title -->
           <mat-form-field appearance="outline" style="margin-left: 4%;">
             <mat-label>Title</mat-label>
-            <input matInput type="text"  maxlength="50" formControlName="title" #title>
+            <input matInput type="text"  maxlength="50" formControlName="title" #title placeholder="Title of the new Crime Area">
             <mat-hint align="end">{{title.value.length}}/50</mat-hint>
             <mat-error *ngIf="crimeArea.get('title')?.hasError('required')">
               Title required
@@ -68,7 +68,7 @@
           <!-- Description -->
           <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Description</mat-label>
-            <textarea matInput  maxlength="250" type="text" formControlName="description" #desc></textarea>
+            <textarea matInput  maxlength="250" type="text" formControlName="description" #desc placeholder="Enter some more information, regarding to the title."></textarea>
             <mat-error *ngIf="crimeArea.get('description')?.hasError('required')">
               Description required
             </mat-error>
@@ -81,7 +81,7 @@
           <!-- Location -->
           <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Location</mat-label>
-            <textarea matInput type="text"  maxlength="50" formControlName="location" #location></textarea>
+            <textarea matInput type="text"  maxlength="50" formControlName="location" #location placeholder="The Area that mentioned crime occured"></textarea>
             <mat-hint align="end">{{location.value.length}}/50</mat-hint>
             <mat-error *ngIf="crimeArea.get('location')?.hasError('required')">
               Location required
@@ -98,7 +98,7 @@
           <!-- start date -->
           <mat-form-field appearance="outline">
             <mat-label>Start date</mat-label>
-            <input matInput type="date"  formControlName="start_date_time" #start_date_time>
+            <input matInput type="date"  formControlName="start_date_time" #start_date_time placeholder="The Area that mentioned crime occured">
             <mat-error *ngIf="crimeArea.get('start_date_time')?.hasError('required')">
               Start date required
             </mat-error>

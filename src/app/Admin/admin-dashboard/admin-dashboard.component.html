@@ -73,7 +73,6 @@
 </div> -->
 
 <!-- new -->
-
 <div style="text-align: right;">
   <button mat-button (click)="toggleGridColumns()" fxHide.lt-md>
     <span *ngIf="gridColumns === 4">3 Columns</span>
@@ -84,7 +83,7 @@
 <div class="content">
   <div fxLayout="row wrap" fxLayoutGap="16px grid">
     <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="50%" *ngFor="let num of [1,2,3,4,5,6]">
-      <mat-card class="mat-elevation-z4">
+      <mat-card class="mat-elevation-z4" [ngStyle]="{'background-color': getRandomColorToCard()}" style="color: white;">
         <mat-card-header>
           <mat-card-title *ngIf="num==1">Rules </mat-card-title>
           <mat-card-title *ngIf="num==2">Wanted Criminal </mat-card-title>
@@ -95,50 +94,62 @@
         </mat-card-header>
         <mat-card-content>
           <!-- card -->
-          <div class="row">
+          <div class="row p-0">
             <tr>
               <!-- icon -->
-              <div class="left-section">
+              <div class="left-section ">
                 <!-- rules -->
                 <div class="icon" *ngIf="num==1">
-                  <i class="fa fa-podcast text-primary fa-4x"></i>
+                  <i class="fa fa-podcast text-light fa-4x "></i>
+                  &nbsp;&nbsp;
+                  <i class="fa fa-podcast text-light fa-6x opacity-50 "></i>
                 </div>
                 <!-- Wanted Criminal -->
                 <div class="icon" *ngIf="num==2">
-                  <i class="fa fa-user-secret text-secondary fa-4x"></i>
+                  <i class="fa fa-user-secret text-light fa-4x"></i>
+                  &nbsp;&nbsp;
+                  <i class="fa fa-user-secret text-light fa-6x opacity-50"></i>
                 </div>
                 <!-- Missing Details -->
                 <div class="icon" *ngIf="num==3">
-                  <i class="fa fa-search-minus text-info fa-4x"></i>
+                  <i class="fa fa-search-minus text-light fa-4x mb-0"></i>
+                  &nbsp;&nbsp;
+                  <i class="fa fa-search-minus text-light fa-6x opacity-50"></i>
                 </div>
                 <!-- Crime Details -->
                 <div class="icon" *ngIf="num==4">
-                  <i class="fa fa-fire text-warning fa-4x"></i>
+                  <i class="fa fa-fire text-light fa-4x"></i>
+                  &nbsp; &nbsp;
+                  <i class="fa fa-fire text-light fa-6x opacity-50"></i>
                 </div>
                 <!-- Crime Areas -->
                 <div class="icon" *ngIf="num==5">
-                  <i class="fa fa-ban text-danger fa-4x"></i>
+                  <i class="fa fa-ban text-light fa-4x"></i>
+                  &nbsp; &nbsp;
+                  <i class="fa fa-ban text-light fa-6x opacity-50"></i>
                 </div>
                 <!-- Emergency Alerts -->
                 <div class="icon" *ngIf="num==6">
-                  <i class="fa fa-bell text-success fa-4x"></i>
+                  <i class="fa fa-bell text-light fa-4x"></i>
+                  &nbsp; &nbsp;
+                  <i class="fa fa-bell text-light fa-6x opacity-50"></i>
                 </div>
 
               </div>
               <!-- total -->
               <div class="right-section">
                 <!-- rules -->
-                <p class="h4" *ngIf="num==1">Total : {{this.counts.rules[0].count}}</p>
+                <p class="h2" *ngIf="num==1">{{this.counts.rules[0].count}}</p>
                 <!-- Wanted Criminal -->
-                <p class="h4" *ngIf="num==2">Total : {{this.counts.criminals[0].count}}</p>
+                <p class="h2" *ngIf="num==2">{{this.counts.criminals[0].count}}</p>
                 <!-- Missing Details -->
-                <p class="h4" *ngIf="num==3">Total : {{this.counts.misseds[0].count}}</p>
+                <p class="h2" *ngIf="num==3">{{this.counts.misseds[0].count}}</p>
                 <!-- Crime Details -->
-                <p class="h4" *ngIf="num==4">Total : {{this.counts.crimes[0].count}}</p>
+                <p class="h2" *ngIf="num==4">{{this.counts.crimes[0].count}}</p>
                 <!-- Crime Areas -->
-                <p class="h4" *ngIf="num==5">Total : {{this.counts.crimeareas[0].count}}</p>
+                <p class="h2" *ngIf="num==5">{{this.counts.crimeareas[0].count}}</p>
                 <!-- Emergency Alerts -->
-                <p class="h4" *ngIf="num==6">Total : {{this.counts.emergencies[0].count}}</p>
+                <p class="h2" *ngIf="num==6">{{this.counts.emergencies[0].count}}</p>
 
               </div>
             </tr>
@@ -156,14 +167,13 @@
 
     <!-- crimesChart  -->
     <div class="crimesChart w-100 mt-4">
-
       <canvas id="chart_canvas_1"></canvas>
     </div>
   
   <!-- complaintsChart -->
   <div class="complaintsChart w-100 mt-4">
     <!-- year -->
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" >
       <mat-label>Year</mat-label>
       <mat-select [(ngModel)]="selectedYear" (selectionChange)="ComplaintYear()">
         <mat-option *ngFor="let year of years" [value]="year.year">
@@ -180,7 +190,6 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <br>
     <!-- chart -->
   <canvas id="chart_canvas_2"></canvas>
 </div>
@@ -205,7 +214,6 @@
       </mat-option>
     </mat-select>
   </mat-form-field>
-  <br>
   <!-- chart -->
   <canvas id="chart_canvas_3"></canvas>
 </div>

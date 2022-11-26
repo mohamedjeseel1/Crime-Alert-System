@@ -7,6 +7,8 @@ import { CrimeService } from 'src/app/services/crime.service';
 import { DashboardService } from 'src/app/services/dashboard.service';
 import { ComplaintsService } from 'src/app/services/complaints.service';
 import { UserService } from 'src/app/services/user.service';
+import { StationRegisterComponent } from 'src/app/Admin/create-records/station-register/station-register.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-admin-dashboard',
@@ -249,7 +251,8 @@ export class AdminDashboardComponent implements OnInit {
     private crimeService: CrimeService,
     private DashboardService: DashboardService,
     private ComplaintsService: ComplaintsService,
-    private UserService: UserService
+    private UserService: UserService,
+    private station_popup: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -265,6 +268,13 @@ export class AdminDashboardComponent implements OnInit {
     this.crimesCount();
     this.complaintsCount();
     this.userCount();
+  }
+  // station register
+  station_register() {
+    this.station_popup.open(StationRegisterComponent, {
+      height: 'auto',
+      width: 'auto',
+    });
   }
 
   // toggle for columns
@@ -428,11 +438,19 @@ export class AdminDashboardComponent implements OnInit {
       dataList.push(0);
     }
     let daysInMonth = this.getComplaintLabelList(year, month);
-
+    console.log('============================');
+    console.log(this.complaints);
     daysInMonth.forEach((d, index) => {
       this.complaints.forEach((w: any) => {
         let day = w.date.split('-').pop();
-        if (d == day) {
+
+        let dd = d;
+        if (dd.length == 1) {
+          dd = '0' + dd;
+        }
+        console.log(dd + ' ' + day);
+
+        if (dd == day) {
           //Update list with weightages
           dataList.splice(index, 1, parseFloat(w.count));
         }
@@ -447,12 +465,13 @@ export class AdminDashboardComponent implements OnInit {
     return new Date(year, month, 0).getDate();
   }
 
-  // ////
   // load complaint charts
   myChart2: Chart;
   loadComplaintChart(year: number, month: number): void {
     let labelList = this.getComplaintLabelList(year, month);
     let dataList = this.getComplaintDataList(year, month);
+    console.log('loadComplaintChart=================');
+    console.log(dataList);
 
     if (this.myChart2 != null) {
       this.myChart2.destroy();
@@ -593,5 +612,11 @@ export class AdminDashboardComponent implements OnInit {
   //  userMonth
   userMonth() {
     this.userCount();
+  }
+
+  // get random colors for card
+  getRandomColorToCard() {
+    var color = Math.floor(0x1000000 * Math.random()).toString(16);
+    return '#' + ('000000' + color).slice(-6);
   }
 }

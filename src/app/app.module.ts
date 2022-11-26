@@ -59,6 +59,16 @@ import { MyprofileComponent } from './Common/pop_ups/myprofile/myprofile.compone
 import { FilterPipe } from './filter.pipe';
 import { ChartExampleComponent } from './services/chart-example/chart-example.component';
 import { MessagesComponent } from './Admin/messages/messages.component';
+import { FAQComponent } from './Common/faq/faq.component';
+
+// MDB modules
+import { MdbCollapseModule } from 'mdb-angular-ui-kit/collapse';
+import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
+import { ReplyMessagePopupComponent } from './Admin/messages/reply-message-popup/reply-message-popup.component';
+import { StationRegisterComponent } from './Admin/create-records/station-register/station-register.component';
+import { AdViewStationComponent } from './Admin/view-records/ad-view-station/ad-view-station.component';
+import { StationEditComponent } from './Common/pop_ups/edits/station-edit/station-edit.component';
+import { StationViewComponent } from './Common/pop_ups/views/station-view/station-view.component';
 
 @NgModule({
   declarations: [
@@ -111,8 +121,14 @@ import { MessagesComponent } from './Admin/messages/messages.component';
 
     // filter
     FilterPipe,
-     ChartExampleComponent,
-     MessagesComponent,
+    ChartExampleComponent,
+    MessagesComponent,
+    FAQComponent,
+    ReplyMessagePopupComponent,
+    StationRegisterComponent,
+    AdViewStationComponent,
+    StationEditComponent,
+    StationViewComponent,
   ],
   imports: [
     BrowserModule,
@@ -125,6 +141,10 @@ import { MessagesComponent } from './Admin/messages/messages.component';
 
     // new
     FlexLayoutModule,
+
+    // MDB modules
+    MdbCollapseModule,
+    MdbAccordionModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

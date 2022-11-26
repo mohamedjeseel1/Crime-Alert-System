@@ -16,4 +16,12 @@ export class ContactService {
   contactForm(data: any): Observable<any> {
     return this.http.post(this.api_url + '/send', data);
   }
+
+  deleteMessage(id: any): Observable<any> {
+    return this.http.delete(this.api_url + '/' + id);
+  }
+
+  replyMessage(data: any, id: any): Observable<any> {
+    return this.http.put<any>(this.api_url + '/reply/' + id, data);
+  }
 }

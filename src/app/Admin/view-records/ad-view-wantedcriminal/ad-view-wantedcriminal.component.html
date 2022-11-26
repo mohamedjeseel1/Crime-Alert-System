@@ -3,22 +3,41 @@
     <button mat-raised-button color="primary"  (click)="GenerateReport()"><mat-icon>print</mat-icon> Generate report</button> 
 </div>
 
+
 <!-- filter -->
-<mat-form-field class="search">
-  <mat-label>Filter</mat-label>
-  <input matInput placeholder="Ex. Search" #input [(ngModel)]="searchText">
-</mat-form-field>
-&nbsp;
-<mat-form-field class="filter-option" style="width: 100px;" >
-  <mat-label>Criteria</mat-label>
-  <mat-select [(ngModel)]="filtered_option">
-    <mat-option *ngFor="let item of filter_options" [value]="item.key">
-      {{item.name}}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+<form [formGroup]="filterGroup" class="mt-2" >
+  <mat-form-field class="search">
+    <mat-label>Filter</mat-label>
+    <input matInput placeholder="Ex. Search" #input [(ngModel)]="searchText" formControlName="searchtText">
+  </mat-form-field>
+  
+  &nbsp;
+  <mat-form-field class="filter-option" style="width: 70px;" >
+    <mat-label>Criteria</mat-label>
+    <mat-select [(ngModel)]="filtered_option" formControlName="criteria">
+      <mat-option *ngFor="let item of filter_options" [value]="item.key" >
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <!-- filter between -->
+  &nbsp;
+  <mat-form-field class="from-date" style="width: 100px;" >
+  <mat-label>From</mat-label>
+  <input matInput type="date" [(ngModel)]="from_date" (change)="dateSelected()" formControlName="fromDate" >
+  </mat-form-field>
+  &nbsp;
+  <mat-form-field class="from-date" style="width: 100px;" >
+    <mat-label>To</mat-label>
+    <input matInput type="date"  [(ngModel)]="to_date" (change)="dateSelected()" formControlName="toDate">
+    </mat-form-field>
+    
+    <a mat-icon-button color="warn" (click)="clearDateBetweenFilter()"><mat-icon>cancel</mat-icon> </a> 
+  </form>
+
 <!-- table -->
-<table class="table table-hover " id="print_mark" *ngIf="(criminals | filter: searchText:filtered_option).length > 0; else noResults">
+<table class="table table-hover " id="print_mark" *ngIf="(criminals_data | filter: searchText:filtered_option).length > 0; else noResults">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -37,7 +56,7 @@
 
     </tr>
   </thead>
-  <tbody *ngFor="let criminal of criminals | filter: searchText:filtered_option; let i=index">
+  <tbody *ngFor="let criminal of criminals_data | filter: searchText:filtered_option; let i=index">
     <tr>
       <th scope="row">{{i+1}}</th>
       <td>{{criminal.id}}</td>

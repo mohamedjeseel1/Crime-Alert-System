@@ -37,7 +37,7 @@
                 <!-- User type -->
                 <mat-form-field appearance="outline">
                   <mat-label>User type</mat-label>
-                  <mat-select formControlName="role">
+                  <mat-select #userType formControlName="role">
                     <mat-option value="admin">Admin</mat-option>
                     <mat-option value="police">Police</mat-option>
                     <mat-option value="public">General Public</mat-option>
@@ -85,7 +85,7 @@
                 <!-- Full name -->
                 <mat-form-field appearance="outline">
                   <mat-label>Full name</mat-label>
-                  <input matInput formControlName="fullname" #fn maxlength="50" type="text">
+                  <input matInput formControlName="fullname" #fn maxlength="50" >
                   <mat-error *ngIf="personaldetails.get('fullname')?.hasError('required')"> Full name
                     required</mat-error>
                   <mat-hint align="end">{{fn.value.length}}/50</mat-hint>
@@ -93,24 +93,24 @@
                 </mat-form-field>
                 <!-- Gender -->
                 <mat-radio-group aria-label="Select an option" labelPosition="before" formControlName="gender" required>
-              <mat-label >Gender</mat-label>
+                  <mat-label>Gender</mat-label>
                   <mat-radio-button value="male" color="primary">Male</mat-radio-button>
                   <mat-radio-button value="female" color="primary">Female</mat-radio-button>
                   <!-- <mat-error *ngIf="personaldetails.get('gender')?.hasError('required')"> *</mat-error> -->
 
-                  </mat-radio-group>
+                </mat-radio-group>
                 <!-- Image -->
-                <div class="image mb-4">
+                <div class="image mt-4">
                   <label for="image">Image</label>
                   <input type="file" (change)="onFileSelected($event)" class="form-control" formControlName="image" #img
                     required>
                   <mat-error *ngIf="personaldetails.get('image')?.hasError('required')">
-                  *<mat-hint align="end">image must be 100px*100px</mat-hint> 
+                    *<mat-hint align="end">image must be 100px*100px</mat-hint>
                   </mat-error>
 
                 </div>
                 <!-- nic -->
-                <mat-form-field appearance="outline" class="mt-4">
+                <mat-form-field appearance="outline">
                   <mat-label>NIC</mat-label>
                   <input matInput formControlName="nic">
                   <mat-error *ngIf="personaldetails.get('nic')?.hasError('required')"> NIC
@@ -137,13 +137,26 @@
               <form [formGroup]="contactdetails">
                 <div>
                   <!-- address -->
-                  <mat-form-field appearance="outline">
+                  <mat-form-field *ngIf="userType.value != 'police'" appearance="outline">
                     <mat-label>Address</mat-label>
                     <input matInput formControlName="address" #adrs maxlength="50">
                     <mat-error *ngIf="contactdetails.get('address')?.hasError('required')"> Address
                       required</mat-error>
-                    <mat-hint align="end">If the user type is police, you should enter the branch code as address</mat-hint> &nbsp;
+                    <mat-hint align="end">If the user type is police, you should enter the branch code as address
+                    </mat-hint> &nbsp;
                     <mat-hint align="end">{{adrs.value.length}}/50</mat-hint>
+                  </mat-form-field>
+
+                  <!-- Branch Name -->
+                  <mat-form-field *ngIf="userType.value == 'police'" appearance="outline">
+                    <mat-label>Branch Name</mat-label>
+                    <mat-select formControlName="address">
+                      <mat-option *ngFor="let st of station" value="{{st.branchCode}}-{{st.Sname}}">{{st.branchCode}} - {{st.Sname}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="userdetails.get('role')?.hasError('required')">
+                      Branch Name required
+                    </mat-error>
                   </mat-form-field>
 
                   <!-- contact -->

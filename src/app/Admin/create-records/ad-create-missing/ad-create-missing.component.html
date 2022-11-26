@@ -39,7 +39,7 @@
           <!-- title -->
           <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Title</mat-label>
-            <input matInput type="text"  maxlength="50" formControlName="title" #title>
+            <input matInput type="text"  maxlength="50" formControlName="title" #title placeholder="Title of the Missed one">
             <mat-hint align="end">{{title.value.length}}/50</mat-hint>
             <mat-error *ngIf="missingForm.get('title')?.hasError('required')">
               Title required
@@ -51,7 +51,7 @@
            <!-- Description -->
            <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Description</mat-label>
-            <textarea matInput  maxlength="250" type="text" formControlName="description" #desc></textarea>
+            <textarea matInput  maxlength="250" type="text" formControlName="description" #desc placeholder="Enter some more information, regarding to the title."></textarea>
             <mat-error *ngIf="missingForm.get('description')?.hasError('required')">
               Description required
             </mat-error>
@@ -64,7 +64,7 @@
           <!-- Identification -->
           <mat-form-field appearance="outline">
             <mat-label>Identification</mat-label>
-            <input matInput formControlName="identification" #identity>
+            <input matInput formControlName="identification" #identity placeholder="How to Identify?">
             <mat-error *ngIf="missingForm.get('identification')?.hasError('required')">
               Identification required
             </mat-error>
@@ -76,7 +76,7 @@
           <!-- Location -->
           <mat-form-field appearance="outline" style="margin-left: 4%;">
             <mat-label>Location</mat-label>
-            <input matInput type="text"  maxlength="50" formControlName="location" #location>
+            <input matInput type="text"  maxlength="50" formControlName="location" #location placeholder="The missed place">
             <mat-hint align="end">{{location.value.length}}/50</mat-hint>
             <mat-error *ngIf="missingForm.get('location')?.hasError('required')">
               Location required

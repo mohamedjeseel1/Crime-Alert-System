@@ -1,0 +1,147 @@
+
+<!-- n new -->
+
+<mat-card>
+    <!-- card title -->
+    <mat-card-title>Add Ploice Station </mat-card-title>
+    <!-- card content    -->
+    <mat-card-content>
+      <div class="row">
+        <div class="col-6">
+          <form [formGroup]="station">
+            
+            <!-- auto admin id -->
+            <mat-form-field appearance="outline" class="d-none">
+              <mat-label>Admin ID</mat-label>
+              <input matInput formControlName="adminid">
+            </mat-form-field>
+
+               <!-- Province code -->
+               <mat-form-field appearance="outline" style="width: 48%; ">
+                <mat-label>Province</mat-label>
+                <mat-select formControlName="province" #province>
+                  <mat-option *ngFor="let station of stations" value="{{station.province_name}}">{{station.province_name}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="station.get('province')?.hasError('required')">
+                  Province required
+                </mat-error>
+              </mat-form-field>
+  
+               <!-- Destrict -->
+            <mat-form-field appearance="outline" style="width: 48%; margin-left:4%;">
+                <mat-label>District</mat-label>
+                <mat-select formControlName="district" #district>
+                  <mat-option *ngFor="let station of stations" value="{{station.district_name}}">{{station.district_name}}</mat-option>
+                  <!-- <mat-option *ngFor="let station of stations" value="{{station.district_name}}">{{station.district_name}}</mat-option> -->
+                </mat-select>
+                <mat-error *ngIf="station.get('district')?.hasError('required')">
+                Destrict required
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Town -->
+            <mat-form-field appearance="outline" style="width: 48%; ">
+              <mat-label>Town</mat-label>
+              <mat-select formControlName="town" #town>
+                <mat-option *ngFor="let station of stations" value="{{station.ps_name}}">{{station.ps_name}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="station.get('town')?.hasError('required')">
+                Town required
+              </mat-error>
+            </mat-form-field>
+
+            <!-- BranchCode -->
+            <mat-form-field appearance="outline" style="width: 48%; margin-left:4%;">
+              <mat-label>Branch Code</mat-label>
+              <mat-select formControlName="branchCode" #branchCode>
+                <mat-option *ngFor="let station of stations" value="{{station.gnd_id}}">{{station.gnd_id}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="station.get('branchCode')?.hasError('required')">
+                Branch Code required
+              </mat-error>
+            </mat-form-field>
+
+              <!-- Station Name -->
+              <mat-form-field appearance="outline" style="width: 48%; ">
+                <mat-label>Station Name</mat-label>
+                <mat-select formControlName="Sname" #sname>
+                  <mat-option *ngFor="let station of stations" value="{{station.name}}">{{station.name}}</mat-option>
+                </mat-select>
+                <mat-error *ngIf="station.get('Sname')?.hasError('required')">
+                    Station Name required
+                </mat-error>
+              </mat-form-field>
+
+                <!-- contact -->
+            <mat-form-field appearance="outline" style="width: 48%; margin-left:4%;">
+              <mat-label>Contact Number</mat-label>
+              <input matInput type="number" formControlName="contact" #contact>
+              <mat-error *ngIf="station.get('contact')?.hasError('required')"> Contact Number
+                required</mat-error>
+              <mat-error
+                *ngIf="station.get('contact')?.hasError('minlength') || station.get('contact')?.hasError('maxlength')">
+                Must be 10 digits long</mat-error>
+            </mat-form-field>
+  
+            <!-- Email -->
+            <mat-form-field appearance="outline" style="width: 100%;">
+                <mat-label>E-Mail</mat-label>
+                <input matInput formControlName="email" type="email" #email>
+                <mat-error *ngIf="station.get('email')?.hasError('required')">
+                  E-Mail required
+                </mat-error>
+                <mat-error *ngIf="station.get('email')?.hasError('email')">
+                  not a valid email address
+                </mat-error>
+                <mat-error *ngIf="station.get('email')?.hasError('maxlength')">
+                  must be less than 50 characters
+                </mat-error>
+                <mat-error *ngIf="station.get('email')?.hasError('exists')">
+                  Email already exists
+                </mat-error>
+              </mat-form-field>
+
+          
+          </form>
+        </div>
+  
+        <!-- card -->
+        <div class="col-6">
+  
+          <mat-card class="card">
+            <mat-card-title class="header">
+              <img src=".\assets\create-logo.png" alt="logo"
+                style="width: 50px; height: 50px; margin-left: 0%; position: absolute;">
+              <p class="h5">{{branchCode.value}} {{sname.value}}</p>
+              <p class="h5">{{district.value}}</p>
+              <p class="h5">Admin - {{user.userId}}</p>
+            </mat-card-title>
+            <hr>
+            <h4> <u>{{sname.value}}</u> </h4>
+            
+            <mat-card-content>
+             Province : {{province.value}}<br>
+             District : {{district.value}}<br>
+             Town : {{town.value}}<br>
+             E-Mail : {{email.value}}<br>
+             Contact Number : {{contact.value}}
+            </mat-card-content>
+            <mat-card-actions></mat-card-actions>
+          </mat-card>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="buttons row">
+        <div class="col-sm-6 ">
+          <button mat-raised-button color="warn" #cancel>Cancel</button>
+        </div>
+        <div class="col-sm-6 ">
+          <button mat-raised-button color="primary" class="submit" (click)="create()">Create</button>
+        </div>
+      </div>
+  
+    </mat-card-actions>
+  
+  </mat-card>
+  

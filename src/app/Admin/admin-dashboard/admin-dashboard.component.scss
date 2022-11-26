@@ -26,7 +26,10 @@ mat-toolbar {
     margin-left: 0;
     position: absolute;
 }
-
+.icon{
+    opacity: 0.4;
+    // position: absolute;
+}
 
 .right-section{
     text-align: right;
@@ -34,4 +37,9 @@ mat-toolbar {
 .h4{
     font-weight: 500;
 }
+// .complaintsChart .mat-form-field{
+//     border-top: 0;
+//     padding: 0px;
+//     width: 200px;
+// }
 

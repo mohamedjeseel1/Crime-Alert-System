@@ -20,31 +20,29 @@
       <!-- <div [fxFlex]="(100/gridColumns) + '%'" fxFlex.xs="100%" fxFlex.sm="50%" > -->
         <div class="row">          
                 <div [ngClass]="(classname)" *ngFor="let message of contact_form">
-                    <mat-card class="mat-elevation-z4 mb-3">
-                        <mat-card-header>
+                    <mat-card class="mat-elevation-z4 mb-3 text-light" [ngStyle]="{'background-color': getRandomColor()}">
+                        <mat-card-header >
                           <mat-card-title >{{message.userId}} </mat-card-title>
-                          <p>{{message.email}} </p>
+                          <p><i><b>{{message.email}}</b></i> </p>
                         </mat-card-header>
+                        <hr>
                         <mat-card-content>
-                          <!-- card -->
-                          <div class="row">
-                            <tr>
-                              <!-- icon -->
-                              <div class="left-section">
-                                  {{message.subject}}               
+                              <div class="section">
+                                  <p class="h6"><b>{{message.subject}} </b></p>           
+                                  <p>{{message.message}} </p>           
                               </div>
-                              <!-- total -->
-                              <div class="right-section">
-                                <!-- rules -->
-                                <p class="h4" >{{message.message}} </p>
-                              </div>
-                            </tr>
-                          </div>
+
+                              <hr>
+                              <p class="h6">Reply from Admin - <i><b>{{message.adminid}}</b></i> </p>
+                              <p>{{message.Re_message}} </p>           
+
                         </mat-card-content>
                         <mat-card-actions>
                          
-                          <button mat-button>LIKE</button>
-                          <button mat-button>SHARE</button>
+                          <!-- <button mat-button>LIKE</button> -->
+                          <button mat-flat-button color="secondary" (click)="openReply(message.id)" *ngIf="isAdmin">REPLY</button>
+                          <button mat-stroked-button (click)="deleteMessage(message.id)" >DELETE</button>
+                          <!-- *ngIf="isPolice || isPolice" -->
                         </mat-card-actions>
                     </mat-card>                
                 </div>               

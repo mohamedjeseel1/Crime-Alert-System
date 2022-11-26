@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MyprofileComponent } from 'src/app/Common/pop_ups/myprofile/myprofile.component';
 import { UserStorageService } from 'src/app/services/user-storage.service';
 import { UserService } from 'src/app/services/user.service';
-import { ROLES } from 'src/app/user-auth/roles-enum';
+import { ROLES } from 'src/app/user-auth/roles-enum'; // current user role
 
 @Component({
   selector: 'app-admin-dash-template',
@@ -11,10 +11,11 @@ import { ROLES } from 'src/app/user-auth/roles-enum';
   styleUrls: ['./admin-dash-template.component.scss'],
 })
 export class AdminDashTemplateComponent implements OnInit {
-  roles = ROLES;
+  roles = ROLES; // current user role
 
   filePath: string;
 
+  // current user details
   user = {
     userId: '',
     username: '',
@@ -39,7 +40,7 @@ export class AdminDashTemplateComponent implements OnInit {
     updatedAt: '',
   };
 
-  //To identify curent user is admin or not:purpose - customize slidebar links
+  //To identifycurrent user role: purpose - customize slidebar links
   isAdmin = false;
   isPolice = false;
   isPublic = false;
@@ -56,12 +57,15 @@ export class AdminDashTemplateComponent implements OnInit {
     this.isPolice = this.user.role == this.roles.POLICE;
     this.isPublic = this.user.role == this.roles.PUBLIC;
 
-    // this.getAllUsers();
+    // this.getUser();
     this.getUserById();
   }
   // My Profile
   myprofile() {
-    this.view_popup.open(MyprofileComponent);
+    this.view_popup.open(MyprofileComponent, {
+      width: '60%',
+      height: 'auto',
+    });
   }
 
   // sign out

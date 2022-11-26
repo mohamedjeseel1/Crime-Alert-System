@@ -1,0 +1,95 @@
+<!-- buttons -->
+<div class="button">
+    <button mat-raised-button color="primary"  (click)="GenerateReport()"><mat-icon>print</mat-icon> Generate report</button> 
+  </div>
+  
+  <!-- filter -->
+  <form [formGroup]="filterGroup" class="mt-2" >
+  <mat-form-field class="search">
+    <mat-label>Filter</mat-label>
+    <input matInput placeholder="Ex. Search" #input [(ngModel)]="searchText" formControlName="searchtText">
+  </mat-form-field>
+  
+  &nbsp;
+  <mat-form-field class="filter-option" style="width: 70px;" >
+    <mat-label>Criteria</mat-label>
+    <mat-select [(ngModel)]="filtered_option" formControlName="criteria">
+      <mat-option *ngFor="let item of filter_options" [value]="item.key" >
+        {{item.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <!-- filter between -->
+  &nbsp;
+  <mat-form-field class="from-date" style="width: 100px;" >
+  <mat-label>From</mat-label>
+  <input matInput type="date" [(ngModel)]="from_date" (change)="dateSelected()" formControlName="fromDate" >
+  </mat-form-field>
+  &nbsp;
+  <mat-form-field class="from-date" style="width: 100px;" >
+    <mat-label>To</mat-label>
+    <input matInput type="date"  [(ngModel)]="to_date" (change)="dateSelected()" formControlName="toDate">
+    </mat-form-field>
+    
+    <a mat-icon-button color="warn" (click)="clearDateBetweenFilter()"><mat-icon>cancel</mat-icon> </a> 
+  </form>
+  
+  <!-- table -->
+  <table class="table table-hover " id="print_mark" *ngIf="(station_data | filter: searchText:filtered_option).length > 0; else noResults">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">ID</th>
+        <th scope="col">Admin ID</th>
+        <th scope="col">Date</th>
+        <th scope="col">Province</th>
+        <th scope="col">District</th>
+        <th scope="col">Branch Code</th>
+        <th scope="col">Station Name</th>
+        <th scope="col">Contact</th>
+        <th scope="col">Email</th>
+  
+      </tr>
+    </thead>
+    <tbody *ngFor="let st of station_data | filter: searchText:filtered_option; let i = index">
+      <tr>
+        <th scope="row">{{i+1}}</th>
+        <td>{{st.id}}</td>
+        <td>{{st.adminid}}</td>
+        <td>{{st.date}}</td>
+        <td>{{st.province}}</td>
+        <td>{{st.district}}</td>
+        <td>{{st.branchCode}}</td>
+        <td>{{st.Sname}}</td>
+        <td>{{st.contact}}</td>
+        <td>{{st.email}}</td>
+  
+        <td>
+          <a matTooltip="View">
+            <mat-icon color="primary" (click)="openDialog(st.id)">visibility</mat-icon>
+          </a>
+          <a matTooltip="Edit" *ngIf="logged_user_role=='admin'">
+            <mat-icon class="material-icons-outlined" (click)="edit(st.id)">
+              edit
+            </mat-icon>
+          </a>
+          <a matTooltip="Delete">
+            <mat-icon color="warn" (click)="deleteStation(st.id)">delete</mat-icon>
+          </a>
+          <!-- <a matTooltip="Print" *ngIf="(logged_user_role=='public'||logged_user_role=='police')">
+            <mat-icon>print</mat-icon>
+          </a> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- if no search data found-->
+  <ng-template #noResults>
+    <div style="text-align: center; margin-top: 70px;">
+      <p>No results found for "{{searchText}}".</p>
+    </div>
+  </ng-template>
+  <!-- Paginator -->
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of crimes"></mat-paginator>
+  

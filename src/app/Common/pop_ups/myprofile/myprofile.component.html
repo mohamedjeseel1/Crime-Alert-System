@@ -1,55 +1,79 @@
 <div class="row justify-content-between text-left">
-    <div class="form-group col-sm-6 flex-column d-flex">
-        <!-- <h2 mat-dialog-title>My Profile</h2> -->
+    <div class="form-group col-sm-11 flex-column d-flex">
+        <div> <img [src]="filePath" alt="userPic" style="width: 70px; height: 70px;" /></div><br>
     </div>
-    <div class="form-group col-sm-6 flex-column d-flex">
-        <button mat-raised-button color="warn" [mat-dialog-close]>X</button>
+    <div class="form-group col-sm-1 flex-column d-flex ">
+        <button mat-mini-fab color="warn" [mat-dialog-close]>
+            <mat-icon>cancel</mat-icon>
+        </button>
     </div>
 </div>
 
-<div class="container">
-    <div class="row justify-content-between text-left">
-        <div class="form-group col-sm-8 flex-column d-flex">
-            <p style="color: rgb(0, 89, 255);">Name</p>
-            <h2>jeseel</h2>
-            <!-- <h2 mat-dialog-title>{{dataSet?.name}}</h2> -->
+<div class="container bg-light">
+    <div class="row justify-content-between text-left ">
+        <div class="form-group col-sm-4 flex-column d-flex">
+            <p class="h5">User ID</p>
+            <p class="h6"><i>{{userProfile.id}}</i></p>
+            <!-- <h4 mat-dialog-title>{{dataSet?.joindDate}}</h4> -->
         </div>
         <div class="form-group col-sm-4 flex-column d-flex">
-            <p style="color: rgb(255, 0, 179);">Joined Date</p>
-            <h2>2022/02/22</h2>
-            <!-- <h3 mat-dialog-title>{{dataSet?.joindDate}}</h3> -->
+            <p class="h5">Role</p>
+            <p class="h6"><i>{{userProfile.role}}</i></p>
         </div>
+        <div class="form-group col-sm-4 flex-column d-flex">
+            <p class="h5">Full Name</p>
+            <p class="h6"><i>{{userProfile.fullname}}</i></p>
+        </div>
+
     </div>
 
     <div class="row justify-content-between text-left">
         <div class="form-group col-sm-4 flex-column d-flex">
-            <p>NIC</p>
-            <h2>963290411</h2>
-            <!-- <h3 mat-dialog-title>{{dataSet?.nic}}</h3> -->
+            <p class="h5">Joined Date</p>
+            <p class="h6"><i>{{userProfile.createdAt}}</i></p>
         </div>
         <div class="form-group col-sm-4 flex-column d-flex">
-            <p>Gender</p>
-            <h2>male</h2>
-            <!-- <h3 mat-dialog-title>{{dataSet?.gender}}</h3> -->
+            <p class="h5">Gender</p>
+            <p class="h6"><i>{{userProfile.gender}}</i></p>
         </div>
         <div class="form-group col-sm-4 flex-column d-flex">
-            <p>Phone Number</p>
-            <h2>0000111101</h2>
+            <p class="h5">NIC</p>
+            <p class="h6"><i>{{userProfile.nic}}</i></p>
+        </div>
+
+    </div>
+
+    <div class="row justify-content-between text-left">
+        <div class="form-group col-sm-4 flex-column d-flex">
+            <p class="h5">Email</p>
+            <p class="h6"><i>{{userProfile.email}}</i></p>
+        </div>
+        <div class="form-group col-sm-4 flex-column d-flex">
+            <p class="h5">Phone Number</p>
+            <p class="h6"><i>{{userProfile.contact}}</i></p>
             <!-- <h3 mat-dialog-title>{{dataSet?.phoneNo}}</h3> -->
         </div>
-    </div>
-
-    <div class="row justify-content-between text-left">
-        <div class="form-group col-sm-6 flex-column d-flex">
-            <p>Address</p>
-            <h2>0000111101</h2>
+        <div class="form-group col-sm-4 flex-column d-flex">
+            <p class="h5">Address</p>
+            <p class="h6"><i>{{userProfile.address}}</i></p>
             <!-- <h3 mat-dialog-title>{{dataSet?.address}}</h3> -->
         </div>
 
-        <div class="form-group col-sm-4 flex-column d-flex">
-            <p>DOB</p>
-            <h2>0000111101</h2>
-            <!-- <h3 mat-dialog-title>{{dataSet?.dob}}</h3> -->
+        <p class="h6"> Note: If you want edit something, please contact the Administration Team</p>
+
+        <div class=" row">
+            <div class="col-sm-4">
+                <i class="fas fa-map-marker-alt  fa-2x text-danger"></i>
+                <p>331 Olcott Mawatha, Colombo, Sri Lanka</p>
+            </div>
+            <div class="col-sm-4">
+                <i class="fas fa-phone col-sm-4 fa-2x text-success"></i>
+                <p>0112 421 111</p>
+            </div>
+            <div class="col-sm-4">
+                <i class="fas fa-envelope  col-sm-4 fa-2x text-secondary"></i>
+                <p>crimeAlert@system.com</p>
+            </div>
         </div>
+
     </div>
-</div>

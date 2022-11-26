@@ -43,7 +43,7 @@
           <!-- title -->
           <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Title</mat-label>
-            <input matInput type="text"  maxlength="50" formControlName="title" #title>
+            <input matInput type="text"  maxlength="50" formControlName="title" #title placeholder="Title of the new Crime Area">
             <mat-hint align="end">{{title.value.length}}/50</mat-hint>
             <mat-error *ngIf="emergencyAlert.get('title')?.hasError('required')">
               Title required
@@ -56,7 +56,7 @@
           <!-- Description -->
           <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Description</mat-label>
-            <textarea matInput  maxlength="250" type="text" formControlName="description" #desc></textarea>
+            <textarea matInput  maxlength="250" type="text" formControlName="description" #desc placeholder="Enter some more information, regarding to the title."></textarea>
             <mat-error *ngIf="emergencyAlert.get('description')?.hasError('required')">
               Description required
             </mat-error>
@@ -69,7 +69,7 @@
           <!-- Location -->
           <mat-form-field appearance="outline" style="width: 100%;">
             <mat-label>Location</mat-label>
-            <textarea matInput type="text"  maxlength="50" formControlName="location" #location></textarea>
+            <textarea matInput type="text"  maxlength="50" formControlName="location" #location placeholder="The Place Alert"></textarea>
             <mat-hint align="end">{{location.value.length}}/50</mat-hint>
             <mat-error *ngIf="emergencyAlert.get('location')?.hasError('required')">
               Location required

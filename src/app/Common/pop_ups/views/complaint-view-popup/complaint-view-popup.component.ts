@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+import { ReportService } from 'src/app/services/report.service';
 
 @Component({
   selector: 'app-complaint-view-popup',
@@ -36,7 +37,8 @@ export class ComplaintViewPopupComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
     private remark_popup: MatDialog,
-    private service: ComplaintsService
+    private service: ComplaintsService,
+    private reportservice: ReportService
   ) {
     this.complaintData = data.complaint;
     this.isReportMode = data.isReportMode;
@@ -44,22 +46,13 @@ export class ComplaintViewPopupComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  openRemark() {
-    this.remark_popup.open(RejectRemarksPopupComponent, {
-      height: 'auto',
-      width: '30%',
-    });
-  }
-
-  rejectComplaint(): void {}
-
-  acceptComplaint() {
+  rejectComplaint() {
     this.service
-      .updateStatus({ status: 'Accepted' }, this.complaintData.id)
+      .updateStatus({ status: 'Rejected' }, this.complaintData.id)
       .subscribe(
         (data) => {
           // this.generatePDF();
-          location.reload();
+          this.createReport(this.complaintData.id);
         },
         (error) => {
           console.log(error);
@@ -87,5 +80,35 @@ export class ComplaintViewPopupComponent implements OnInit {
       let filename = 'FIR_report id-' + this.complaintData.id + '.pdf';
       pdf.save(filename); // Generated PDF
     });
+  }
+
+  createReport(complaint_Id: number) {
+    this.reportservice
+      .createReport({ complaintId: complaint_Id, genaratedAT: Date.now() })
+      .subscribe(
+        (data) => {
+          console.log('=======Delete response');
+          console.log(data);
+          this.complaintData = data;
+          location.reload();
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  }
+
+  acceptComplaint() {
+    this.service
+      .updateStatus({ status: 'Accepted' }, this.complaintData.id)
+      .subscribe(
+        (data) => {
+          // this.generatePDF();
+          this.createReport(this.complaintData.id);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   }
 }

@@ -5,6 +5,10 @@ import jspdf from 'jspdf';
 import { ComplaintViewPopupComponent } from 'src/app/Common/pop_ups/views/complaint-view-popup/complaint-view-popup.component';
 import { ComplaintsService } from 'src/app/services/complaints.service';
 
+import moment from 'moment'; // filter between
+import { FormControl, FormGroup } from '@angular/forms';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-admin-complaint',
   templateUrl: './admin-complaint.component.html',
@@ -13,8 +17,19 @@ import { ComplaintsService } from 'src/app/services/complaints.service';
 export class AdminComplaintComponent implements OnInit {
   apiBaseUrl = 'localhost:8081/';
 
+  
   searchText: string;
   filtered_option: any;
+  // filter(date_between)
+  from_date: any;
+  to_date: any;
+
+  filterGroup = new FormGroup({
+    searchtText: new FormControl(''),
+    criteria: new FormControl(''),
+    fromDate: new FormControl(''),
+    toDate: new FormControl(''),
+  });
 
   filter_options = [
     {
@@ -48,6 +63,21 @@ export class AdminComplaintComponent implements OnInit {
       id: '',
       userId: '',
       date: '',
+      crimeType: '',
+      subject: '',
+      description: '',
+      document: '',
+      status: '',
+      location: '',
+      updatedAt: '',
+      createdAt: '',
+    },
+  ];
+  // After between filter
+  complaintData_list: any = [
+    {
+      id: '',
+      userId: '',
       crimeType: '',
       subject: '',
       description: '',
@@ -92,21 +122,38 @@ export class AdminComplaintComponent implements OnInit {
     this.service.getAllComplaints().subscribe((data: any) => {
       console.log(data);
       this.complaintData = data;
+      // filter between
+      this.complaintData_list = data;
+      console.log('=========.complaintData_list');
+      console.log(this.complaintData_list);
     });
   }
 
   deleteComplaint(id: any) {
-    this.service.deleteComplaint(id).subscribe((data: any) => {
-      alert('deleted');
-      location.reload(); // will load data after relaod by ngOnInit()
-    });
+    this.service.deleteComplaint(id).subscribe(
+      (data: any) => {
+        console.log(data);
+        this.complaintData = data;
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: 'Deleted Successfully',
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        this.getAll();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   getByStatus(status: any) {
     this.service.getComplaintByStatus(status).subscribe(
       (data: any) => {
         console.log('getByStatus\n' + data);
-        this.complaintData = data;
+        this.complaintData_list = data;
       },
       (error: any) => {
         console.error('ERROR\n' + error);
@@ -129,5 +176,26 @@ export class AdminComplaintComponent implements OnInit {
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
       pdf.save('complaint_report.pdf'); // Generated PDF
     });
+  }
+
+  // between filter
+  dateSelected() {
+    this.filterByBetweenDate();
+  }
+
+  filterByBetweenDate() {
+    if (this.from_date != '' && this.to_date != '') {
+      let filteredReports = this.complaintData.filter((r: any) => {
+        return moment(r.date).isBetween(this.from_date, this.to_date);
+      });
+      this.complaintData_list = filteredReports;
+    } else {
+      this.complaintData_list = this.complaintData;
+    }
+  }
+
+  clearDateBetweenFilter() {
+    this.complaintData_list = this.complaintData;
+    this.filterGroup.reset();
   }
 }

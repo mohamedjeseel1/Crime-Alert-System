@@ -11,7 +11,6 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end " id="togmenu">
       <ul class="navbar-nav mt-5">
-        <li class="nav-item"><a href="#" class="nav-link h5 disabled text-muted">ChatBox</a> </li>
         <li class="nav-item "><a href="#about" class="nav-link h5 text-warning">About</a></li>
         <li class="nav-item"><a href="#contact_us" class="nav-link h5 text-warning">Contact us</a></li>
         <li class="nav-item"><a href="#" class="nav-link h5 text-warning" routerLink="login">| Login</a></li>
@@ -35,8 +34,7 @@
         Thus, everyone can stay updated and reduce crime in a shorter amount of time.
       </p>
     </div>
-    <button mat-raised-button class="loginbtn mt-5" routerLink="/register">Join now</button>
-
+    <button mat-raised-button class="loginbtn mt-5"  style="width: auto;" routerLink="/register">User register</button>
   </div>
 </div>
 
@@ -101,7 +99,7 @@
 
 <!-- Contact us -->
 <!--container-->
-<div class="container bg-light " id="contact_us">
+    <div class="container bg-light " id="contact_us" style="font-weight:600; background-image: linear-gradient(to right, rgb(199, 227, 219), #f0f0f0); ">
   <section class="mb-4">
 
     <!--Section heading-->
@@ -124,14 +122,11 @@
             <div class="form-group w-50">
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fa fa-user text-info"></i></div>
+                  <div class="input-group-text"><i class="fa fa-user text-primary"></i></div>
                 </div>
                 <input class="form-control" formControlName="userId" placeholder="User ID">
-                <!-- <mat-error *ngIf="contact_form.get('userId')?.hasError('required')">
-                  user Id required
-                </mat-error> -->
-                <!-- <mat-error *ngIf="userId?.invalid && (userId?.dirty || userId?.touched)">userId is required</mat-error> -->
               </div>
+              <mat-error *ngIf="contact_form.controls['userId']?.invalid && (contact_form.controls['userId']?.dirty || contact_form.controls['userId']?.touched)">userId is required</mat-error>
             </div>
             <!--Grid column-->
 
@@ -139,11 +134,12 @@
             <div class="form-group w-50">
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fa fa-envelope text-info"></i></div>
+                  <div class="input-group-text"><i class="fa fa-envelope text-primary"></i></div>
                 </div>
                 <input type="email" class="form-control" id="email" formControlName="email" placeholder="Email"
                   required>
               </div>
+              <mat-error *ngIf="contact_form.controls['email']?.invalid && (contact_form.controls['email']?.dirty || contact_form.controls['email']?.touched)">Email is required</mat-error>
             </div>
             <!--Grid column-->
 
@@ -155,10 +151,11 @@
             <div class="form-group">
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fas fa-edit text-info"></i></div>
+                  <div class="input-group-text"><i class="fas fa-edit text-primary"></i></div>
                 </div>
-                <textarea class="form-control" placeholder="Subject" formControlName="subject" required></textarea>
+                <textarea class="form-control" placeholder=" Briefly Mention Your Query/ Information." formControlName="subject" required></textarea>
               </div>
+              <mat-error *ngIf="contact_form.controls['subject']?.invalid && (contact_form.controls['subject']?.dirty || contact_form.controls['subject']?.touched)">Subject is required</mat-error>
             </div>
           </div>
           <!--Grid row-->
@@ -170,18 +167,19 @@
             <div class="form-group">
               <div class="input-group mb-2">
                 <div class="input-group-prepend">
-                  <div class="input-group-text"><i class="fa fa-comment text-info"></i></div>
+                  <div class="input-group-text"><i class="fa fa-comment text-primary"></i></div>
                 </div>
-                <textarea class="form-control" formControlName="message" placeholder="Message" required></textarea>
+                <textarea class="form-control" formControlName="message" placeholder="Enter some more information, regarding to Your Quesry/Information." required></textarea>
               </div>
+              <mat-error *ngIf="contact_form.controls['message']?.invalid && (contact_form.controls['message']?.dirty || contact_form.controls['message']?.touched)">Message is required</mat-error>
             </div>
           </div>
           <!--Grid row-->
 
         </form>
 
-        <div class="text-center text-md-left mb-4">
-          <a class="btn btn-primary" class="btn btn-info btn-block rounded-2 py-2" (click)="contactForm()">Send</a>
+        <div class="text-center text-md-left mb-4 text-light">
+          <a class="btn btn-primary" class="btn btn-primary btn-block rounded-2 py-2" (click)="contactForm()">Send</a>
         </div>
       </div>
       <!--Grid column-->
@@ -189,15 +187,15 @@
       <!--Grid column-->
       <div class="col-md-3 text-center">
         <ul class="list-unstyled mb-0">
-          <li><i class="fas fa-map-marker-alt fa-2x "></i>
+          <li><i class="fas fa-map-marker-alt fa-2x text-danger"></i>
             <p>331 Olcott Mawatha, Colombo, Sri Lanka</p>
           </li>
 
-          <li><i class="fas fa-phone mt-4 fa-2x"></i>
+          <li><i class="fas fa-phone mt-4 fa-2x text-success"></i>
             <p>0112 421 111</p>
           </li>
 
-          <li><i class="fas fa-envelope mt-4 fa-2x"></i>
+          <li><i class="fas fa-envelope mt-4 fa-2x text-secondary"></i>
             <p>crimeAlert@system.com</p>
           </li>
         </ul>
@@ -210,3 +208,6 @@
 
 
 </div>
+
+<!-- FAQ  -->
+<app-faq></app-faq>

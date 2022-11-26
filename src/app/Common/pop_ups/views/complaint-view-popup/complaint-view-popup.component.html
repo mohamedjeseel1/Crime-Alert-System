@@ -23,7 +23,7 @@
 <!-- buttons -->
 <div mat-dialog-actions class="buttons row">
   <div class="col-sm-6" *ngIf="complaintData.status=='pending'">
-    <button mat-raised-button color="warn" (click)="openRemark()" mat-dialog-close>Reject</button>
+    <button mat-raised-button color="warn"  (click)="rejectComplaint()" mat-dialog-close>Reject</button>
   </div>
   <div class="col-sm-6" *ngIf="complaintData.status=='pending'">
     <button mat-raised-button color="primary" (click)="acceptComplaint()">Accept</button>
